@@ -154,6 +154,7 @@
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -161,6 +162,7 @@
         .line-clamp-3 {
             display: -webkit-box;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -4613,6 +4615,11 @@
 
             resultContainer.classList.remove('hidden');
             resultContainer.classList.add('fade-in');
+
+            // 🚀 自動滾動到結果區域
+            setTimeout(() => {
+                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
         };
 
         // 學區查詢邏輯
@@ -5571,9 +5578,13 @@
             const params = new URLSearchParams(window.location.search);
             const address = params.get('address') || params.get('search');
             if (address) {
+                // 確保切換到行政分頁 (包含查詢器)
+                if (window.switchTab) window.switchTab('A7area');
+
                 const searchInput = document.getElementById('address-input');
                 if (searchInput) {
                     searchInput.value = address;
+                    // 延遲執行查詢確保分頁切換動畫完成
                     setTimeout(() => checkVillage(), 800);
                 }
             }
