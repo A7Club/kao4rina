@@ -233,7 +233,7 @@
     <nav class="sticky top-4 z-40 mx-4 sm:mx-8 lg:mx-auto max-w-6xl">
         <div
             class="bg-white/90 backdrop-blur-md rounded-full shadow-cute px-6 py-3 flex justify-between items-center border-2 border-white">
-            <div class="flex items-center cursor-pointer gap-2" onclick="window.location.href='lifehub.html'">
+            <div class="flex items-center cursor-pointer gap-2" onclick="window.location.href='index.html'">
                 <div
                     class="w-10 h-10 bg-themeYellow rounded-full flex items-center justify-center text-white text-xl shadow-inner">
                     <i class="fa-solid fa-mountain-city"></i>
@@ -2468,6 +2468,9 @@
                 resetSchoolHighlight();
             }
             msgBox.classList.remove('hidden');
+            setTimeout(() => {
+                msgBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
         }
 
         function highlightSchoolsByVillage(village) {
@@ -2505,7 +2508,7 @@
                 const schoolInput = document.getElementById('school-address-input');
                 if (schoolInput) {
                     schoolInput.value = address;
-                    setTimeout(() => checkSchoolDistrict(), 800);
+                    setTimeout(() => checkSchoolDistrict(), 400);
                 }
             }
         });
