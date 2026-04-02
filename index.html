@@ -2694,7 +2694,6 @@
         function confettiEffect(el) {
             for (let i = 0; i < 5; i++) {
                 const confetti = document.createElement('i');
-                const btns = ['home', 'food', 'shopping'];
                 const icons = ['fa-star', 'fa-heart', 'fa-music'];
                 const colors = ['text-themePink', 'text-themeYellow', 'text-themeBlue'];
                 confetti.className = `fa-solid ${icons[Math.floor(Math.random() * icons.length)]} ${colors[Math.floor(Math.random() * colors.length)]} absolute pointer-events-none z-50`;
