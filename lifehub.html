@@ -1288,6 +1288,24 @@
                 fetchMedicalData();
                 renderPublicSchools(0);
                 fetchEducationData();
+
+                // 🛸 處理來自 URL 的「一鍵查詢」參數 (優化版：確保內容已注入)
+                const params = new URLSearchParams(window.location.search);
+                const address = params.get('address') || params.get('search');
+                if (address) {
+                    const schoolInput = document.getElementById('school-address-input');
+                    const dashInput = document.getElementById('dash-school-input');
+                    if (schoolInput) {
+                        schoolInput.value = address;
+                        if (dashInput) dashInput.value = address;
+                        // 延遲執行確保數據與 DOM 完全就緒
+                        setTimeout(() => {
+                            checkSchoolDistrict();
+                            const section = document.getElementById('mod-school-registry') || document.querySelector('.bg-blue-50/50');
+                            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 800);
+                    }
+                }
             }
         }
 
@@ -2468,9 +2486,6 @@
                 resetSchoolHighlight();
             }
             msgBox.classList.remove('hidden');
-            setTimeout(() => {
-                msgBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
         }
 
         function highlightSchoolsByVillage(village) {
@@ -2501,17 +2516,6 @@
             schoolCards.forEach(card => { card.classList.remove('ring-4', 'ring-themeBlue', 'ring-offset-2', 'opacity-50'); });
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const address = params.get('address') || params.get('search');
-            if (address) {
-                const schoolInput = document.getElementById('school-address-input');
-                if (schoolInput) {
-                    schoolInput.value = address;
-                    setTimeout(() => checkSchoolDistrict(), 400);
-                }
-            }
-        });
     </script>
 </body>
 
