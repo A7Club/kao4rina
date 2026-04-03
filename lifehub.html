@@ -421,7 +421,6 @@
 
                     <!-- 緊急救援標籤 -->
                     <a href="#section-emergency"
-                        onclick="event.preventDefault(); document.getElementById('section-emergency').scrollIntoView({behavior: 'smooth', block: 'start'});"
                         class="group relative flex items-center justify-center p-1.5 pr-3 lg:p-2.5 lg:pr-5 rounded-full bg-white border-2 lg:border-[3px] border-red-100 hover:border-red-300 hover:-translate-y-1 hover:shadow-md transition-all shadow-sm shrink-0 overflow-hidden">
                         <div
                             class="absolute -right-2 -bottom-2 lg:-right-3 lg:-bottom-3 text-red-50 text-4xl lg:text-6xl opacity-80 group-hover:scale-110 transition-transform">
@@ -444,7 +443,6 @@
 
                     <!-- 醫療院所標籤 -->
                     <a href="#section-medical"
-                        onclick="event.preventDefault(); document.getElementById('section-medical').scrollIntoView({behavior: 'smooth', block: 'start'});"
                         class="group relative flex items-center justify-center p-1.5 pr-3 lg:p-2.5 lg:pr-5 rounded-full bg-white border-2 lg:border-[3px] border-green-100 hover:border-green-300 hover:-translate-y-1 hover:shadow-md transition-all shadow-sm shrink-0 overflow-hidden">
                         <div
                             class="absolute -right-2 -bottom-2 lg:-right-3 lg:-bottom-3 text-green-50 text-4xl lg:text-6xl opacity-80 group-hover:scale-110 transition-transform">
@@ -2536,6 +2534,49 @@
 
         window.addEventListener('hashchange', syncTitleWithHash);
         window.addEventListener('load', syncTitleWithHash);
+
+        // 🌟 新增：全域關鍵字高亮與捲動邏輯
+        function highlightAndScrollTo(query) {
+            if (!query) return;
+            const q = query.toLowerCase();
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const matches = [];
+            while (node = walker.nextNode()) {
+                const text = node.textContent;
+                const parent = node.parentElement;
+                if (text.toLowerCase().includes(q) && !['SCRIPT', 'STYLE', 'NAV', 'FOOTER', 'HEADER', 'BUTTON', 'I'].includes(parent.tagName)) {
+                    matches.push(node);
+                }
+            }
+
+            if (matches.length > 0) {
+                const firstMatch = matches[0];
+                const parent = firstMatch.parentElement;
+                let p = parent;
+                while (p && p !== document.body) {
+                    if (p.tagName === 'DETAILS') p.open = true;
+                    p = p.parentElement;
+                }
+                const text = firstMatch.textContent;
+                const regex = new RegExp(`(${query})`, 'gi');
+                const span = document.createElement('span');
+                span.innerHTML = text.replace(regex, '<mark class="bg-yellow-200 text-gray-900 px-1 rounded shadow-sm font-black">$1</mark>');
+                parent.replaceChild(span, firstMatch);
+                setTimeout(() => {
+                    span.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 800);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get('search');
+            if (query) {
+                // 等待資料載入與地圖初始化後再執行
+                setTimeout(() => highlightAndScrollTo(query), 1200);
+            }
+        });
     </script>
 </body>
 

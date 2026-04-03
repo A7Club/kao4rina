@@ -572,8 +572,8 @@
     <!-- 📝 分享在地店家 Modal (全新設計) -->
     <!-- ========================================== -->
     <div id="share-store-modal" class="fixed inset-0 z-[150] hidden items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
-            onclick="closeShareStoreModal()"></div>
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeShareStoreModal()">
+        </div>
         <div class="bg-white rounded-[2rem] border-4 border-pink-200 w-full max-w-4xl h-[90vh] flex flex-col shadow-2xl transform scale-95 opacity-0 transition-all duration-300 overflow-hidden relative z-10"
             id="share-store-modal-content">
 
@@ -2020,18 +2020,14 @@
 
                 // 新增：動態抓取並搜尋 explore.html 靜態內容
                 let exploreSnippet = null;
-                let exploreLinkTarget = 'explore.html'; // 預設連結
+                let exploreLinkTarget = 'explore.html';
                 try {
                     const res = await fetch('explore.html');
                     if (res.ok) {
                         const htmlText = await res.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(htmlText, 'text/html');
-
-                        // 移除不需要被搜尋的標籤
                         doc.querySelectorAll('script, style, nav, footer, header, template, svg').forEach(el => el.remove());
-
-                        // 遍歷所有文字節點尋找關鍵字
                         const walkDOM = (node) => {
                             if (exploreSnippet) return;
                             if (node.nodeType === Node.TEXT_NODE) {
@@ -2043,53 +2039,76 @@
                                     let snippet = text.substring(startIndex, endIndex);
                                     if (startIndex > 0) snippet = '...' + snippet;
                                     if (endIndex < text.length) snippet = snippet + '...';
-
-                                    // 關鍵字高亮
                                     const regex = new RegExp(`(${q})`, 'gi');
                                     exploreSnippet = snippet.replace(regex, '<span class="bg-purple-200 text-purple-700 px-1 rounded font-black">$1</span>');
-
-                                    // 尋找內容所屬的分類區塊 ID 作為精準錨點
                                     let parent = node.parentElement;
-                                    let targetTab = 'overview'; // 預設導向總覽分頁
-
-                                    // 往上層找尋帶有 data-shows-on 屬性的容器，以決定該切換到哪個分頁
+                                    let targetTab = 'overview';
                                     while (parent && parent.tagName !== 'BODY') {
                                         if (parent.hasAttribute('data-shows-on')) {
                                             const showsOnTabs = parent.getAttribute('data-shows-on').split(',');
-
-                                            // 決定最佳的分頁：
-                                            // 1. 如果此區塊只在特定分頁顯示（不是 overview），則優先使用該分頁。
-                                            // 2. 如果包含 overview，但在其他特定分頁也有，盡量導向特定分頁，避免總覽內容過多。
-                                            // 3. 否則就用陣列中的第一個分頁。
                                             if (showsOnTabs.length === 1 && showsOnTabs[0] !== 'overview') {
                                                 targetTab = showsOnTabs[0];
                                             } else {
                                                 const nonOverviewTab = showsOnTabs.find(tab => tab !== 'overview');
                                                 targetTab = nonOverviewTab || showsOnTabs[0];
                                             }
-                                            break; // 找到第一個定義了分頁的父容器就停止
+                                            break;
                                         }
                                         parent = parent.parentElement;
                                     }
-
-                                    // 將網址設定為 explore.html#(分頁名稱)
-                                    // 同時附帶搜尋關鍵字，讓 explore.html 的腳本可以進行高亮
-                                    // 將查詢參數放在 hash 前面，確保腳本與分頁都能正確讀取
                                     exploreLinkTarget = `explore.html?search=${encodeURIComponent(query)}#${targetTab}`;
-
-
                                 }
                             } else {
-                                for (let child of node.childNodes) {
-                                    walkDOM(child);
-                                }
+                                for (let child of node.childNodes) walkDOM(child);
                             }
                         };
                         walkDOM(doc.body);
                     }
-                } catch (e) {
-                    console.warn('無法抓取 explore.html 進行搜尋', e);
-                }
+                } catch (e) { console.warn('無法抓取 explore.html 進行搜尋', e); }
+
+                // 新增：動態抓取並搜尋 lifehub.html 靜態內容
+                let lifehubSnippet = null;
+                let lifehubLinkTarget = 'lifehub.html';
+                try {
+                    const res = await fetch('lifehub.html');
+                    if (res.ok) {
+                        const htmlText = await res.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(htmlText, 'text/html');
+                        doc.querySelectorAll('script, style, nav, footer, header, template, svg').forEach(el => el.remove());
+                        const walkDOM = (node) => {
+                            if (lifehubSnippet) return;
+                            if (node.nodeType === Node.TEXT_NODE) {
+                                const text = node.textContent.trim();
+                                if (text.toLowerCase().includes(q) && text.length > 1) {
+                                    const matchIdx = text.toLowerCase().indexOf(q);
+                                    const startIndex = Math.max(0, matchIdx - 25);
+                                    const endIndex = Math.min(text.length, matchIdx + q.length + 25);
+                                    let snippet = text.substring(startIndex, endIndex);
+                                    if (startIndex > 0) snippet = '...' + snippet;
+                                    if (endIndex < text.length) snippet = snippet + '...';
+                                    const regex = new RegExp(`(${q})`, 'gi');
+                                    lifehubSnippet = snippet.replace(regex, '<span class="bg-green-200 text-green-700 px-1 rounded font-black">$1</span>');
+
+                                    // 尋找內容所屬的錨點 ID
+                                    let parent = node.parentElement;
+                                    let anchorId = '';
+                                    while (parent && parent.tagName !== 'BODY') {
+                                        if (parent.id && parent.id.startsWith('section-')) {
+                                            anchorId = parent.id;
+                                            break;
+                                        }
+                                        parent = parent.parentElement;
+                                    }
+                                    lifehubLinkTarget = `lifehub.html?search=${encodeURIComponent(query)}${anchorId ? '#' + anchorId : ''}`;
+                                }
+                            } else {
+                                for (let child of node.childNodes) walkDOM(child);
+                            }
+                        };
+                        walkDOM(doc.body);
+                    }
+                } catch (e) { console.warn('無法抓取 lifehub.html 進行搜尋', e); }
 
                 const matchedFood = foodData.filter(item =>
                     (item.name && item.name.toLowerCase().includes(q)) ||
@@ -2147,7 +2166,25 @@
                     `;
                 }
 
-                // 2. 本地 SPA 模板內文搜尋
+                // 2. 安心支援所匹配結果
+                const lifehubKeywords = ['生活', '支援', '醫療', '就學', '學區', '診所', '藥局', '公共', '家長', '評論', '教育'];
+                const matchLifehubKw = lifehubKeywords.some(k => k.toLowerCase().includes(q));
+
+                if (lifehubSnippet || matchLifehubKw) {
+                    domainContentHtml += `
+                        <a href="${lifehubLinkTarget}" class="block bg-green-50 p-4 rounded-2xl shadow-sm border border-white hover:-translate-y-1 hover:shadow-md transition-all group mb-3">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-themeGreen text-xl shadow-sm shrink-0"><i class="fa-solid fa-briefcase-medical"></i></div>
+                                <h4 class="font-black text-gray-800 text-lg group-hover:text-themeGreen transition-colors">前往「安心支援所」</h4>
+                            </div>
+                            <p class="text-sm text-gray-600 font-bold sm:pl-[3.25rem]">
+                                ${lifehubSnippet ? `找到相關內容：<span class="text-gray-800">${lifehubSnippet}</span>` : '此頁面提供 A7 重劃區的醫療資源、學區查詢、家長評論與公共服務資訊。'}
+                            </p>
+                        </a>
+                    `;
+                }
+
+                // 3. 本地 SPA 模板內文搜尋 (原本的 2)
                 const templates = [
                     { id: 'tpl-home', name: '首頁', hash: 'home', color: 'themePink', icon: 'fa-mountain-city', bg: 'bg-pink-50' },
                     { id: 'tpl-food', name: '美食販賣部', hash: 'food', color: 'themePink', icon: 'fa-burger', bg: 'bg-pink-50' },
@@ -5069,7 +5106,7 @@
         }
 
         // --- 分享在地店家 Modal 邏輯 (全新) ---
-        window.openShareStoreModal = function() {
+        window.openShareStoreModal = function () {
             const modal = document.getElementById('share-store-modal');
             const content = document.getElementById('share-store-modal-content');
             const iframe = document.getElementById('share-modal-iframe');
@@ -5080,7 +5117,7 @@
 
             // 鎖定背景滾動
             document.body.style.overflow = 'hidden';
-            
+
             loading.style.display = 'flex';
             iframe.src = formUrl;
             modal.classList.remove('hidden');
@@ -5092,7 +5129,7 @@
             }, 10);
         };
 
-        window.closeShareStoreModal = function() {
+        window.closeShareStoreModal = function () {
             const modal = document.getElementById('share-store-modal');
             const content = document.getElementById('share-store-modal-content');
             const iframe = document.getElementById('share-modal-iframe');
@@ -5104,7 +5141,7 @@
 
             // 執行退場動畫
             content.classList.add('scale-95', 'opacity-0');
-            
+
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
@@ -5113,7 +5150,7 @@
         };
 
         // 橋接舊有的 toggleShareForm，確保 HTML 中的 onclick="toggleShareForm()" 依然有效
-        window.toggleShareForm = function() {
+        window.toggleShareForm = function () {
             window.openShareStoreModal();
         };
     </script>
