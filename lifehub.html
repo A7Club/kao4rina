@@ -554,10 +554,15 @@
                                 class="absolute -right-4 -bottom-4 text-purple-200 text-7xl lg:text-8xl opacity-50 pointer-events-none group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
                                 <i class="fa-solid fa-comments"></i>
                             </div>
-                            <h4
-                                class="text-base lg:text-lg font-black text-purple-600 mb-3 lg:mb-4 flex items-center relative z-10">
-                                <i class="fa-regular fa-comment-dots mr-1.5 lg:mr-2 text-purple-400"></i>最新家長評論
-                            </h4>
+                            <div class="flex items-center justify-between mb-3 lg:mb-4 relative z-10">
+                                <h4 class="text-base lg:text-lg font-black text-purple-600 flex items-center">
+                                    <i class="fa-regular fa-comment-dots mr-1.5 lg:mr-2 text-purple-400"></i>最新家長評論
+                                </h4>
+                                <button onclick="document.getElementById('section-education').scrollIntoView({behavior: 'smooth', block: 'start'})" 
+                                    class="text-[10px] lg:text-xs font-black text-purple-500 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full shadow-sm border border-purple-100 transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
+                                    了解更多機構 <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                                </button>
+                            </div>
                             <div id="dash-comments-container"
                                 class="flex flex-col gap-2.5 lg:gap-3 relative z-10 flex-1 overflow-y-auto hide-scrollbar">
                                 <div
