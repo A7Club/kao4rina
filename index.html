@@ -2253,16 +2253,6 @@
                 }
 
 
-                if (!html) {
-                    html = `
-                        <div class="text-center py-16 bg-white rounded-[2.5rem] border-4 border-gray-100 shadow-cute">
-                            <i class="fa-solid fa-face-sad-tear text-6xl text-gray-300 mb-4"></i>
-                            <p class="font-bold text-gray-500 text-xl">找不到與「${query}」相關的內容喔！</p>
-                            <p class="text-sm text-gray-400 mt-2">請換個關鍵字（例如：早餐、五金、文青里）試試看</p>
-                        </div>
-                    `;
-                }
-
                 // 渲染醫療結果
                 if (matchedMedical.length > 0) {
                     html += `
@@ -2330,6 +2320,16 @@
                                     </div>
                                 `).join('')}
                             </div>
+                        </div>
+                    `;
+                }
+
+                if (!html) {
+                    html = `
+                        <div class="text-center py-16 bg-white rounded-[2.5rem] border-4 border-gray-100 shadow-cute">
+                            <i class="fa-solid fa-face-sad-tear text-6xl text-gray-300 mb-4"></i>
+                            <p class="font-bold text-gray-500 text-xl">找不到與「${query}」相關的內容喔！</p>
+                            <p class="text-sm text-gray-400 mt-2">請換個關鍵字（例如：早餐、五金、文青里）試試看</p>
                         </div>
                     `;
                 }
@@ -4625,7 +4625,10 @@
 
                     globalCommunityData = parsedData;
                     resolve(globalCommunityData);
-                }).catch(reject);
+                }).catch(err => {
+                    console.warn('Fetch Community Data Error:', err);
+                    resolve([]);
+                });
             });
         }
 
@@ -4655,7 +4658,10 @@
 
                     globalBuildingData = parsedData;
                     resolve(globalBuildingData);
-                }).catch(reject);
+                }).catch(err => {
+                    console.warn('Fetch Building Data Error:', err);
+                    resolve([]);
+                });
             });
         }
 
