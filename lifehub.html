@@ -1048,12 +1048,23 @@
 
         // PUBLIC_SCHOOLS 現在由 data-schools.js 提提供
 
-        window.renderPublicSchools = function (selectedIndex = 0) {
+        window.renderPublicSchools = function (selectedIndex = 0, retryCount = 0) {
             const container = document.getElementById('public-schools-container');
             if (!container) return;
 
+            // 確保資料已掛載，若未就緒則自動重試 (最多 5 次)
             if (typeof PUBLIC_SCHOOLS === 'undefined' || !Array.isArray(PUBLIC_SCHOOLS) || PUBLIC_SCHOOLS.length === 0) {
-                container.innerHTML = '<div class="col-span-full text-center py-10 text-gray-400 font-bold bg-white rounded-3xl border border-dashed border-gray-200">學區資料載入中，請稍候...</div>';
+                if (retryCount < 5) {
+                    setTimeout(() => window.renderPublicSchools(selectedIndex, retryCount + 1), 300);
+                    return;
+                }
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-red-500 font-bold bg-white rounded-3xl border-4 border-red-50">
+                        <i class="fa-solid fa-triangle-exclamation text-4xl mb-4 block"></i>
+                        無法讀取學區資料 (PUBLIC_SCHOOLS)<br>
+                        <span class="text-xs text-gray-400 mt-2 font-normal">請確認 data-schools.js 是否已正確上傳且路徑無誤</span>
+                    </div>
+                `;
                 return;
             }
 
