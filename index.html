@@ -432,8 +432,8 @@
             <button onclick="loadPage('shopping'); toggleMobileMenu()"
                 class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeYellow bg-yellow-50 shadow-sm active:scale-95 transition-transform">🛍️
                 生活補給站</button>
-            <a href="lifehub.html"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeGreen bg-green-50 shadow-sm active:scale-95 transition-transform block">🩺
+            <a href="lifehub.html" onclick="toggleMobileMenu()"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeGreen bg-green-50 shadow-sm active:scale-95 transition-transform flex items-center justify-center">🩺
                 安心支援所</a>
             <!-- 將探索柒改為外部連結 -->
             <a href="explore.html"
@@ -1541,144 +1541,6 @@
         </div>
     </template>
 
-    <!-- 🩺 5. 生活通模板 (Lifehub) -->
-    <template id="tpl-lifehub">
-
-        <div class="fade-in">
-            <div class="flex items-center mb-8">
-                <div
-                    class="w-12 h-12 bg-themeGreen text-white rounded-2xl flex items-center justify-center text-2xl mr-4 transform rotate-3 shadow-md">
-                    <i class="fa-solid fa-heart-pulse"></i>
-                </div>
-                <h2 class="text-2xl font-black text-themeGreen">安心支援所 <span
-                        class="text-lg text-gray-400 font-bold ml-2">政府機關、行政與醫療服務</span></h2>
-            </div>
-
-            <!-- 獨立保留緊急聯絡電話區塊 -->
-            <div
-                class="bg-red-400 p-6 md:p-8 rounded-[2.5rem] text-white shadow-cute mb-8 relative overflow-hidden border-4 border-red-200">
-                <div
-                    class="absolute -right-6 -bottom-6 text-red-300 text-8xl floating opacity-50 z-0 pointer-events-none">
-                    <i class="fa-solid fa-truck-medical"></i>
-                </div>
-                <h3 class="text-2xl font-black mb-4 relative z-10 flex items-center"><i
-                        class="fa-solid fa-phone-volume mr-3"></i> 救護與緊急電話</h3>
-
-                <!-- 使用 flex-wrap 讓兩個分類可以依照內容寬度並排 -->
-                <div class="flex flex-wrap gap-3 md:gap-4 relative z-10 items-start">
-
-                    <!-- 派出所 -->
-                    <details
-                        class="group bg-white rounded-[1.2rem] shadow-sm border-2 border-red-100 overflow-hidden text-gray-800 transition-all w-full md:w-auto">
-                        <summary
-                            class="font-black list-none flex justify-between items-center px-5 py-3 md:py-4 text-base md:text-lg text-red-500 cursor-pointer hover:bg-red-50 transition-colors gap-6">
-                            <span class="flex items-center whitespace-nowrap"><i
-                                    class="fa-solid fa-building-shield mr-2.5 text-xl"></i> 警察局 / 派出所</span>
-                            <span class="text-red-300 group-open:rotate-180 transition-transform"><i
-                                    class="fa-solid fa-chevron-down"></i></span>
-                        </summary>
-                        <div class="px-3 pb-3 space-y-2.5 bg-white">
-                            <!-- 大埔派出所 -->
-                            <div
-                                class="flex flex-col sm:flex-row sm:items-center justify-between bg-red-50 p-3.5 rounded-xl gap-3 border border-red-100/50 hover:border-red-200 transition-colors">
-                                <div class="pr-2">
-                                    <div class="text-red-700 font-black text-sm md:text-base mb-1">大埔派出所</div>
-                                    <div class="text-xs text-red-400 font-bold flex items-start"><i
-                                            class="fa-solid fa-location-dot mt-0.5 mr-1.5 shrink-0"></i>桃園市龜山區文德二路80號
-                                    </div>
-                                </div>
-                                <a href="tel:03-3202554"
-                                    class="bg-white hover:bg-red-500 hover:text-white transition-colors text-red-500 px-3.5 py-1.5 rounded-lg shadow-sm text-sm font-black shrink-0 border border-red-100 flex items-center justify-center gap-1.5 w-fit sm:w-auto"><i
-                                        class="fa-solid fa-phone-volume"></i> 03-3202554</a>
-                            </div>
-                            <!-- 坪頂派出所 -->
-                            <div
-                                class="flex flex-col sm:flex-row sm:items-center justify-between bg-red-50 p-3.5 rounded-xl gap-3 border border-red-100/50 hover:border-red-200 transition-colors">
-                                <div class="pr-2">
-                                    <div class="text-red-700 font-black text-sm md:text-base mb-1">坪頂派出所</div>
-                                    <div class="text-xs text-red-400 font-bold flex items-start"><i
-                                            class="fa-solid fa-location-dot mt-0.5 mr-1.5 shrink-0"></i>桃園市龜山區大湖一路65號
-                                    </div>
-                                </div>
-                                <a href="tel:03-3282570"
-                                    class="bg-white hover:bg-red-500 hover:text-white transition-colors text-red-500 px-3.5 py-1.5 rounded-lg shadow-sm text-sm font-black shrink-0 border border-red-100 flex items-center justify-center gap-1.5 w-fit sm:w-auto"><i
-                                        class="fa-solid fa-phone-volume"></i> 03-3282570</a>
-                            </div>
-                            <!-- 龜山派出所 -->
-                            <div
-                                class="flex flex-col sm:flex-row sm:items-center justify-between bg-red-50 p-3.5 rounded-xl gap-3 border border-red-100/50 hover:border-red-200 transition-colors">
-                                <div class="pr-2">
-                                    <div class="text-red-700 font-black text-sm md:text-base mb-1">龜山派出所</div>
-                                    <div class="text-xs text-red-400 font-bold flex items-start"><i
-                                            class="fa-solid fa-location-dot mt-0.5 mr-1.5 shrink-0"></i>桃園市龜山區萬壽路二段931號
-                                    </div>
-                                </div>
-                                <a href="tel:03-3186447"
-                                    class="bg-white hover:bg-red-500 hover:text-white transition-colors text-red-500 px-3.5 py-1.5 rounded-lg shadow-sm text-sm font-black shrink-0 border border-red-100 flex items-center justify-center gap-1.5 w-fit sm:w-auto"><i
-                                        class="fa-solid fa-phone-volume"></i> 03-3186447</a>
-                            </div>
-                        </div>
-                    </details>
-
-                    <!-- 消防隊 -->
-                    <details
-                        class="group bg-white rounded-[1.2rem] shadow-sm border-2 border-red-100 overflow-hidden text-gray-800 transition-all w-full md:w-auto">
-                        <summary
-                            class="font-black list-none flex justify-between items-center px-5 py-3 md:py-4 text-base md:text-lg text-red-500 cursor-pointer hover:bg-red-50 transition-colors gap-6">
-                            <span class="flex items-center whitespace-nowrap"><i
-                                    class="fa-solid fa-fire-extinguisher mr-2.5 text-xl"></i> 消防隊</span>
-                            <span class="text-red-300 group-open:rotate-180 transition-transform"><i
-                                    class="fa-solid fa-chevron-down"></i></span>
-                        </summary>
-                        <div class="px-3 pb-3 space-y-2.5 bg-white">
-                            <!-- 坪頂分隊 -->
-                            <div
-                                class="flex flex-col sm:flex-row sm:items-center justify-between bg-red-50 p-3.5 rounded-xl gap-3 border border-red-100/50 hover:border-red-200 transition-colors">
-                                <div class="pr-2">
-                                    <div class="text-red-700 font-black text-sm md:text-base mb-1">坪頂消防分隊</div>
-                                    <div class="text-xs text-red-400 font-bold flex items-start"><i
-                                            class="fa-solid fa-location-dot mt-0.5 mr-1.5 shrink-0"></i>桃園市龜山區復興三路80號
-                                    </div>
-                                </div>
-                                <a href="tel:03-3280309"
-                                    class="bg-white hover:bg-red-500 hover:text-white transition-colors text-red-500 px-3.5 py-1.5 rounded-lg shadow-sm text-sm font-black shrink-0 border border-red-100 flex items-center justify-center gap-1.5 w-fit sm:w-auto"><i
-                                        class="fa-solid fa-phone-volume"></i> 03-3280309</a>
-                            </div>
-                        </div>
-                    </details>
-                </div>
-            </div>
-
-            <!-- 醫療合法登記查詢提醒 -->
-            <div
-                class="bg-blue-50/80 text-blue-600 text-xs sm:text-sm font-bold px-5 py-3 rounded-2xl mb-6 flex items-start sm:items-center shadow-sm border border-blue-100 w-full leading-relaxed gap-3">
-                <i class="fa-solid fa-circle-info text-blue-500 text-lg mt-0.5 sm:mt-0 shrink-0"></i>
-                <div>
-                    就診前請確認機構與醫事人員具合法資格。<br class="hidden sm:block">
-                    <a href="https://ma.mohw.gov.tw/Accessibility/BASSearch/MASearchBAS" target="_blank"
-                        class="inline-flex items-center text-blue-500 hover:text-blue-700 underline mt-1 sm:mt-0">
-                        <i class="fa-solid fa-magnifying-glass mr-1.5 text-xs"></i>衛福部醫事機構查詢系統
-                    </a>
-                </div>
-            </div>
-
-            <!-- 動態醫療分類標籤 -->
-            <div id="medical-tags-container" class="flex flex-wrap gap-2 md:gap-3 w-full mb-4 mt-2">
-                <!-- 動態注入分類按鈕 -->
-            </div>
-
-            <!-- 動態醫療分類清單 -->
-            <div id="medical-list-container" class="flex flex-col gap-6 w-full">
-                <div
-                    class="w-full text-center text-themeGreen py-12 bg-white rounded-[2.5rem] border-4 border-green-50 shadow-cute">
-                    <i class="fa-solid fa-spinner fa-spin text-4xl mb-5"></i>
-                    <p class="font-bold">正在連線樂園救護中心庫...</p>
-                </div>
-            </div>
-
-
-        </div>
-    </template>
 
     <!-- JavaScript 路由與注入邏輯 -->
     <script>
@@ -1738,8 +1600,8 @@
                 // 原本 explore 頁面的錨點或路由，直接導向新的獨立頁面
                 window.location.href = 'explore.html' + (hash === 'buildings' ? '#buildings' : '');
             } else if (hash === 'school') {
-                // 特殊錨點路由：切換到生活通頁面並滾動至教育單位區塊
-                window.location.href = 'lifehub.html#section-education-hall';
+                // 特殊錨點路由：切換到外部生活通頁面並定位
+                window.location.href = 'lifehub.html#school';
             } else if (hash === 'food-gacha') {
                 renderPage('home');
                 document.title = 'A7 柒樂部🎡｜美食隨機輪盤';
@@ -1876,7 +1738,6 @@
                     'food': 'A7 柒樂部🎡｜美食販賣部',
                     'food-gacha': 'A7 柒樂部🎡｜美食隨機輪盤',
                     'shopping': 'A7 柒樂部🎡｜生活補給站',
-                    'lifehub': 'A7 柒樂部🎡｜公共服務與醫療',
                     'search': 'A7 柒樂部🎡｜全站搜尋'
                 };
                 document.title = pageTitles[pageId] || 'A7 柒樂部🎡｜林口、龜山美食生活地圖指南';
@@ -1885,8 +1746,7 @@
                 const pagePaths = {
                     'home': '/index',
                     'food': '/food',
-                    'shopping': '/shop',
-                    'lifehub': '/lifehub'
+                    'shopping': '/shop'
                 };
 
                 if (typeof gtag === 'function') {
@@ -1956,9 +1816,6 @@
                     fetchShoppingData();
                 }
 
-                if (pageId === 'lifehub') {
-                    fetchMedicalData();
-                }
             } else {
                 console.error("找不到對應的模板: ", pageId);
             }
@@ -1998,12 +1855,11 @@
 
             try {
                 // 等待所有資料庫完整載入 (保留載入建案與社群以供搜尋)
-                const [foodData, shoppingData, communityData, buildingData, medicalData, likesData] = await Promise.all([
+                const [foodData, shoppingData, communityData, buildingData, likesData] = await Promise.all([
                     loadSharedFoodData(),
                     loadSharedShoppingData(),
                     loadSharedCommunityData(),
                     loadSharedBuildingData(),
-                    loadSharedMedicalData(),
                     loadSharedLikesData()
                 ]);
 
@@ -2128,11 +1984,6 @@
                     (item.village && item.village.toLowerCase().includes(q))
                 );
 
-                const matchedMedical = medicalData.filter(item =>
-                    (item.name && item.name.toLowerCase().includes(q)) ||
-                    (item.category && item.category.toLowerCase().includes(q)) ||
-                    (item.address && item.address.toLowerCase().includes(q))
-                );
 
                 let html = '';
 
@@ -2374,37 +2225,6 @@
                     `;
                 }
 
-                // 渲染醫療結果
-                if (matchedMedical.length > 0) {
-                    html += `
-                        <div class="bg-white rounded-[2rem] p-6 shadow-cute border-4 border-green-50 relative overflow-hidden">
-                            <h3 class="text-2xl font-black text-themeGreen mb-4 border-b-2 border-green-100 pb-2"><i class="fa-solid fa-heart-pulse mr-2"></i> 醫療與救護 (${matchedMedical.length})</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
-                                ${matchedMedical.map(item => {
-                        let navTarget = encodeURIComponent(item.address || item.name);
-                        return `
-                                        <div class="bg-green-50 p-3 rounded-2xl shadow-sm border border-white flex items-center gap-3 hover:-translate-y-1 hover:shadow-md transition-all group relative">
-                                            <a href="#lifehub" class="absolute inset-0 z-0 rounded-2xl"></a>
-                                            <div class="w-10 h-10 bg-white rounded-full shrink-0 flex items-center justify-center text-themeGreen text-lg shadow-sm relative z-10 pointer-events-none"><i class="fa-solid fa-stethoscope"></i></div>
-                                            <div class="flex-1 overflow-hidden pr-2 relative z-10 pointer-events-none">
-                                                <div class="flex items-center gap-2 mb-0.5">
-                                                    <span class="text-[10px] bg-white text-themeGreen px-1.5 py-0.5 rounded-md font-black shadow-sm shrink-0">${item.category}</span>
-                                                    <h4 class="font-black text-gray-800 line-clamp-1 group-hover:text-themeGreen">${item.name}</h4>
-                                                </div>
-                                                <p class="text-xs text-gray-500 font-bold line-clamp-1"><i class="fa-solid fa-location-dot mr-1 text-green-500"></i>${item.address || '在地醫療'}</p>
-                                            </div>
-                                            <div class="relative z-10 shrink-0">
-                                                <a href="https://www.google.com/maps/dir/?api=1&destination=${navTarget}" target="_blank" class="bg-white text-green-500 hover:bg-green-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-sm transition-colors cursor-pointer" title="Google導航">
-                                                    <i class="fa-solid fa-location-arrow"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    `;
-                    }).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
 
                 if (!html) {
                     html = `
@@ -4634,160 +4454,6 @@
         }
 
 
-        function loadSharedMedicalData() {
-            return new Promise((resolve, reject) => {
-                if (globalMedicalData) return resolve(globalMedicalData);
-                const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTmr3ebvX4CeJ_Dc-TK_57zxqaVlXfI4CPVcgTAWAIKM29dtR-SqiFs93i2iz1ScwYEBcty8mlIxKYO/pub?gid=368795626&single=true&output=csv';
-
-                fetch(csvUrl).then(res => res.text()).then(csvText => {
-                    const rows = parseCSV(csvText);
-                    if (rows.length < 2) return resolve([]);
-
-                    const headers = rows[0];
-                    let nameIdx = headers.findIndex(k => k.includes('名稱') || k.includes('機構') || k.includes('店名'));
-                    if (nameIdx === -1) nameIdx = 0;
-                    let catIdx = headers.findIndex(k => k.includes('醫療分類'));
-                    if (catIdx === -1) catIdx = 8;
-                    let addressIdx = headers.findIndex(k => k.includes('地址'));
-                    let phoneIdx = headers.findIndex(k => k.includes('電話'));
-
-                    let licenseIdx = 14;
-
-                    let parsedData = rows.slice(1).map(row => {
-                        return {
-                            name: row[nameIdx] ? row[nameIdx].trim() : '',
-                            category: row[catIdx] ? row[catIdx].trim() : '其他醫療',
-                            address: addressIdx !== -1 && row[addressIdx] ? formatAddress(row[addressIdx].trim()) : '',
-                            phone: phoneIdx !== -1 && row[phoneIdx] ? row[phoneIdx].trim() : '',
-                            license: row[licenseIdx] ? row[licenseIdx].trim() : ''
-                        };
-                    }).filter(item => item.name !== '');
-
-                    globalMedicalData = parsedData;
-                    resolve(globalMedicalData);
-                }).catch(reject);
-            });
-        }
-
-        function fetchMedicalData() {
-            const container = document.getElementById('medical-list-container');
-            if (!container) return;
-
-            loadSharedMedicalData().then(data => {
-                if (data.length === 0) {
-                    container.innerHTML = '<div class="col-span-full text-center text-gray-500 font-bold py-8">目前沒有醫療資料</div>';
-                } else {
-                    renderMedicalData(data, '全部');
-                }
-            }).catch(err => {
-                console.error('Medical CSV Fetch Error:', err);
-                container.innerHTML = '<div class="col-span-full text-center text-red-500 font-bold py-8 bg-white rounded-3xl">醫療資料載入失敗，請稍後再試。</div>';
-            });
-        }
-
-        function renderMedicalData(data, activeCategory = '全部') {
-            const container = document.getElementById('medical-list-container');
-            const tagsContainer = document.getElementById('medical-tags-container');
-            if (!container) return;
-
-            container.className = "flex flex-col gap-6 w-full";
-
-            if (tagsContainer) {
-                const allCategories = ['全部', ...new Set(globalMedicalData.map(item => item.category).filter(c => c))];
-                tagsContainer.innerHTML = allCategories.map(cat => {
-                    const isActive = cat === activeCategory;
-                    const activeClass = isActive
-                        ? 'bg-themeGreen text-white shadow-md scale-[1.02] md:scale-105 z-10'
-                        : 'bg-white text-gray-600 hover:bg-green-50 shadow-sm border-2 border-transparent hover:-translate-y-1';
-
-                    let icon = '🩺';
-                    if (cat.includes('牙')) icon = '🦷';
-                    else if (cat.includes('小兒') || cat.includes('婦產') || cat.includes('兒童')) icon = '👶';
-                    else if (cat.includes('眼')) icon = '👁️';
-                    else if (cat.includes('骨') || cat.includes('復健')) icon = '🦴';
-                    else if (cat.includes('藥')) icon = '💊';
-                    else if (cat === '全部') icon = '🏥';
-
-                    return `<button onclick="renderMedicalData(globalMedicalData, '${cat.replace(/'/g, "\\'")}')" class="w-auto py-2.5 md:py-3 px-4 md:px-6 rounded-full font-black text-xs md:text-sm transition-all transform flex items-center justify-center gap-1 md:gap-2 border border-green-100 whitespace-nowrap ${activeClass}">
-                                <span class="hidden md:inline-block shrink-0">${icon}</span>
-                                <span>${cat}</span>
-                            </button>`;
-                }).join('');
-            }
-
-            const filteredData = activeCategory === '全部' ? data : data.filter(item => item.category === activeCategory);
-            if (filteredData.length === 0) {
-                container.innerHTML = '<div class="col-span-full text-center text-gray-400 font-bold py-8">這個分類還沒有資料喔！</div>';
-                return;
-            }
-
-            const groupedCategories = {};
-            filteredData.forEach(item => {
-                const cat = item.category || '其他醫療';
-                if (!groupedCategories[cat]) groupedCategories[cat] = [];
-                groupedCategories[cat].push(item);
-            });
-
-            const stylePool = [
-                { border: 'border-green-50', textBig: 'text-green-100', textTitle: 'text-themeGreen', badgeBg: 'bg-themeGreen', icon: 'fa-stethoscope' },
-                { border: 'border-purple-50', textBig: 'text-purple-100', textTitle: 'text-themePurple', badgeBg: 'bg-themePurple', icon: 'fa-tooth' },
-                { border: 'border-orange-50', textBig: 'text-orange-100', textTitle: 'text-orange-400', badgeBg: 'bg-orange-400', icon: 'fa-baby' },
-                { border: 'border-blue-50', textBig: 'text-blue-100', textTitle: 'text-themeBlue', badgeBg: 'bg-themeBlue', icon: 'fa-eye' },
-                { border: 'border-yellow-50', textBig: 'text-yellow-100', textTitle: 'text-themeYellow', badgeBg: 'bg-themeYellow', icon: 'fa-bone' },
-                { border: 'border-pink-50', textBig: 'text-pink-100', textTitle: 'text-themePink', badgeBg: 'bg-themePink', icon: 'fa-pills' }
-            ];
-
-            let html = '';
-
-            for (const [catName, items] of Object.entries(groupedCategories)) {
-                let style;
-                if (catName.includes('牙')) style = stylePool[1];
-                else if (catName.includes('小兒') || catName.includes('婦產') || catName.includes('兒童')) style = stylePool[2];
-                else if (catName.includes('眼')) style = stylePool[3];
-                else if (catName.includes('骨') || catName.includes('復健')) style = stylePool[4];
-                else if (catName.includes('藥')) style = stylePool[5];
-                else style = stylePool[0];
-
-                const itemsHtml = items.map(item => {
-                    const navTarget = encodeURIComponent((item.address && item.address.trim() !== '') ? item.address : item.name);
-                    return `
-                        <li class="bg-gray-50 p-4 rounded-2xl hover:bg-white hover:shadow-md transition-all group flex flex-col gap-2 border border-transparent hover:border-gray-100 h-full justify-between">
-                            <div class="flex items-start justify-between w-full">
-                                <div class="flex flex-col flex-1 pr-2">
-                                    <div class="flex items-start">
-                                        <i class="fa-solid fa-notes-medical ${style.textTitle} mr-2 mt-1 shrink-0 group-hover:scale-125 transition-transform"></i>
-                                        <span class="font-black text-gray-800 text-lg leading-snug">${item.name}</span>
-                                    </div>
-                                    ${item.license ? `<div class="ml-6 mt-1.5 text-[10px] text-white ${style.badgeBg} px-2 py-1 rounded-md font-black w-fit shadow-sm flex items-center"><i class="fa-regular fa-id-badge mr-1"></i>桃衛醫字第：${item.license} 號</div>` : ''}
-                                </div>
-                                <a href="https://www.google.com/maps/dir/?api=1&destination=${navTarget}" target="_blank" title="導航至 ${item.name}" class="shrink-0 bg-blue-100 text-blue-600 hover:bg-blue-500 hover:text-white px-2.5 py-1.5 rounded-lg text-xs font-black transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer mt-0.5">
-                                    <i class="fa-solid fa-location-arrow"></i> 導航
-                                </a>
-                            </div>
-                            <div class="mt-1 space-y-1.5">
-                                ${item.phone ? `<div class="text-xs md:text-sm text-gray-500 font-bold ml-6 flex items-center"><i class="fa-solid fa-phone mr-1.5 text-gray-300"></i>${item.phone}</div>` : ''}
-                                ${item.address ? `<div class="text-xs md:text-sm text-gray-500 font-bold ml-6 flex items-start"><i class="fa-solid fa-location-dot mr-1.5 text-gray-300 mt-0.5"></i><span class="line-clamp-2">${item.address}</span></div>` : ''}
-                            </div>
-                        </li>
-                    `;
-                }).join('');
-
-                html += `
-                    <div class="w-full">
-                        <div class="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-cute border-4 ${style.border} relative h-full flex flex-col">
-                            <div class="absolute -top-4 -right-4 text-6xl ${style.textBig} floating pointer-events-none"><i class="fa-solid ${style.icon}"></i></div>
-                            <h3 class="text-2xl font-black ${style.textTitle} mb-5 border-b-2 border-gray-100 pb-3 relative z-10 shrink-0">
-                                ${catName}
-                            </h3>
-                            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-bold text-gray-600 relative z-10 flex-1 content-start">
-                                ${itemsHtml}
-                            </ul>
-                        </div>
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
-        }
 
         function loadSharedCommunityData() {
             return new Promise((resolve, reject) => {
