@@ -621,8 +621,23 @@
                                 class="fa-solid fa-book-open-reader mr-3"></i> 教育學習殿堂</h3>
                     </div>
 
-                    <!-- 模組：就學與設籍 -->
+                    <!-- 🏫 在地教育單位 -->
+                    <div id="school"
+                        class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-cute my-8 relative overflow-hidden border-4 border-blue-50 scroll-mt-24">
+                        <div
+                            class="absolute -right-4 -top-4 text-blue-50 text-8xl floating opacity-50 z-0 pointer-events-none">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <h3 class="text-2xl font-black mb-6 relative z-10 flex items-center text-themeBlue"><i
+                                class="fa-solid fa-book-open mr-3"></i> 在地教育單位</h3>
 
+                        <div id="public-schools-container"
+                            class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10 items-start">
+                            <!-- JS 將動態注入大卡片與小列表 -->
+                        </div>
+                    </div>
+
+                    <!-- 模組：就學與設籍 -->
                     <div
                         class="bg-white rounded-[2rem] p-6 md:p-8 shadow-cute border-4 border-blue-50 relative overflow-hidden group hover:-translate-y-1 transition-transform">
                         <div
@@ -818,21 +833,6 @@
                         </div>
                     </div>
 
-                    <!-- 🏫 在地教育單位 -->
-                    <div id="school"
-                        class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-cute mt-8 relative overflow-hidden border-4 border-blue-50 scroll-mt-24">
-                        <div
-                            class="absolute -right-4 -top-4 text-blue-50 text-8xl floating opacity-50 z-0 pointer-events-none">
-                            <i class="fa-solid fa-school"></i>
-                        </div>
-                        <h3 class="text-2xl font-black mb-6 relative z-10 flex items-center text-themeBlue"><i
-                                class="fa-solid fa-book-open mr-3"></i> 在地教育單位</h3>
-
-                        <div id="public-schools-container"
-                            class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10 items-start">
-                            <!-- JS 將動態注入大卡片與小列表 -->
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -1092,7 +1092,7 @@
                         <div class="text-[10px] sm:text-xs font-black text-amber-400 tracking-[0.25em] uppercase mb-4 flex items-center gap-2 drop-shadow-md">
                             <span class="w-10 h-[2px] bg-amber-400"></span> Academy of Excellence
                         </div>
-                        <a href="${school.website}" target="_blank" class="font-black text-white text-3xl lg:text-4xl leading-[1.2] hover:text-amber-300 transition-colors inline-flex items-start gap-3 group/link drop-shadow-lg mb-8">
+                        <a href="${school.website}" target="_blank" class="font-black text-white text-3xl lg:text-3xl leading-[1.2] hover:text-amber-300 transition-colors inline-flex items-start gap-3 group/link drop-shadow-lg mb-8">
                             <span class="line-clamp-2">${school.name}</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-lg text-white/30 group-hover/link:text-amber-300 shrink-0 mt-3"></i>
                         </a>
