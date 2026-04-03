@@ -36,6 +36,8 @@
     <!-- 🗺️ 加入 Leaflet CSS & JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- 🏫 加入學校數據 -->
+    <script src="data-schools.js"></script>
 
     <!-- 🗺️ 加入 Leaflet.MarkerCluster (地標群聚套件) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
@@ -1854,12 +1856,14 @@
             }
 
             try {
-                // 等待所有資料庫完整載入 (保留載入建案與社群以供搜尋)
-                const [foodData, shoppingData, communityData, buildingData, likesData] = await Promise.all([
+                // 等待所有資料庫完整載入 (全面整合搜尋資料)
+                const [foodData, shoppingData, communityData, buildingData, medicalData, educationData, likesData] = await Promise.all([
                     loadSharedFoodData(),
                     loadSharedShoppingData(),
                     loadSharedCommunityData(),
                     loadSharedBuildingData(),
+                    loadSharedMedicalData(),
+                    loadSharedEducationData(),
                     loadSharedLikesData()
                 ]);
 
@@ -1986,6 +1990,25 @@
                 const matchedBuildings = buildingData.filter(item =>
                     (item.name && item.name.toLowerCase().includes(q)) ||
                     (item.village && item.village.toLowerCase().includes(q))
+                );
+
+                const matchedMedical = medicalData.filter(item =>
+                    (item.name && item.name.toLowerCase().includes(q)) ||
+                    (item.category && item.category.toLowerCase().includes(q)) ||
+                    (item.address && item.address.toLowerCase().includes(q))
+                );
+
+                const matchedEducation = educationData.filter(item =>
+                    (item.name && item.name.toLowerCase().includes(q)) ||
+                    (item.category && item.category.toLowerCase().includes(q)) ||
+                    (item.address && item.address.toLowerCase().includes(q))
+                );
+
+                const matchedSchools = PUBLIC_SCHOOLS.filter(item =>
+                    (item.name && item.name.toLowerCase().includes(q)) ||
+                    (item.type && item.type.toLowerCase().includes(q)) ||
+                    (item.desc && item.desc.toLowerCase().includes(q)) ||
+                    (item.address && item.address.toLowerCase().includes(q))
                 );
 
 
@@ -2240,6 +2263,77 @@
                     `;
                 }
 
+                // 渲染醫療結果
+                if (matchedMedical.length > 0) {
+                    html += `
+                        <div class="bg-white rounded-[2rem] p-6 shadow-cute border-4 border-green-50 relative overflow-hidden mt-6">
+                            <h3 class="text-2xl font-black text-themeGreen mb-4 border-b-2 border-green-100 pb-2"><i class="fa-solid fa-house-medical mr-2"></i> 樂園救護中心 (${matchedMedical.length})</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
+                                ${matchedMedical.map(item => {
+                        let navTarget = encodeURIComponent(item.address || item.name);
+                        return `
+                                        <div class="bg-green-50 p-3 rounded-2xl shadow-sm border border-white flex items-center gap-3 hover:-translate-y-1 hover:shadow-md transition-all group relative">
+                                            <a href="lifehub.html?search=${encodeURIComponent(item.name)}#section-medical" class="absolute inset-0 z-0 rounded-2xl"></a>
+                                            <div class="w-10 h-10 bg-white rounded-full shrink-0 flex items-center justify-center text-themeGreen text-lg shadow-sm relative z-10 pointer-events-none"><i class="fa-solid fa-stethoscope"></i></div>
+                                            <div class="flex-1 overflow-hidden pr-2 relative z-10 pointer-events-none">
+                                                <div class="flex items-center gap-2 mb-0.5">
+                                                    <span class="text-[10px] bg-white text-themeGreen px-1.5 py-0.5 rounded-md font-black shadow-sm shrink-0">${item.category}</span>
+                                                    <h4 class="font-black text-gray-800 line-clamp-1 group-hover:text-green-600">${item.name}</h4>
+                                                </div>
+                                                <p class="text-xs text-gray-500 font-bold line-clamp-1"><i class="fa-solid fa-location-dot mr-1 text-green-500"></i>${item.address || '在地醫療服務'}</p>
+                                            </div>
+                                            <div class="relative z-10 shrink-0">
+                                                <a href="https://www.google.com/maps/dir/?api=1&destination=${navTarget}" target="_blank" class="bg-white text-green-500 hover:bg-green-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-sm transition-colors cursor-pointer" title="Google導航">
+                                                    <i class="fa-solid fa-location-arrow"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    `;
+                    }).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // 渲染教育與學校結果
+                if (matchedEducation.length > 0 || matchedSchools.length > 0) {
+                    html += `
+                        <div class="bg-white rounded-[2rem] p-6 shadow-cute border-4 border-blue-50 relative overflow-hidden mt-6">
+                            <h3 class="text-2xl font-black text-themeBlue mb-4 border-b-2 border-blue-100 pb-2"><i class="fa-solid fa-book-open-reader mr-2"></i> 教育學習殿堂 (${matchedEducation.length + matchedSchools.length})</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
+                                ${matchedSchools.map(item => `
+                                    <div class="bg-blue-50 p-4 rounded-2xl shadow-sm border border-white flex flex-col gap-3 hover:-translate-y-1 hover:shadow-md transition-all group relative">
+                                        <a href="lifehub.html?search=${encodeURIComponent(item.name)}#section-education-hall" class="absolute inset-0 z-0 rounded-2xl"></a>
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-12 h-12 bg-white rounded-xl shrink-0 border border-blue-100 overflow-hidden relative z-10 pointer-events-none">
+                                                <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
+                                            </div>
+                                            <div class="flex-1 relative z-10 pointer-events-none">
+                                                <span class="text-[10px] bg-sky-500 text-white px-1.5 py-0.5 rounded-md font-bold mb-1 inline-block">公立學校</span>
+                                                <h4 class="font-black text-gray-800 line-clamp-1 group-hover:text-blue-600">${item.name}</h4>
+                                            </div>
+                                        </div>
+                                        <p class="text-xs text-gray-500 font-bold line-clamp-2 leading-relaxed relative z-10 pointer-events-none">${item.desc}</p>
+                                    </div>
+                                `).join('')}
+                                ${matchedEducation.map(item => `
+                                    <div class="bg-indigo-50 p-3 rounded-2xl shadow-sm border border-white flex items-center gap-3 hover:-translate-y-1 hover:shadow-md transition-all group relative">
+                                        <a href="lifehub.html?search=${encodeURIComponent(item.name)}#section-education-list" class="absolute inset-0 z-0 rounded-2xl"></a>
+                                        <div class="w-10 h-10 bg-white rounded-full shrink-0 flex items-center justify-center text-indigo-500 text-lg shadow-sm relative z-10 pointer-events-none"><i class="fa-solid fa-graduation-cap"></i></div>
+                                        <div class="flex-1 overflow-hidden pr-2 relative z-10 pointer-events-none">
+                                            <div class="flex items-center gap-2 mb-0.5">
+                                                <span class="text-[10px] bg-white text-indigo-500 px-1.5 py-0.5 rounded-md font-black shadow-sm shrink-0">${item.category}</span>
+                                                <h4 class="font-black text-gray-800 line-clamp-1 group-hover:text-indigo-600">${item.name}</h4>
+                                            </div>
+                                            <p class="text-xs text-gray-500 font-bold line-clamp-1"><i class="fa-solid fa-location-dot mr-1 text-indigo-400"></i>${item.address || '在地教育機構'}</p>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
                 if (display) display.innerHTML = `為您找到關於 <span class="text-themePink font-black">「${query}」</span> 的結果：`;
                 container.innerHTML = html;
 
@@ -2247,6 +2341,45 @@
                 console.error("Search Error:", err);
                 container.innerHTML = `<div class="text-center py-12 text-red-500 font-bold bg-white rounded-[2.5rem] border-4 border-red-50">搜尋時發生錯誤，無法連線至資料庫，請稍後再試。</div>`;
             }
+        }
+
+        // --- 共享資料載入函式 (新增) ---
+        async function loadSharedMedicalData() {
+            const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTmr3ebvX4CeJ_Dc-TK_57zxqaVlXfI4CPVcgTAWAIKM29dtR-SqiFs93i2iz1ScwYEBcty8mlIxKYO/pub?gid=368795626&single=true&output=csv';
+            try {
+                const res = await fetch(csvUrl);
+                const csvText = await res.text();
+                const rows = parseCSV(csvText);
+                const headers = rows[0];
+                let nameIdx = headers.findIndex(k => k.includes('名稱') || k.includes('機構'));
+                if (nameIdx === -1) nameIdx = 0;
+                let catIdx = headers.findIndex(k => k.includes('醫療分類'));
+                if (catIdx === -1) catIdx = 8;
+                const addressIdx = headers.findIndex(k => k.includes('地址'));
+                return rows.slice(1).map(row => ({
+                    name: row[nameIdx]?.trim() || '',
+                    category: row[catIdx]?.trim() || '其他醫療',
+                    address: addressIdx !== -1 ? row[addressIdx]?.trim() : ''
+                })).filter(item => item.name);
+            } catch (e) { return []; }
+        }
+
+        async function loadSharedEducationData() {
+            const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTmr3ebvX4CeJ_Dc-TK_57zxqaVlXfI4CPVcgTAWAIKM29dtR-SqiFs93i2iz1ScwYEBcty8mlIxKYO/pub?gid=530207071&single=true&output=csv';
+            try {
+                const res = await fetch(csvUrl);
+                const csvText = await res.text();
+                const rows = parseCSV(csvText);
+                const headers = rows[0];
+                const nameIdx = headers.findIndex(k => k.includes('名稱') || k.includes('機構')) || 1;
+                const catIdx = headers.findIndex(k => k.includes('分類') || k.includes('屬性')) || 2;
+                const addressIdx = headers.findIndex(k => k.includes('地址'));
+                return rows.slice(1).map(row => ({
+                    name: row[nameIdx]?.trim() || '',
+                    category: catIdx !== -1 ? (row[catIdx]?.trim() || '綜合教育') : '綜合教育',
+                    address: addressIdx !== -1 ? row[addressIdx]?.trim() : ''
+                })).filter(item => item.name);
+            } catch (e) { return []; }
         }
 
         // --- 清理便利商店品牌前綴 ---

@@ -31,6 +31,8 @@
 
     <!-- 🌟 加入 Google Identity Services (Google 登入) -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- 🏫 加入學校數據 -->
+    <script src="data-schools.js"></script>
 
     <script>
         tailwind.config = {
@@ -1044,112 +1046,7 @@
         }
         const currentUserId = getUserId();
 
-        const PUBLIC_SCHOOLS = [
-            {
-                name: "桃園市立文青國民中小",
-                type: "雙語教學",
-                tagBg: "bg-blue-500",
-                icon: "fa-star",
-                img: "https://img.ltn.com.tw/Upload/news/600/2024/11/02/175.jpg",
-                website: "https://www.wcjps.tyc.edu.tw/",
-                navUrl: "https://www.google.com/maps/dir/?api=1&destination=桃園市龜山區文青路",
-                desc: "約 40 班 / 總量管制校",
-                address: "桃園市龜山區文青路",
-                distBasic: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文桃里</a>`,
-                distFree: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">樂善里(1,2,3)</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文青里</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">長樂里(1-9)</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文樂里</a>等`
-            },
-            {
-                name: "桃園市立樂善國民小學",
-                type: "雙語教學",
-                tagBg: "bg-sky-500",
-                icon: "fa-star",
-                img: "https://img1.591.com.tw/house/2025/12/12/176550459390441101.jpg!900x.water3.jpg",
-                website: "http://www2.leses.tyc.edu.tw/school/web/index.php",
-                navUrl: "https://www.google.com/maps/dir/?api=1&destination=桃園市龜山區樂善街200巷71號",
-                desc: "約 35 班 / 附設幼兒園",
-                address: "桃園市龜山區樂善街200巷71號",
-                distBasic: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">樂善里</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">樂善里(4-33)</a>`,
-                distFree: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">樂善里(1,2,3)</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">長樂里(1-9)</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">長樂里(10-21)</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文樂里</a>等`
-            },
-            {
-                name: "桃園市立文華國民小學",
-                type: "雙語教學",
-                tagBg: "bg-indigo-500",
-                icon: "fa-star",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoNT8uMwFvB4ILChDqpRT3Gc90Tb0fQXmQhA&s",
-                website: "http://www.sshes.tyc.edu.tw/",
-                navUrl: "https://www.google.com/maps/dir/?api=1&destination=桃園市龜山區文化七路116號",
-                desc: "約 60 班 / 大型學校",
-                address: "桃園市龜山區文化七路116號",
-                distBasic: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文化里</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">明德里</a>`,
-                distFree: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">大華里</a>`
-            },
-            {
-                name: "桃園市立大崗國民小學",
-                type: "生態校園",
-                tagBg: "bg-cyan-500",
-                icon: "fa-leaf",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMWHLgXt_jyO6S9PWU5uMLIpyAoYwKAU_-AA&s",
-                website: "https://www.dges.tyc.edu.tw/",
-                navUrl: "https://www.google.com/maps/dir/?api=1&destination=桃園市龜山區大湖路175號",
-                desc: "約 50 班 / 歷史悠久",
-                address: "桃園市龜山區大湖路175號",
-                distBasic: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">大崗里</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">大湖里</a>`,
-                distFree: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">公西里</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">坪頂里</a>`
-            },
-            {
-                name: "桃園市立文欣國民小學",
-                type: "閱讀教育",
-                tagBg: "bg-blue-400",
-                icon: "fa-book-open-reader",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvmP2GUuUYxzB3IsNpFCKVhls1GP3F47IB2A&s",
-                website: "https://www.weses.tyc.edu.tw/",
-                navUrl: "https://www.google.com/maps/dir/?api=1&destination=桃園市龜山區文德路81號",
-                desc: "約 30 班 / 美感校園",
-                address: "桃園市龜山區文德路81號",
-                distBasic: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文化里(1-17,19,21-33)</a>`,
-                distFree: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文化里(18,20)</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文化里</a>`
-            },
-            {
-                name: "桃園市立長庚國民小學",
-                type: "森林校園",
-                tagBg: "bg-sky-600",
-                icon: "fa-tree",
-                img: "https://pimg.1px.tw/dill4ms/1731339826-948896900-g.jpg",
-                website: "https://www.cgps.tyc.edu.tw/",
-                navUrl: "https://www.google.com/maps/dir/?api=1&destination=桃園市龜山區長庚醫護新村425號",
-                desc: "約 24 班 / 醫護社區",
-                address: "桃園市龜山區長庚醫護新村425號",
-                distBasic: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">長庚里</a>`,
-                distFree: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">長樂里(10-21)</a>`
-            },
-            {
-                name: "桃園市立大埔國民小學",
-                type: "田園教學",
-                tagBg: "bg-teal-500",
-                icon: "fa-seedling",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXyOVMY3BxwFFOsNuOxW70dXIVXjswYrhj9A&s",
-                website: "https://www.dpps.tyc.edu.tw/index.php/zh/",
-                navUrl: "https://www.google.com/maps/dir/?api=1&destination=桃園市龜山區振興路1169號",
-                desc: "約 15 班 / 特色小學",
-                address: "桃園市龜山區振興路1169號",
-                distBasic: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">舊路里</a>`,
-                distFree: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">楓樹里</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">兔坑里</a>`
-            },
-            {
-                name: "桃園市立大崗國民中學",
-                type: "多元社團",
-                tagBg: "bg-indigo-400",
-                icon: "fa-basketball",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHJn0dhayJuMYISOB9QkBTjfXB3ymW36PSaw&s",
-                website: "https://www.dgjh.tyc.edu.tw/",
-                navUrl: "https://www.google.com/maps/dir/?api=1&destination=桃園市龜山區文化二路168號",
-                desc: "約 40 班 / 體育班",
-                address: "桃園市龜山區文化二路168號",
-                distBasic: `<a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">樂善里</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文化里</a><a href="https://a7club.github.io/life/explore.html#buildings" target="_blank" class="inline-block bg-gray-100 text-gray-600 border border-gray-200 hover:bg-themeBlue hover:text-white hover:border-themeBlue px-1.5 rounded transition-colors font-black mx-0.5 mb-1 shadow-sm">文青里</a>等`,
-                distFree: ``
-            }
-        ];
+        // PUBLIC_SCHOOLS 現在由 data-schools.js 提提供
 
         window.renderPublicSchools = function (selectedIndex = 0) {
             const container = document.getElementById('public-schools-container');
