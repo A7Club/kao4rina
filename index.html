@@ -832,19 +832,19 @@
             </div>
 
             <!-- 組合區塊：Lifehub 工具 & 美食拉霸機 -->
-            <div class="flex flex-col lg:flex-row gap-4 md:gap-6 mb-6">
+            <!-- 組合區塊：Lifehub 工具 & 美食拉霸機 (三欄式佈局) -->
+            <div class="flex flex-col lg:flex-row gap-4 lg:gap-6 mb-12 items-stretch w-full">
 
-                <!-- 🌟 新增 Lifehub & Explore 查詢區 -->
-                <div class="w-full lg:w-[60%] xl:w-[65%] flex flex-col gap-4 md:gap-6">
-
+                <!-- 🎯 左欄：行政與學區查詢 (35%) -->
+                <div class="w-full lg:w-[35%] flex flex-col gap-4 lg:gap-6">
                     <!-- 一鍵查詢我家學區 (跳轉 lifehub.html) -->
                     <div
-                        class="bg-gradient-to-br from-sky-100 to-blue-50 rounded-[2.5rem] p-5 sm:p-6 lg:p-8 shadow-cute border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full justify-center">
+                        class="bg-gradient-to-br from-sky-100 to-blue-50 rounded-[2.5rem] p-5 sm:p-6 lg:p-7 shadow-cute border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full justify-center">
                         <div
-                            class="absolute -right-4 -bottom-4 text-sky-200 text-7xl lg:text-8xl opacity-60 pointer-events-none group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
+                            class="absolute -right-4 -bottom-4 text-sky-200 text-7xl opacity-60 pointer-events-none group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
                             <i class="fa-solid fa-school"></i>
                         </div>
-                        <div class="relative z-10 flex flex-col gap-2 lg:gap-4 h-full">
+                        <div class="relative z-10 flex flex-col gap-2 h-full">
                             <div class="flex-1">
                                 <h4 class="text-lg lg:text-xl font-black text-sky-600 mb-1 flex items-center">
                                     <div
@@ -853,7 +853,7 @@
                                     </div>
                                     一鍵查詢我家學區
                                 </h4>
-                                <p class="text-xs lg:text-sm text-sky-700/80 font-bold leading-relaxed mt-1">
+                                <p class="text-xs lg:text-[13px] text-sky-700/80 font-bold leading-relaxed mt-1">
                                     輸入地址（如：文青路100號）快速對照新學區。</p>
                             </div>
                             <div
@@ -870,12 +870,12 @@
 
                     <!-- 行政鄰里查詢 (跳轉 explore.html) -->
                     <div
-                        class="bg-gradient-to-br from-purple-100 to-fuchsia-50 rounded-[2.5rem] p-5 sm:p-6 lg:p-8 shadow-cute border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full justify-center">
+                        class="bg-gradient-to-br from-purple-100 to-fuchsia-50 rounded-[2.5rem] p-5 sm:p-6 lg:p-7 shadow-cute border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full justify-center">
                         <div
-                            class="absolute -right-4 -bottom-4 text-purple-200 text-7xl lg:text-8xl opacity-60 pointer-events-none group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
+                            class="absolute -right-4 -bottom-4 text-purple-200 text-7xl opacity-60 pointer-events-none group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
                             <i class="fa-solid fa-map-location-dot"></i>
                         </div>
-                        <div class="relative z-10 flex flex-col gap-2 lg:gap-4 h-full">
+                        <div class="relative z-10 flex flex-col gap-2 h-full">
                             <div class="flex-1">
                                 <h4 class="text-lg lg:text-xl font-black text-purple-600 mb-1 flex items-center">
                                     <div
@@ -884,8 +884,8 @@
                                     </div>
                                     行政鄰里查詢
                                 </h4>
-                                <p class="text-xs lg:text-sm text-purple-700/80 font-bold leading-relaxed mt-1">
-                                    輸入地址或建案，快速尋找對應的行政里別與鄰長資訊。</p>
+                                <p class="text-xs lg:text-[13px] text-purple-700/80 font-bold leading-relaxed mt-1">
+                                    輸入地址或建案，快速尋找鄰長資訊。</p>
                             </div>
                             <div
                                 class="flex w-full gap-2 shrink-0 bg-white/60 backdrop-blur p-1.5 lg:p-2 rounded-full border border-white shadow-sm mt-auto">
@@ -898,36 +898,38 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- 📝 分享在地店家 (已搬移至此) -->
+                <!-- 📝 中欄：分享在地店家 (20%) -->
+                <div class="w-full lg:w-[20%]">
                     <div
-                        class="bg-white rounded-[2.5rem] shadow-cute p-5 sm:p-6 lg:p-8 border-[4px] border-white relative text-center flex flex-col justify-center overflow-hidden group hover:shadow-lg transition-all h-full">
+                        class="bg-white rounded-[2.5rem] shadow-cute p-5 sm:p-6 lg:p-6 border-[4px] border-white relative text-center flex flex-col justify-center overflow-hidden group hover:shadow-lg transition-all h-full min-h-[300px]">
                         <div
-                            class="absolute -top-6 -right-2 text-pink-200 text-6xl floating z-0 pointer-events-none opacity-40">
-                            <i class="fa-solid fa-gift"></i></div>
-                        <div class="relative z-10 flex flex-col gap-2 h-full">
-                            <h2 class="text-lg lg:text-xl font-black text-themePink mb-1 px-1">🙌 我要分享在地店家資訊</h2>
-                            <p class="text-xs lg:text-sm text-gray-500 font-bold mb-4">發現了超棒的新店？還是有隱藏版美食？<br>快來告訴大家！</p>
-                            <div class="mt-auto">
+                            class="absolute -top-6 -right-2 text-pink-100 text-6xl floating z-0 pointer-events-none opacity-40">
+                            <i class="fa-solid fa-gift"></i>
+                        </div>
+                        <div class="relative z-10 flex flex-col gap-3 h-full items-center justify-center">
+                            <h2 class="text-lg lg:text-[19px] font-black text-themePink mb-1 px-1 leading-tight">🙌 我要分享<br>在地店家資訊</h2>
+                            <p class="text-[11px] lg:text-xs text-gray-400 font-bold mb-4">發現了超棒的新店？<br>快來告訴大家！</p>
+                            <div class="mt-2">
                                 <button onclick="toggleShareForm()"
-                                    class="bg-themePink text-white font-black py-2.5 px-6 rounded-full shadow-md hover:scale-105 hover:bg-pink-400 transition-all text-sm">
-                                    <i class="fa-solid fa-pen-to-square mr-2"></i> 點我填寫分享
+                                    class="bg-themePink text-white font-black py-3 px-5 rounded-full shadow-md hover:scale-105 hover:bg-pink-400 transition-all text-[13px] whitespace-nowrap">
+                                    <i class="fa-solid fa-pen-to-square mr-1.5"></i> 點我填寫分享
                                 </button>
                             </div>
                         </div>
                         <!-- Google Form 嵌入區塊 (預設隱藏) -->
                         <div id="share-form-container"
-                            class="hidden mt-4 w-full relative z-20 bg-pink-50 rounded-2xl p-1.5 border-2 border-pink-100 h-[400px] transition-all duration-300">
+                            class="hidden mt-4 w-full relative z-20 bg-pink-50 rounded-2xl p-1.5 border-2 border-pink-100 h-[350px] transition-all duration-300">
                             <iframe src="https://forms.gle/FyEGds4dPWsiEUUZA"
                                 class="w-full h-full rounded-xl border-0 bg-white" frameborder="0">載入中…</iframe>
                         </div>
                     </div>
-
                 </div>
 
-                <!-- 🎰 美食部拉霸機 (進階：鮮豔跳色 & 童趣升級) -->
+                <!-- 🎰 右欄：美食部拉霸機 (45%) -->
                 <div id="food-gacha"
-                    class="w-full lg:w-[40%] xl:w-[35%] bg-white rounded-[2.5rem] shadow-[0_30px_70px_-15px_rgba(255,158,187,0.5)] p-2 border-[12px] border-themePink/20 relative overflow-hidden flex flex-col group ring-4 ring-white/50 ring-inset min-h-[420px] sm:min-h-[450px] scroll-mt-24">
+                    class="w-full lg:w-[45%] bg-white rounded-[2.5rem] shadow-[0_30px_70px_-15px_rgba(255,158,187,0.5)] p-2 border-[12px] border-themePink/20 relative overflow-hidden flex flex-col group ring-4 ring-white/50 ring-inset min-h-[450px] scroll-mt-24">
 
                     <!-- 機台頂部招牌 (Vibrant Marquee) -->
                     <div
