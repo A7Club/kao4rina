@@ -466,8 +466,8 @@
                     </a>
 
                     <!-- 教育學習標籤 -->
-                    <a href="#section-education"
-                        onclick="event.preventDefault(); document.getElementById('section-education').scrollIntoView({behavior: 'smooth', block: 'start'});"
+                    <a href="#section-education-hall"
+                        onclick="event.preventDefault(); document.getElementById('section-education-hall').scrollIntoView({behavior: 'smooth', block: 'start'});"
                         class="group relative flex items-center justify-center p-1.5 pr-3 lg:p-2.5 lg:pr-5 rounded-full bg-white border-2 lg:border-[3px] border-blue-100 hover:border-blue-300 hover:-translate-y-1 hover:shadow-md transition-all shadow-sm shrink-0 overflow-hidden">
                         <div
                             class="absolute -right-2 -bottom-2 lg:-right-3 lg:-bottom-3 text-blue-50 text-4xl lg:text-6xl opacity-80 group-hover:scale-110 transition-transform">
@@ -512,7 +512,7 @@
                                         </div>
                                         <span class="hidden lg:inline">一鍵</span>查詢學區
                                     </h4>
-                                    <p class="text-[10px] lg:text-sm text-sky-700/80 font-bold leading-tight mt-1">
+                                    <p class="text-[10px] lg:text-sm text-sky-700/80 font-bold leading-tight mt-1 lg:whitespace-nowrap">
                                         輸入地址快速對照新學區。</p>
                                 </div>
                                 <div
@@ -529,7 +529,7 @@
 
                         <!-- 2. 補習班愛心排行榜 (手機並排右側，電腦左下) -->
                         <div
-                            class="col-span-1 lg:col-start-1 lg:row-start-2 bg-gradient-to-br from-pink-100 to-rose-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col lg:h-[180px]">
+                            class="col-span-1 lg:col-start-1 lg:row-start-2 bg-gradient-to-br from-pink-100 to-rose-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col lg:h-[260px]">
                             <div
                                 class="absolute -right-4 -bottom-4 text-pink-200 text-6xl lg:text-8xl opacity-50 pointer-events-none group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
                                 <i class="fa-solid fa-ranking-star"></i>
@@ -549,7 +549,7 @@
 
                         <!-- 3. 最新家長留言 (手機滿版在下方，電腦直立滿版在右側) -->
                         <div
-                            class="col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 bg-gradient-to-br from-purple-100 to-fuchsia-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full lg:h-[384px]">
+                            class="col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 bg-gradient-to-br from-purple-100 to-fuchsia-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full lg:h-[464px]">
                             <div
                                 class="absolute -right-4 -bottom-4 text-purple-200 text-7xl lg:text-8xl opacity-50 pointer-events-none group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
                                 <i class="fa-solid fa-comments"></i>
@@ -558,7 +558,8 @@
                                 <h4 class="text-base lg:text-lg font-black text-purple-600 flex items-center">
                                     <i class="fa-regular fa-comment-dots mr-1.5 lg:mr-2 text-purple-400"></i>最新家長評論
                                 </h4>
-                                <button onclick="document.getElementById('section-education').scrollIntoView({behavior: 'smooth', block: 'start'})" 
+                                <button
+                                    onclick="document.getElementById('section-education-list').scrollIntoView({behavior: 'smooth', block: 'start'})"
                                     class="text-[10px] lg:text-xs font-black text-purple-500 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full shadow-sm border border-purple-100 transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
                                     了解更多機構 <i class="fa-solid fa-chevron-right text-[8px]"></i>
                                 </button>
@@ -724,7 +725,7 @@
                 </div>
 
                 <!-- 3. 教育資源 -->
-                <div id="section-education" class="scroll-mt-36">
+                <div id="section-education-hall" class="scroll-mt-32">
                     <div class="flex items-center justify-between mb-5 px-2 ">
                         <h3 class="text-2xl font-black text-sky-500 flex items-center"><i
                                 class="fa-solid fa-book-open-reader mr-3"></i> 教育學習殿堂</h3>
@@ -732,262 +733,255 @@
 
                     <!-- 模組：就學與設籍 -->
 
+                    <div
+                        class="bg-white rounded-[2rem] p-6 md:p-8 shadow-cute border-4 border-blue-50 relative overflow-hidden group hover:-translate-y-1 transition-transform">
                         <div
-                            class="bg-white rounded-[2rem] p-6 md:p-8 shadow-cute border-4 border-blue-50 relative overflow-hidden group hover:-translate-y-1 transition-transform">
-                            <div
-                                class="absolute -right-4 -bottom-4 text-8xl text-blue-100 opacity-40 group-hover:scale-110 transition-transform pointer-events-none">
-                                <i class="fa-solid fa-school"></i>
-                            </div>
-                            <div
-                                class="bg-blue-100 text-blue-600 text-xs font-black px-3 py-1.5 rounded-xl flex items-center w-max shadow-sm mb-4">
-                                <i class="fa-solid fa-info-circle mr-1.5"></i>
-                                <a href="https://ws.tycg.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvNjYvcmVsZmlsZS8xMTI4Ni8xNjA4NTkzLzFmMTFkZjY1LThlYTMtNGNmZS05ZTFhLTU0MTFlNjRlOGEyNy5wZGY%3d&n=MTE15a245bm05bqm6b6c5bGx5Y2A5ZyL5rCR5Lit5bCP5a245a245Y2A5LiA6Ka96KGoLnBkZg%3d%3d"
-                                    target="_blank" rel="noopener noreferrer" class="hover:underline">依照桃園市教育局公告</a>
-                            </div>
+                            class="absolute -right-4 -bottom-4 text-8xl text-blue-100 opacity-40 group-hover:scale-110 transition-transform pointer-events-none">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <div
+                            class="bg-blue-100 text-blue-600 text-xs font-black px-3 py-1.5 rounded-xl flex items-center w-max shadow-sm mb-4">
+                            <i class="fa-solid fa-info-circle mr-1.5"></i>
+                            <a href="https://ws.tycg.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvNjYvcmVsZmlsZS8xMTI4Ni8xNjA4NTkzLzFmMTFkZjY1LThlYTMtNGNmZS05ZTFhLTU0MTFlNjRlOGEyNy5wZGY%3d&n=MTE15a245bm05bqm6b6c5bGx5Y2A5ZyL5rCR5Lit5bCP5a245a245Y2A5LiA6Ka96KGoLnBkZg%3d%3d"
+                                target="_blank" rel="noopener noreferrer" class="hover:underline">依照桃園市教育局公告</a>
+                        </div>
 
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 relative z-10 items-start">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 relative z-10 items-start">
 
-                                <div class="flex flex-col gap-6">
-                                    <div
-                                        class="bg-blue-50/50 p-4 md:p-6 rounded-[1.5rem] border-2 border-blue-100/60 shadow-inner flex flex-col gap-4">
-                                        <div class="w-full flex flex-col justify-center">
-                                            <h4
-                                                class="text-sm md:text-base font-black text-blue-700 mb-2 flex items-center">
-                                                <i
-                                                    class="fa-solid fa-magnifying-glass-location mr-1.5 text-blue-500"></i>一鍵查詢我家學區
-                                            </h4>
-                                            <p class="text-xs text-blue-500 font-bold mb-4">
-                                                輸入完整地址即可快速對照最新學區（建議包含門牌號碼以利精確判斷）
-                                            </p>
-                                            <div class="flex gap-2 w-full">
-                                                <input type="text" id="school-address-input" placeholder="例如：文青路100號"
-                                                    onkeypress="if(event.key === 'Enter') checkSchoolDistrict()"
-                                                    class="flex-1 min-w-0 rounded-xl border-2 border-blue-200 px-3 sm:px-4 py-2 text-sm font-bold text-gray-700 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 bg-white shadow-inner transition-all">
-                                                <button onclick="checkSchoolDistrict()"
-                                                    class="bg-blue-500 hover:bg-blue-600 text-white font-black px-4 py-2 rounded-xl transition-transform shadow-sm shrink-0 active:scale-95">查詢</button>
-                                            </div>
-                                        </div>
-                                        <div class="w-full flex flex-col justify-center">
-                                            <div id="school-result" class="hidden w-full h-full"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex flex-col gap-4">
-                                        <div
-                                            class="text-xs md:text-sm text-gray-500 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-inner flex items-start gap-3">
-                                            <i
-                                                class="fa-solid fa-circle-exclamation mt-1 shrink-0 text-blue-400 text-lg"></i>
-                                            <div>
-                                                <strong class="text-gray-700 block mb-1">什麼是「自由學區」？</strong>
-                                                指該鄰里被劃分在兩個（或以上）學校的共同學區內，家長可依據自身考量，自由選擇將孩子戶籍遷入並就讀其中一所學校。實際額滿與否及分發順序，需依各校當年度招生簡章為準。
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="text-xs md:text-sm text-rose-600 bg-rose-50/50 p-4 rounded-xl border-2 border-rose-100 flex items-start gap-3">
-                                            <i
-                                                class="fa-solid fa-triangle-exclamation mt-0.5 shrink-0 text-rose-400"></i>
-                                            <p class="font-black leading-relaxed">
-                                                具體學區劃分依照桃園市政府教育局公告「鄰里別」為準，建議設籍前先向區公所或學校教務處確認。
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
+                            <div class="flex flex-col gap-6">
                                 <div
-                                    class="overflow-y-auto max-h-[650px] rounded-[1.5rem] border-2 border-blue-100 shadow-sm bg-white hide-scrollbar h-full">
-                                    <table
-                                        class="w-full text-left text-xs sm:text-sm md:text-base border-collapse relative">
-                                        <thead
-                                            class="bg-blue-50 text-blue-800 border-b-2 border-blue-200 sticky top-0 z-20">
-                                            <tr>
-                                                <th
-                                                    class="p-3 md:p-5 font-black whitespace-nowrap w-auto sm:w-[30%] md:w-[35%] border-r border-blue-100/50">
-                                                    行政里別</th>
-                                                <th class="p-3 md:p-5 font-black">所屬學區 <span
-                                                        class="text-[10px] sm:text-xs text-blue-500 font-normal ml-1 hidden 2xl:inline">(可自由選擇)</span>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-gray-700 font-bold divide-y divide-blue-50">
-                                            <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
-                                                <td
-                                                    class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                    文青里</td>
-                                                <td class="p-3 md:p-5">
-                                                    <div class="flex flex-col gap-y-2">
-                                                        <div class="flex items-center flex-wrap gap-1">
-                                                            <span>文青國中小、大埔國小</span>
-                                                            <span
-                                                                class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
-                                                <td
-                                                    class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                    文藝里</td>
-                                                <td class="p-3 md:p-5">
-                                                    <div class="flex flex-col gap-y-2">
-                                                        <div class="flex items-center flex-wrap gap-1">
-                                                            <span>文青國中小、大埔國小</span>
-                                                            <span
-                                                                class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="hover:bg-blue-50/40 transition-colors group/row">
-                                                <td
-                                                    class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                    <div class="flex flex-col gap-y-2">
-                                                        <div class="flex items-center">樂善里 <span
-                                                                class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">1-3鄰</span>
-                                                        </div>
-                                                        <div
-                                                            class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
-                                                            樂善里 <span
-                                                                class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">4-33鄰</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="p-3 md:p-5">
-                                                    <div class="flex flex-col gap-y-2">
-                                                        <div class="flex items-center flex-wrap gap-1">
-                                                            <span>樂善國小、文青國中小</span>
-                                                            <span
-                                                                class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                        </div>
-                                                        <div
-                                                            class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
-                                                            <span>樂善國小</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="hover:bg-blue-50/40 transition-colors group/row">
-                                                <td
-                                                    class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                    <div class="flex flex-col gap-y-2">
-                                                        <div class="flex items-center">長樂里 <span
-                                                                class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">1-9鄰</span>
-                                                        </div>
-                                                        <div
-                                                            class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
-                                                            長樂里 <span
-                                                                class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">10-21鄰</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="p-3 md:p-5">
-                                                    <div class="flex flex-col gap-y-2">
-                                                        <div class="flex items-center flex-wrap gap-1">
-                                                            <span>樂善國小、文青國中小</span>
-                                                            <span
-                                                                class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                        </div>
-                                                        <div
-                                                            class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2 flex-wrap gap-1">
-                                                            <span>樂善國小、長庚國小</span>
-                                                            <span
-                                                                class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
-                                                <td
-                                                    class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                    文樂里</td>
-                                                <td class="p-3 md:p-5">
-                                                    <div class="flex flex-col gap-y-2">
-                                                        <div class="flex items-center flex-wrap gap-1">
-                                                            <span>樂善國小、文青國中小</span>
-                                                            <span
-                                                                class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="hover:bg-blue-50/40 transition-colors group/row">
-                                                <td
-                                                    class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                    文桃里</td>
-                                                <td class="p-3 md:p-5">
-                                                    <div class="flex items-center">
-                                                        <span>文青國小、文青國中</span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
-                                                <td
-                                                    class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                    長庚里</td>
-                                                <td class="p-3 md:p-5">
-                                                    <div class="flex items-center">
-                                                        <span>長庚國小</span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    class="bg-blue-50/50 p-4 md:p-6 rounded-[1.5rem] border-2 border-blue-100/60 shadow-inner flex flex-col gap-4">
+                                    <div class="w-full flex flex-col justify-center">
+                                        <h4
+                                            class="text-sm md:text-base font-black text-blue-700 mb-2 flex items-center">
+                                            <i
+                                                class="fa-solid fa-magnifying-glass-location mr-1.5 text-blue-500"></i>一鍵查詢我家學區
+                                        </h4>
+                                        <p class="text-xs text-blue-500 font-bold mb-4">
+                                            輸入完整地址即可快速對照最新學區（建議包含門牌號碼以利精確判斷）
+                                        </p>
+                                        <div class="flex gap-2 w-full">
+                                            <input type="text" id="school-address-input" placeholder="例如：文青路100號"
+                                                onkeypress="if(event.key === 'Enter') checkSchoolDistrict()"
+                                                class="flex-1 min-w-0 rounded-xl border-2 border-blue-200 px-3 sm:px-4 py-2 text-sm font-bold text-gray-700 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 bg-white shadow-inner transition-all">
+                                            <button onclick="checkSchoolDistrict()"
+                                                class="bg-blue-500 hover:bg-blue-600 text-white font-black px-4 py-2 rounded-xl transition-transform shadow-sm shrink-0 active:scale-95">查詢</button>
+                                        </div>
+                                    </div>
+                                    <div class="w-full flex flex-col justify-center">
+                                        <div id="school-result" class="hidden w-full h-full"></div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-4">
+                                    <div
+                                        class="text-xs md:text-sm text-gray-500 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-inner flex items-start gap-3">
+                                        <i
+                                            class="fa-solid fa-circle-exclamation mt-1 shrink-0 text-blue-400 text-lg"></i>
+                                        <div>
+                                            <strong class="text-gray-700 block mb-1">什麼是「自由學區」？</strong>
+                                            指該鄰里被劃分在兩個（或以上）學校的共同學區內，家長可依據自身考量，自由選擇將孩子戶籍遷入並就讀其中一所學校。實際額滿與否及分發順序，需依各校當年度招生簡章為準。
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="text-xs md:text-sm text-rose-600 bg-rose-50/50 p-4 rounded-xl border-2 border-rose-100 flex items-start gap-3">
+                                        <i class="fa-solid fa-triangle-exclamation mt-0.5 shrink-0 text-rose-400"></i>
+                                        <p class="font-black leading-relaxed">
+                                            具體學區劃分依照桃園市政府教育局公告「鄰里別」為準，建議設籍前先向區公所或學校教務處確認。
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- 🏫 在地教育單位 -->
-                        <div id="school"
-                            class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-cute mt-8 relative overflow-hidden border-4 border-blue-50 scroll-mt-24">
                             <div
-                                class="absolute -right-4 -top-4 text-blue-50 text-8xl floating opacity-50 z-0 pointer-events-none">
-                                <i class="fa-solid fa-school"></i>
-                            </div>
-                            <h3 class="text-2xl font-black mb-6 relative z-10 flex items-center text-themeBlue"><i
-                                    class="fa-solid fa-book-open mr-3"></i> 在地教育單位</h3>
-
-                            <div id="public-schools-container"
-                                class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10 items-start">
-                                <!-- JS 將動態注入大卡片與小列表 -->
+                                class="overflow-y-auto max-h-[650px] rounded-[1.5rem] border-2 border-blue-100 shadow-sm bg-white hide-scrollbar h-full">
+                                <table
+                                    class="w-full text-left text-xs sm:text-sm md:text-base border-collapse relative">
+                                    <thead
+                                        class="bg-blue-50 text-blue-800 border-b-2 border-blue-200 sticky top-0 z-20">
+                                        <tr>
+                                            <th
+                                                class="p-3 md:p-5 font-black whitespace-nowrap w-auto sm:w-[30%] md:w-[35%] border-r border-blue-100/50">
+                                                行政里別</th>
+                                            <th class="p-3 md:p-5 font-black">所屬學區 <span
+                                                    class="text-[10px] sm:text-xs text-blue-500 font-normal ml-1 hidden 2xl:inline">(可自由選擇)</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-700 font-bold divide-y divide-blue-50">
+                                        <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
+                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                                文青里</td>
+                                            <td class="p-3 md:p-5">
+                                                <div class="flex flex-col gap-y-2">
+                                                    <div class="flex items-center flex-wrap gap-1">
+                                                        <span>文青國中小、大埔國小</span>
+                                                        <span
+                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
+                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                                文藝里</td>
+                                            <td class="p-3 md:p-5">
+                                                <div class="flex flex-col gap-y-2">
+                                                    <div class="flex items-center flex-wrap gap-1">
+                                                        <span>文青國中小、大埔國小</span>
+                                                        <span
+                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-blue-50/40 transition-colors group/row">
+                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                                <div class="flex flex-col gap-y-2">
+                                                    <div class="flex items-center">樂善里 <span
+                                                            class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">1-3鄰</span>
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
+                                                        樂善里 <span
+                                                            class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">4-33鄰</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-3 md:p-5">
+                                                <div class="flex flex-col gap-y-2">
+                                                    <div class="flex items-center flex-wrap gap-1">
+                                                        <span>樂善國小、文青國中小</span>
+                                                        <span
+                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
+                                                        <span>樂善國小</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-blue-50/40 transition-colors group/row">
+                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                                <div class="flex flex-col gap-y-2">
+                                                    <div class="flex items-center">長樂里 <span
+                                                            class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">1-9鄰</span>
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
+                                                        長樂里 <span
+                                                            class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">10-21鄰</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-3 md:p-5">
+                                                <div class="flex flex-col gap-y-2">
+                                                    <div class="flex items-center flex-wrap gap-1">
+                                                        <span>樂善國小、文青國中小</span>
+                                                        <span
+                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2 flex-wrap gap-1">
+                                                        <span>樂善國小、長庚國小</span>
+                                                        <span
+                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
+                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                                文樂里</td>
+                                            <td class="p-3 md:p-5">
+                                                <div class="flex flex-col gap-y-2">
+                                                    <div class="flex items-center flex-wrap gap-1">
+                                                        <span>樂善國小、文青國中小</span>
+                                                        <span
+                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-blue-50/40 transition-colors group/row">
+                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                                文桃里</td>
+                                            <td class="p-3 md:p-5">
+                                                <div class="flex items-center">
+                                                    <span>文青國小、文青國中</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
+                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                                長庚里</td>
+                                            <td class="p-3 md:p-5">
+                                                <div class="flex items-center">
+                                                    <span>長庚國小</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <h4 id="section-education" class="text-2xl font-black text-gray-500 ml-2 mt-5 flex items-center scroll-mt-32"><i
-                        class="fa-solid fa-chalkboard-user mr-2 text-themePurple"></i>學習照顧機構</h4>
+                    <!-- 🏫 在地教育單位 -->
+                    <div id="school"
+                        class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-cute mt-8 relative overflow-hidden border-4 border-blue-50 scroll-mt-24">
+                        <div
+                            class="absolute -right-4 -top-4 text-blue-50 text-8xl floating opacity-50 z-0 pointer-events-none">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <h3 class="text-2xl font-black mb-6 relative z-10 flex items-center text-themeBlue"><i
+                                class="fa-solid fa-book-open mr-3"></i> 在地教育單位</h3>
 
-                <!-- 新增分類按鈕區塊 -->
-                <div id="education-filter-container" class="flex gap-2.5 overflow-x-auto hide-scrollbar mb-4 px-2 pb-3">
-                    <!-- 分類按鈕將由 JS 動態生成 -->
-                </div>
-
-                <div id="education-list-container" class="w-full">
-                    <div
-                        class="w-full text-center text-themePurple py-12 bg-white rounded-[2.5rem] border-4 border-purple-50 shadow-cute">
-                        <i class="fa-solid fa-spinner fa-spin text-4xl mb-5"></i>
-                        <p class="font-bold">正在連線在地教育機構庫...</p>
-                    </div>
-                </div>
-
-                <div
-                    class="bg-[#2C3E50] rounded-3xl p-6 md:p-8 shadow-cute relative overflow-hidden border-4 border-[#1A252F] flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div
-                        class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]">
-                    </div>
-                    <div class="relative z-10 flex items-center gap-4 text-left w-full md:w-auto">
-                        <div class="text-4xl sm:text-5xl animate-bounce drop-shadow-lg shrink-0">🖍️</div>
-                        <div>
-                            <h5 class="font-black text-white text-xl sm:text-2xl tracking-wide drop-shadow-md mb-1">
-                                在地補教機構招募中</h5>
-                            <p class="text-gray-300 font-bold text-xs sm:text-sm leading-relaxed max-w-lg">提供 A7
-                                區域內的幼兒園、安親班、才藝補習班等資訊，一起完善在地教育地圖！</p>
+                        <div id="public-schools-container"
+                            class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10 items-start">
+                            <!-- JS 將動態注入大卡片與小列表 -->
                         </div>
                     </div>
-                    <button onclick="window.location.href='https://forms.gle/FyEGds4dPWsiEUUZA'"
-                        class="relative z-10 w-full md:w-auto px-6 py-3.5 bg-themeYellow text-gray-800 font-black rounded-full shadow-[0_4px_0_#9D70FF] hover:translate-y-[2px] hover:shadow-[0_2px_0_#9D70FF] active:translate-y-[4px] active:shadow-none transition-all flex items-center justify-center gap-2 text-base shrink-0"><i
-                            class="fa-solid fa-hand-sparkles"></i> 提供資訊</button>
                 </div>
             </div>
+
+            <h4 id="section-education-list"
+                class="text-2xl font-black text-gray-500 ml-2 mt-5 flex items-center scroll-mt-32"><i
+                    class="fa-solid fa-chalkboard-user mr-2 text-themePurple"></i>學習照顧機構</h4>
+
+            <!-- 新增分類按鈕區塊 -->
+            <div id="education-filter-container" class="flex gap-2.5 overflow-x-auto hide-scrollbar mb-6 px-2 pt-2 pb-3">
+                <!-- 分類按鈕將由 JS 動態生成 -->
+            </div>
+
+            <div id="education-list-container" class="w-full">
+                <div
+                    class="w-full text-center text-themePurple py-12 bg-white rounded-[2.5rem] border-4 border-purple-50 shadow-cute">
+                    <i class="fa-solid fa-spinner fa-spin text-4xl mb-5"></i>
+                    <p class="font-bold">正在連線在地教育機構庫...</p>
+                </div>
+            </div>
+
+            <div
+                class="bg-[#2C3E50] rounded-3xl p-6 md:p-8 shadow-cute relative overflow-hidden border-4 border-[#1A252F] flex flex-col md:flex-row items-center justify-between gap-6">
+                <div
+                    class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]">
+                </div>
+                <div class="relative z-10 flex items-center gap-4 text-left w-full md:w-auto">
+                    <div class="text-4xl sm:text-5xl animate-bounce drop-shadow-lg shrink-0">🖍️</div>
+                    <div>
+                        <h5 class="font-black text-white text-xl sm:text-2xl tracking-wide drop-shadow-md mb-1">
+                            在地補教機構招募中</h5>
+                        <p class="text-gray-300 font-bold text-xs sm:text-sm leading-relaxed max-w-lg">提供 A7
+                            區域內的幼兒園、安親班、才藝補習班等資訊，一起完善在地教育地圖！</p>
+                    </div>
+                </div>
+                <button onclick="window.location.href='https://forms.gle/FyEGds4dPWsiEUUZA'"
+                    class="relative z-10 w-full md:w-auto px-6 py-3.5 bg-themeYellow text-gray-800 font-black rounded-full shadow-[0_4px_0_#9D70FF] hover:translate-y-[2px] hover:shadow-[0_2px_0_#9D70FF] active:translate-y-[4px] active:shadow-none transition-all flex items-center justify-center gap-2 text-base shrink-0"><i
+                        class="fa-solid fa-hand-sparkles"></i> 提供資訊</button>
+            </div>
+        </div>
         </div>
         </div>
         </div>
