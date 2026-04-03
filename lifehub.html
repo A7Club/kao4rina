@@ -580,116 +580,6 @@
             <!-- 🔥 下方：全版幅寬內容區塊 -->
             <div class="flex-1 min-w-0 space-y-16 pb-10 mt-12 pt-8 border-t-4 border-dashed border-gray-100 w-full">
 
-                <!-- 1. 緊急救援 -->
-                <div id="section-emergency" class="scroll-mt-36">
-                    <div class="flex items-center justify-between mb-6 px-2 ">
-                        <h3 class="text-2xl font-black text-red-500 flex items-center"><i
-                                class="fa-solid fa-truck-medical mr-3"></i> 救護與緊急通報</h3>
-                    </div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-2 gap-6 relative z-10">
-                        <!-- 警察局卡片 (專業通報面板風格) -->
-                        <div
-                            class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 border-l-[16px] border-l-blue-600 relative overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all h-full">
-                            <div
-                                class="absolute right-0 bottom-0 text-blue-50 text-9xl pointer-events-none transform translate-x-1/4 translate-y-1/4 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-shield-halved"></i>
-                            </div>
-
-                            <div
-                                class="px-6 md:px-8 py-6 border-b border-gray-50 flex items-center justify-between relative z-10 bg-gradient-to-r from-blue-50/50 to-transparent">
-                                <div class="flex items-center gap-4">
-                                    <div
-                                        class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl shadow-inner">
-                                        <i class="fa-solid fa-building-shield"></i>
-                                    </div>
-                                    <h4 class="text-2xl md:text-3xl font-black text-gray-800 tracking-wide">警察局 </h4>
-                                </div>
-                                <div
-                                    class="flex items-center gap-2 bg-rose-50 text-rose-600 px-3 py-1.5 rounded-full text-xs font-black shadow-sm border border-rose-100">
-                                    <span class="relative flex h-2 w-2">
-                                        <span
-                                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-                                    </span>
-                                    24H 執勤
-                                </div>
-                            </div>
-
-                            <div class="p-6 md:p-8 flex flex-col gap-6 relative z-10">
-                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div>
-                                        <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
-                                                class="fa-solid fa-location-crosshairs text-blue-500"></i> 大埔派出所</div>
-                                        <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
-                                                class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區文德二路80號
-                                        </div>
-                                    </div>
-                                    <a href="tel:03-3202554"
-                                        class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] active:scale-95 shrink-0"><i
-                                            class="fa-solid fa-phone-volume animate-pulse"></i> 03-3202554</a>
-                                </div>
-                                <div class="h-px w-full bg-gray-100"></div>
-                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div>
-                                        <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
-                                                class="fa-solid fa-location-crosshairs text-blue-500"></i> 坪頂派出所</div>
-                                        <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
-                                                class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區大湖一路65號
-                                        </div>
-                                    </div>
-                                    <a href="tel:03-3282570"
-                                        class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] active:scale-95 shrink-0"><i
-                                            class="fa-solid fa-phone-volume animate-pulse"></i> 03-3282570</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 消防隊卡片 (專業通報面板風格) -->
-                        <div
-                            class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 border-l-[16px] border-l-red-600 relative overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all h-full">
-                            <div
-                                class="absolute right-0 bottom-0 text-red-50 text-9xl pointer-events-none transform translate-x-1/4 translate-y-1/4 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-fire-extinguisher"></i>
-                            </div>
-
-                            <div
-                                class="px-6 md:px-8 py-6 border-b border-gray-50 flex items-center justify-between relative z-10 bg-gradient-to-r from-red-50/50 to-transparent">
-                                <div class="flex items-center gap-4">
-                                    <div
-                                        class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-2xl shadow-inner">
-                                        <i class="fa-solid fa-truck-medical"></i>
-                                    </div>
-                                    <h4 class="text-2xl md:text-3xl font-black text-gray-800 tracking-wide">消防隊 </h4>
-                                </div>
-                                <div
-                                    class="flex items-center gap-2 bg-rose-50 text-rose-600 px-3 py-1.5 rounded-full text-xs font-black shadow-sm border border-rose-100">
-                                    <span class="relative flex h-2 w-2">
-                                        <span
-                                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-                                    </span>
-                                    24H 待命
-                                </div>
-                            </div>
-
-                            <div class="p-6 md:p-8 flex flex-col gap-6 relative z-10 h-full">
-                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div>
-                                        <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
-                                                class="fa-solid fa-location-crosshairs text-red-500"></i> 坪頂消防分隊</div>
-                                        <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
-                                                class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區復興三路80號
-                                        </div>
-                                    </div>
-                                    <a href="tel:03-3280309"
-                                        class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(220,38,38,0.3)] active:scale-95 shrink-0"><i
-                                            class="fa-solid fa-phone-volume animate-pulse"></i> 03-3280309</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- 2. 醫療院所 -->
                 <div id="section-medical" class="scroll-mt-36">
@@ -980,6 +870,117 @@
                 <button onclick="window.location.href='https://forms.gle/FyEGds4dPWsiEUUZA'"
                     class="relative z-10 w-full md:w-auto px-6 py-3.5 bg-themeYellow text-gray-800 font-black rounded-full shadow-[0_4px_0_#9D70FF] hover:translate-y-[2px] hover:shadow-[0_2px_0_#9D70FF] active:translate-y-[4px] active:shadow-none transition-all flex items-center justify-center gap-2 text-base shrink-0"><i
                         class="fa-solid fa-hand-sparkles"></i> 提供資訊</button>
+            </div>
+
+            <!-- 1. 緊急救援 -->
+            <div id="section-emergency" class="scroll-mt-36">
+                <div class="flex items-center justify-between mb-6 px-2 ">
+                    <h3 class="text-2xl font-black text-red-500 flex items-center"><i
+                            class="fa-solid fa-truck-medical mr-3"></i> 救護與緊急通報</h3>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-2 gap-6 relative z-10">
+                    <!-- 警察局卡片 (專業通報面板風格) -->
+                    <div
+                        class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 border-l-[16px] border-l-blue-600 relative overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all h-full">
+                        <div
+                            class="absolute right-0 bottom-0 text-blue-50 text-9xl pointer-events-none transform translate-x-1/4 translate-y-1/4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <div
+                            class="px-6 md:px-8 py-6 border-b border-gray-50 flex items-center justify-between relative z-10 bg-gradient-to-r from-blue-50/50 to-transparent">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl shadow-inner">
+                                    <i class="fa-solid fa-building-shield"></i>
+                                </div>
+                                <h4 class="text-2xl md:text-3xl font-black text-gray-800 tracking-wide">警察局 </h4>
+                            </div>
+                            <div
+                                class="flex items-center gap-2 bg-rose-50 text-rose-600 px-3 py-1.5 rounded-full text-xs font-black shadow-sm border border-rose-100">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                                </span>
+                                24H 執勤
+                            </div>
+                        </div>
+
+                        <div class="p-6 md:p-8 flex flex-col gap-6 relative z-10">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div>
+                                    <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
+                                            class="fa-solid fa-location-crosshairs text-blue-500"></i> 大埔派出所</div>
+                                    <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
+                                            class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區文德二路80號
+                                    </div>
+                                </div>
+                                <a href="tel:03-3202554"
+                                    class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] active:scale-95 shrink-0"><i
+                                        class="fa-solid fa-phone-volume animate-pulse"></i> 03-3202554</a>
+                            </div>
+                            <div class="h-px w-full bg-gray-100"></div>
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div>
+                                    <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
+                                            class="fa-solid fa-location-crosshairs text-blue-500"></i> 坪頂派出所</div>
+                                    <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
+                                            class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區大湖一路65號
+                                    </div>
+                                </div>
+                                <a href="tel:03-3282570"
+                                    class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] active:scale-95 shrink-0"><i
+                                        class="fa-solid fa-phone-volume animate-pulse"></i> 03-3282570</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 消防隊卡片 (專業通報面板風格) -->
+                    <div
+                        class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 border-l-[16px] border-l-red-600 relative overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all h-full">
+                        <div
+                            class="absolute right-0 bottom-0 text-red-50 text-9xl pointer-events-none transform translate-x-1/4 translate-y-1/4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-fire-extinguisher"></i>
+                        </div>
+
+                        <div
+                            class="px-6 md:px-8 py-6 border-b border-gray-50 flex items-center justify-between relative z-10 bg-gradient-to-r from-red-50/50 to-transparent">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-2xl shadow-inner">
+                                    <i class="fa-solid fa-truck-medical"></i>
+                                </div>
+                                <h4 class="text-2xl md:text-3xl font-black text-gray-800 tracking-wide">消防隊 </h4>
+                            </div>
+                            <div
+                                class="flex items-center gap-2 bg-rose-50 text-rose-600 px-3 py-1.5 rounded-full text-xs font-black shadow-sm border border-rose-100">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                                </span>
+                                24H 待命
+                            </div>
+                        </div>
+
+                        <div class="p-6 md:p-8 flex flex-col gap-6 relative z-10 h-full">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div>
+                                    <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
+                                            class="fa-solid fa-location-crosshairs text-red-500"></i> 坪頂消防分隊</div>
+                                    <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
+                                            class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區復興三路80號
+                                    </div>
+                                </div>
+                                <a href="tel:03-3280309"
+                                    class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(220,38,38,0.3)] active:scale-95 shrink-0"><i
+                                        class="fa-solid fa-phone-volume animate-pulse"></i> 03-3280309</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         </div>
