@@ -796,14 +796,33 @@
                             </div>
                         </div>
 
-                        <!-- 內容區 -->
-                        <div class="relative h-[600px] bg-gray-50">
-                            <div id="report-loading" class="absolute inset-0 flex flex-col items-center justify-center text-amber-600 bg-gray-50 z-10">
-                                <i class="fa-solid fa-spinner fa-spin text-4xl mb-3"></i>
-                                <p class="font-bold">載入市政信箱中...</p>
+                        <!-- 內容區 (具備導引與 Iframe 雙視圖) -->
+                        <div class="relative min-h-[420px] bg-gray-50 flex flex-col group">
+                            <!-- 導引展示區 (政府專用：解決拒絕連線) -->
+                            <div id="report-guidance-view" class="hidden flex-1 p-8 md:p-12 flex flex-col items-center justify-center text-center">
+                                <div id="guidance-icon-box" class="w-20 h-20 md:w-24 md:h-24 bg-amber-100 text-amber-500 rounded-3xl flex items-center justify-center text-4xl md:text-5xl mb-6 shadow-inner ring-4 ring-white">
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                </div>
+                                <h4 id="guidance-title" class="text-xl md:text-2xl font-black text-gray-800 mb-4 tracking-tight">報修申報導引</h4>
+                                <div id="guidance-tips" class="max-w-md w-full bg-white p-5 md:p-6 rounded-2xl border-2 border-amber-50 shadow-sm mb-8 text-left space-y-4">
+                                    <!-- 這裡會由 JS 注入填寫提示 -->
+                                </div>
+                                <button id="guidance-cta-btn" onclick="" class="group relative px-10 py-4 bg-amber-500 hover:bg-amber-600 text-white font-black rounded-2xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center gap-3">
+                                    <span class="text-lg">立即前往官方系統申報</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                                </button>
+                                <p class="mt-6 text-xs text-gray-400 font-bold bg-gray-100 px-4 py-2 rounded-full border border-gray-200">※ 因官方網站資安限制，點擊後將為您開啟獨立彈窗進行填寫</p>
                             </div>
-                            <iframe id="report-iframe" class="w-full h-full border-0 absolute inset-0 z-20 bg-white"
-                                onload="document.getElementById('report-loading').style.display='none'"></iframe>
+
+                            <!-- 原有 Iframe 區 (備援：非政府網頁時顯示) -->
+                            <div id="report-iframe-view" class="hidden flex-1 relative h-[600px]">
+                                <div id="report-loading" class="absolute inset-0 flex flex-col items-center justify-center text-amber-600 bg-gray-50 z-10">
+                                    <i class="fa-solid fa-spinner fa-spin text-4xl mb-3"></i>
+                                    <p class="font-bold">載入官方頁面中...</p>
+                                </div>
+                                <iframe id="report-iframe" class="w-full h-full border-0 absolute inset-0 z-20 bg-white"
+                                    onload="document.getElementById('report-loading').style.display='none'"></iframe>
+                            </div>
                         </div>
 
                         <!-- 底部提醒 -->
@@ -3535,24 +3554,69 @@
         window.openReportIframe = function (url, title) {
             const container = document.getElementById('report-iframe-container');
             const iframe = document.getElementById('report-iframe');
+            const guidanceView = document.getElementById('report-guidance-view');
+            const iframeView = document.getElementById('report-iframe-view');
             const titleEl = document.querySelector('#report-iframe-title span');
             const externalLink = document.getElementById('report-external-link');
-            const loading = document.getElementById('report-loading');
+            const ctaBtn = document.getElementById('guidance-cta-btn');
 
-            if (!container || !iframe || !titleEl) return;
+            if (!container || !guidanceView || !iframeView) return;
 
+            const isGov = url.includes('tycg.gov.tw');
             titleEl.textContent = title;
             externalLink.href = url;
-            loading.style.display = 'flex';
-            iframe.src = url;
 
+            // 1. 準備導引內容
+            const tipsBox = document.getElementById('guidance-tips');
+            let tipsHtml = '';
+            let iconClass = 'fa-bullhorn';
+
+            if (title.includes('路燈')) {
+                iconClass = 'fa-lightbulb';
+                tipsHtml = `
+                    <p class="text-gray-700 font-bold flex items-start gap-2"><i class="fa-solid fa-circle-info text-amber-500 mt-1"></i><span><b>路燈編號：</b>請尋找電線桿上的黃色標籤噴漆號碼 (如: 025)。</span></p>
+                    <p class="text-gray-700 font-bold flex items-start gap-2"><i class="fa-solid fa-location-dot text-amber-500 mt-1"></i><span><b>明確地址：</b>若無編號，請提供門牌或鄰近交叉路口。</span></p>
+                `;
+            } else if (title.includes('路面')) {
+                iconClass = 'fa-road';
+                tipsHtml = `
+                    <p class="text-gray-700 font-bold flex items-start gap-2"><i class="fa-solid fa-circle-info text-amber-500 mt-1"></i><span><b>坑洞位置：</b>在哪個車道、或在哪個十字路口。</span></p>
+                    <p class="text-gray-700 font-bold flex items-start gap-2"><i class="fa-solid fa-up-right-and-down-left-from-center text-amber-500 mt-1"></i><span><b>概略大小：</b>例如一個排球大、或是一整條裂縫。</span></p>
+                `;
+            } else if (title.includes('號誌')) {
+                iconClass = 'fa-traffic-light';
+                tipsHtml = `
+                    <p class="text-gray-700 font-bold flex items-start gap-2"><i class="fa-solid fa-circle-info text-amber-500 mt-1"></i><span><b>故障狀況：</b>燈號全黑不亮、單色故障或指示牌掉落。</span></p>
+                    <p class="text-gray-700 font-bold flex items-start gap-2"><i class="fa-solid fa-map-pin text-amber-500 mt-1"></i><span><b>方向確認：</b>往台北/新莊方向，或是往機場區段。</span></p>
+                `;
+            }
+
+            document.getElementById('guidance-title').textContent = title + '申報導引';
+            document.getElementById('guidance-icon-box').innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+            tipsBox.innerHTML = tipsHtml;
+            ctaBtn.onclick = () => {
+                window.open(url, 'reportWin', 'width=1000,height=800,scrollbars=yes,resizable=yes');
+            };
+
+            // 2. 切換視圖
+            if (isGov) {
+                guidanceView.classList.remove('hidden');
+                iframeView.classList.add('hidden');
+            } else {
+                guidanceView.classList.add('hidden');
+                iframeView.classList.remove('hidden');
+                const loading = document.getElementById('report-loading');
+                if (loading) loading.style.display = 'flex';
+                iframe.src = url;
+            }
+
+            // 3. 顯示容器與動畫
             container.classList.remove('hidden');
-            // 觸發進場動畫
             setTimeout(() => {
                 container.classList.remove('opacity-0', 'translate-y-4');
             }, 10);
 
-            // 自動捲動到填寫區觀察位置
+            // 4. 自動捲動
             setTimeout(() => {
                 const yOffset = -100;
                 const rect = container.getBoundingClientRect();
@@ -3568,7 +3632,8 @@
             container.classList.add('opacity-0', 'translate-y-4');
             setTimeout(() => {
                 container.classList.add('hidden');
-                document.getElementById('report-iframe').src = 'about:blank';
+                const iframe = document.getElementById('report-iframe');
+                if (iframe) iframe.src = 'about:blank';
             }, 500);
         }
 
