@@ -569,6 +569,51 @@
     </div>
 
     <!-- ========================================== -->
+    <!-- 📝 分享在地店家 Modal (全新設計) -->
+    <!-- ========================================== -->
+    <div id="share-store-modal" class="fixed inset-0 z-[150] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            onclick="closeShareStoreModal()"></div>
+        <div class="bg-white rounded-[2rem] border-4 border-pink-200 w-full max-w-4xl h-[90vh] flex flex-col shadow-2xl transform scale-95 opacity-0 transition-all duration-300 overflow-hidden relative z-10"
+            id="share-store-modal-content">
+
+            <!-- Modal 標題列 -->
+            <div class="px-6 py-4 border-b-2 border-pink-100 flex justify-between items-center bg-pink-50 shrink-0">
+                <h3 class="text-xl font-black text-themePink flex items-center gap-2 truncate pr-4">
+                    <i class="fa-solid fa-gift shrink-0"></i> <span>分享在地店家資訊</span>
+                </h3>
+                <div class="flex gap-2">
+                    <a href="https://forms.gle/FyEGds4dPWsiEUUZA" target="_blank"
+                        class="w-10 h-10 bg-white border-2 border-pink-100 rounded-full flex items-center justify-center text-themePink hover:bg-themePink hover:text-white transition-all shadow-sm shrink-0"
+                        title="在新分頁開啟">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                    </a>
+                    <button onclick="closeShareStoreModal()"
+                        class="w-10 h-10 bg-white border-2 border-pink-100 rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all shadow-sm shrink-0">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal 內容區 -->
+            <div class="flex-1 w-full bg-gray-50 relative">
+                <div id="share-modal-loading"
+                    class="absolute inset-0 flex flex-col items-center justify-center text-themePink bg-gray-50 z-10">
+                    <i class="fa-solid fa-spinner fa-spin text-4xl mb-3"></i>
+                    <p class="font-bold">載入表單中...</p>
+                </div>
+                <iframe id="share-modal-iframe" src="" class="w-full h-full border-0 absolute inset-0 z-20 bg-white"
+                    onload="document.getElementById('share-modal-loading').style.display='none'"></iframe>
+            </div>
+
+            <!-- Modal 底部提醒 -->
+            <div class="p-3 bg-white border-t-2 border-gray-100 text-center shrink-0">
+                <p class="text-[10px] sm:text-xs text-gray-400 font-bold">A7 柒樂部與您一起打造溫暖的在地生活圈🎡</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
     <!-- 🧩 頁面模板區 (Template) - 不會被渲染直到被呼叫 -->
     <!-- ========================================== -->
 
@@ -919,12 +964,6 @@
                                     <i class="fa-solid fa-pen-to-square mr-1"></i> 分享店家
                                 </button>
                             </div>
-                        </div>
-                        <!-- Google Form 嵌入區塊 (預設隱藏) -->
-                        <div id="share-form-container"
-                            class="hidden mt-4 w-full relative z-20 bg-pink-50 rounded-2xl p-1.5 border-2 border-pink-100 h-[400px] transition-all duration-300">
-                            <iframe src="https://forms.gle/FyEGds4dPWsiEUUZA"
-                                class="w-full h-full rounded-xl border-0 bg-white" frameborder="0">載入中…</iframe>
                         </div>
                     </div>
                 </div>
@@ -5028,6 +5067,55 @@
                 window.location.href = 'explore.html';
             }
         }
+
+        // --- 分享在地店家 Modal 邏輯 (全新) ---
+        window.openShareStoreModal = function() {
+            const modal = document.getElementById('share-store-modal');
+            const content = document.getElementById('share-store-modal-content');
+            const iframe = document.getElementById('share-modal-iframe');
+            const loading = document.getElementById('share-modal-loading');
+            const formUrl = "https://forms.gle/FyEGds4dPWsiEUUZA";
+
+            if (!modal || !content || !iframe) return;
+
+            // 鎖定背景滾動
+            document.body.style.overflow = 'hidden';
+            
+            loading.style.display = 'flex';
+            iframe.src = formUrl;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            // 觸發進場動畫
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        };
+
+        window.closeShareStoreModal = function() {
+            const modal = document.getElementById('share-store-modal');
+            const content = document.getElementById('share-store-modal-content');
+            const iframe = document.getElementById('share-modal-iframe');
+
+            if (!modal || !content) return;
+
+            // 恢復背景滾動
+            document.body.style.overflow = '';
+
+            // 執行退場動畫
+            content.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                iframe.src = ""; // 釋放 iframe 資源
+            }, 300);
+        };
+
+        // 橋接舊有的 toggleShareForm，確保 HTML 中的 onclick="toggleShareForm()" 依然有效
+        window.toggleShareForm = function() {
+            window.openShareStoreModal();
+        };
     </script>
 </body>
 
