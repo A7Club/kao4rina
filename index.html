@@ -432,9 +432,9 @@
             <button onclick="loadPage('shopping'); toggleMobileMenu()"
                 class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeYellow bg-yellow-50 shadow-sm active:scale-95 transition-transform">🛍️
                 生活補給站</button>
-            <button onclick="loadPage('lifehub'); toggleMobileMenu()"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeGreen bg-green-50 shadow-sm active:scale-95 transition-transform">🩺
-                安心支援所</button>
+            <a href="lifehub.html"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeGreen bg-green-50 shadow-sm active:scale-95 transition-transform block">🩺
+                安心支援所</a>
             <!-- 將探索柒改為外部連結 -->
             <a href="explore.html"
                 class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themePurple bg-purple-50 shadow-sm active:scale-95 transition-transform">🎠
@@ -1739,16 +1739,7 @@
                 window.location.href = 'explore.html' + (hash === 'buildings' ? '#buildings' : '');
             } else if (hash === 'school') {
                 // 特殊錨點路由：切換到生活通頁面並滾動至教育單位區塊
-                renderPage('lifehub');
-                setTimeout(() => {
-                    const schoolEl = document.getElementById('school');
-                    if (schoolEl) {
-                        schoolEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        // 加上短暫的高亮提示框讓使用者知道定位成功
-                        schoolEl.classList.add('ring-4', 'ring-themeGreen', 'ring-offset-4', 'transition-shadow', 'duration-500');
-                        setTimeout(() => schoolEl.classList.remove('ring-4', 'ring-themeGreen', 'ring-offset-4'), 2500);
-                    }
-                }, 350);
+                window.location.href = 'lifehub.html#section-education-hall';
             } else if (hash === 'food-gacha') {
                 renderPage('home');
                 document.title = 'A7 柒樂部🎡｜美食隨機輪盤';
@@ -2188,8 +2179,7 @@
                 const templates = [
                     { id: 'tpl-home', name: '首頁', hash: 'home', color: 'themePink', icon: 'fa-mountain-city', bg: 'bg-pink-50' },
                     { id: 'tpl-food', name: '美食販賣部', hash: 'food', color: 'themePink', icon: 'fa-burger', bg: 'bg-pink-50' },
-                    { id: 'tpl-shopping', name: '生活補給站', hash: 'shopping', color: 'themeYellow', icon: 'fa-store', bg: 'bg-yellow-50' },
-                    { id: 'tpl-lifehub', name: '安心支援所', hash: 'lifehub', color: 'themeGreen', icon: 'fa-briefcase-medical', bg: 'bg-green-50' }
+                    { id: 'tpl-shopping', name: '生活補給站', hash: 'shopping', color: 'themeYellow', icon: 'fa-store', bg: 'bg-yellow-50' }
                 ];
 
                 templates.forEach(tpl => {
