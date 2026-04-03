@@ -321,27 +321,6 @@
                     </div>
                 </button>
 
-                <!-- 公設報修 -->
-                <button data-tab="report" data-active="bg-amber-50/80 border-amber-400 shadow-cute scale-[1.02]"
-                    data-inactive="bg-white border-white shadow-sm hover:shadow-cute hover:-translate-y-2 hover:border-amber-200"
-                    class="tab-btn pt-4 pb-3 px-1 sm:px-2 md:pt-5 md:pb-4 lg:pt-6 lg:pb-5 rounded-[1.2rem] md:rounded-[1.5rem] lg:rounded-[2rem] border-2 sm:border-4 transition-all duration-300 flex flex-col items-center justify-center text-center group cursor-pointer focus:outline-none w-full relative overflow-hidden">
-                    <div
-                        class="absolute -right-4 -top-4 w-16 h-16 bg-amber-50 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700 pointer-events-none">
-                    </div>
-                    <div
-                        class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-xl sm:text-2xl md:text-3xl group-hover:bg-amber-500 group-hover:text-white shadow-inner group-hover:shadow-xl group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-400 shrink-0 relative z-10 mb-1.5 sm:mb-2 md:mb-3">
-                        <i class="fa-solid fa-bullhorn"></i>
-                    </div>
-                    <div class="flex flex-col items-center w-full relative z-10">
-                        <h3
-                            class="font-black text-xs sm:text-sm md:text-base lg:text-lg text-gray-800 leading-tight whitespace-nowrap tracking-wide group-hover:text-amber-700 transition-colors">
-                            公設報修</h3>
-                        <p
-                            class="text-gray-400 text-[9px] sm:text-[10px] md:text-xs font-bold truncate w-full mt-0.5 sm:mt-1">
-                            市政反映</p>
-                    </div>
-                </button>
-
                 <!-- 在地社群 -->
                 <button data-tab="community" data-active="bg-purple-50/80 border-purple-400 shadow-cute scale-[1.02]"
                     data-inactive="bg-white border-white shadow-sm hover:shadow-cute hover:-translate-y-2 hover:border-purple-200"
@@ -747,6 +726,89 @@
                                     </p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <!-- ============================================== -->
+            <!-- 模組：公設報修 (移動至總覽) -->
+            <!-- ============================================== -->
+            <div id="mod-report" class="content-module mb-12 hidden" data-shows-on="overview">
+                <div class="flex flex-row items-center justify-between mb-6 relative z-10 gap-2">
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-black text-amber-600 flex items-center shrink-0">
+                        <i class="fa-solid fa-bullhorn mr-3"></i>公設報修與市政反映
+                    </h3>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-8">
+                    <!-- 路燈故障 -->
+                    <button onclick="openReportIframe('https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC024', '路燈故障申報')"
+                        class="bg-white rounded-[2rem] p-6 shadow-sm border-4 border-amber-50 hover:border-amber-400 hover:shadow-cute hover:-translate-y-1.5 transition-all group flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:bg-amber-500 group-hover:text-white transition-all shadow-inner">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h3 class="font-black text-gray-800 text-lg mb-1">路燈故障申報</h3>
+                        <p class="text-xs text-gray-400 font-bold">路燈不亮、閃爍或毀損</p>
+                    </button>
+
+                    <!-- 路面不平 -->
+                    <button onclick="openReportIframe('https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC017', '路面不平申報')"
+                        class="bg-white rounded-[2rem] p-6 shadow-sm border-4 border-amber-50 hover:border-amber-400 hover:shadow-cute hover:-translate-y-1.5 transition-all group flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:bg-orange-500 group-hover:text-white transition-all shadow-inner">
+                            <i class="fa-solid fa-road"></i>
+                        </div>
+                        <h3 class="font-black text-gray-800 text-lg mb-1">路面不平申報</h3>
+                        <p class="text-xs text-gray-400 font-bold">坑洞、裂縫或不正常隆起</p>
+                    </button>
+
+                    <!-- 交通號誌 -->
+                    <button onclick="openReportIframe('https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC034', '交通號誌申報')"
+                        class="bg-white rounded-[2rem] p-6 shadow-sm border-4 border-amber-50 hover:border-amber-400 hover:shadow-cute hover:-translate-y-1.5 transition-all group flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-yellow-100 text-yellow-500 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:bg-yellow-500 group-hover:text-white transition-all shadow-inner">
+                            <i class="fa-solid fa-traffic-light"></i>
+                        </div>
+                        <h3 class="font-black text-gray-800 text-lg mb-1">交通號誌申報</h3>
+                        <p class="text-xs text-gray-400 font-bold">紅綠燈、指示看板故障</p>
+                    </button>
+                </div>
+
+                <!-- Iframe 顯示區域 -->
+                <div id="report-iframe-container" class="hidden opacity-0 transform translate-y-4 transition-all duration-500">
+                    <div class="bg-white rounded-[2.5rem] border-4 border-amber-200 overflow-hidden shadow-cute relative">
+                        <!-- 標題列 -->
+                        <div class="px-6 py-4 border-b-2 border-amber-100 flex justify-between items-center bg-amber-50 shrink-0">
+                            <h3 id="report-iframe-title" class="text-lg font-black text-amber-800 flex items-center gap-2">
+                                <i class="fa-solid fa-file-signature"></i> <span>載入中...</span>
+                            </h3>
+                            <div class="flex gap-2">
+                                <a id="report-external-link" href="#" target="_blank"
+                                    class="w-10 h-10 bg-white border-2 border-amber-200 rounded-full flex items-center justify-center text-amber-500 hover:bg-amber-500 hover:text-white transition-all shadow-sm"
+                                    title="開啟外部連結">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                                </a>
+                                <button onclick="closeReportIframe()"
+                                    class="w-10 h-10 bg-white border-2 border-amber-200 rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all shadow-sm">
+                                    <i class="fa-solid fa-xmark text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 內容區 -->
+                        <div class="relative h-[600px] bg-gray-50">
+                            <div id="report-loading" class="absolute inset-0 flex flex-col items-center justify-center text-amber-600 bg-gray-50 z-10">
+                                <i class="fa-solid fa-spinner fa-spin text-4xl mb-3"></i>
+                                <p class="font-bold">載入市政信箱中...</p>
+                            </div>
+                            <iframe id="report-iframe" class="w-full h-full border-0 absolute inset-0 z-20 bg-white"
+                                onload="document.getElementById('report-loading').style.display='none'"></iframe>
+                        </div>
+
+                        <!-- 底部提醒 -->
+                        <div class="p-4 bg-amber-50/50 border-t-2 border-amber-100 text-center">
+                            <p class="text-xs text-amber-700 font-bold italic">※ 若頁面顯示空白，可能是政府網站禁止嵌入，請點擊右上方「外部連結」按鈕即可正常填寫。</p>
                         </div>
                     </div>
                 </div>
@@ -1330,87 +1392,6 @@
                 </div>
                 <div class="mt-4 w-full text-right text-xs text-gray-400 font-bold"><i
                         class="fa-solid fa-rotate mr-1"></i>資料來源：Google News</div>
-            </div>
-
-            <!-- ============================================== -->
-            <!-- 模組：公設報修 (新增) -->
-            <!-- ============================================== -->
-            <div id="mod-report" class="content-module mb-12 hidden" data-shows-on="report">
-                <div class="flex items-center mb-6">
-                    <h2 class="text-2xl font-black text-amber-500 flex items-center">
-                        <i class="fa-solid fa-bullhorn mr-3 text-3xl"></i>公設報修與市政反映
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-8">
-                    <!-- 路燈故障 -->
-                    <button onclick="openReportIframe('https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC024', '路燈故障申報')"
-                        class="bg-white rounded-[2rem] p-6 shadow-sm border-4 border-amber-50 hover:border-amber-400 hover:shadow-cute hover:-translate-y-1.5 transition-all group flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:bg-amber-500 group-hover:text-white transition-all shadow-inner">
-                            <i class="fa-solid fa-lightbulb"></i>
-                        </div>
-                        <h3 class="font-black text-gray-800 text-lg mb-1">路燈故障申報</h3>
-                        <p class="text-xs text-gray-400 font-bold">路燈不亮、閃爍或毀損</p>
-                    </button>
-
-                    <!-- 路面不平 -->
-                    <button onclick="openReportIframe('https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC017', '路面不平申報')"
-                        class="bg-white rounded-[2rem] p-6 shadow-sm border-4 border-amber-50 hover:border-amber-400 hover:shadow-cute hover:-translate-y-1.5 transition-all group flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:bg-orange-500 group-hover:text-white transition-all shadow-inner">
-                            <i class="fa-solid fa-road"></i>
-                        </div>
-                        <h3 class="font-black text-gray-800 text-lg mb-1">路面不平申報</h3>
-                        <p class="text-xs text-gray-400 font-bold">坑洞、裂縫或不正常隆起</p>
-                    </button>
-
-                    <!-- 交通號誌 -->
-                    <button onclick="openReportIframe('https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC034', '交通號誌申報')"
-                        class="bg-white rounded-[2rem] p-6 shadow-sm border-4 border-amber-50 hover:border-amber-400 hover:shadow-cute hover:-translate-y-1.5 transition-all group flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-yellow-100 text-yellow-500 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:bg-yellow-500 group-hover:text-white transition-all shadow-inner">
-                            <i class="fa-solid fa-traffic-light"></i>
-                        </div>
-                        <h3 class="font-black text-gray-800 text-lg mb-1">交通號誌申報</h3>
-                        <p class="text-xs text-gray-400 font-bold">紅綠燈、指示看板故障</p>
-                    </button>
-                </div>
-
-                <!-- Iframe 顯示區域 -->
-                <div id="report-iframe-container" class="hidden opacity-0 transform translate-y-4 transition-all duration-500">
-                    <div class="bg-white rounded-[2.5rem] border-4 border-amber-200 overflow-hidden shadow-cute relative">
-                        <!-- 標題列 -->
-                        <div class="px-6 py-4 border-b-2 border-amber-100 flex justify-between items-center bg-amber-50 shrink-0">
-                            <h3 id="report-iframe-title" class="text-lg font-black text-amber-800 flex items-center gap-2">
-                                <i class="fa-solid fa-file-signature"></i> <span>載入中...</span>
-                            </h3>
-                            <div class="flex gap-2">
-                                <a id="report-external-link" href="#" target="_blank"
-                                    class="w-10 h-10 bg-white border-2 border-amber-200 rounded-full flex items-center justify-center text-amber-500 hover:bg-amber-500 hover:text-white transition-all shadow-sm"
-                                    title="開啟外部連結">
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
-                                </a>
-                                <button onclick="closeReportIframe()"
-                                    class="w-10 h-10 bg-white border-2 border-amber-200 rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all shadow-sm">
-                                    <i class="fa-solid fa-xmark text-xl"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- 內容區 -->
-                        <div class="relative h-[600px] bg-gray-50">
-                            <div id="report-loading" class="absolute inset-0 flex flex-col items-center justify-center text-amber-600 bg-gray-50 z-10">
-                                <i class="fa-solid fa-spinner fa-spin text-4xl mb-3"></i>
-                                <p class="font-bold">載入市政信箱中...</p>
-                            </div>
-                            <iframe id="report-iframe" class="w-full h-full border-0 absolute inset-0 z-20 bg-white"
-                                onload="document.getElementById('report-loading').style.display='none'"></iframe>
-                        </div>
-
-                        <!-- 底部提醒 -->
-                        <div class="p-4 bg-amber-50/50 border-t-2 border-amber-100 text-center">
-                            <p class="text-xs text-amber-700 font-bold italic">※ 若頁面顯示空白，可能是政府網站禁止嵌入，請點擊右上方「外部連結」按鈕即可正常填寫。</p>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- ============================================== -->
@@ -3473,8 +3454,7 @@
             'A7area': '分區建案與學區',
             'school': '就學與設籍指南',
             'transit': '通勤交通指南',
-            'news': 'A7 最新焦點',
-            'report': '公設報修專區'
+            'news': 'A7 最新焦點'
         };
 
         function toggleMobileMenu() {
@@ -3604,7 +3584,7 @@
                 let currentTab = 'overview';
                 if (window.location.hash) {
                     const hashTab = window.location.hash.replace('#', '');
-                    const validTabs = ['overview', 'engineering', 'community', 'faq', 'A7area', 'school', 'transit', 'news', 'report'];
+                    const validTabs = ['overview', 'engineering', 'community', 'faq', 'A7area', 'school', 'transit', 'news'];
                     if (validTabs.includes(hashTab)) {
                         currentTab = hashTab;
                     }
@@ -3615,7 +3595,7 @@
             let initialTab = 'overview';
             try {
                 const hash = window.location.hash.replace('#', '');
-                const validTabs = ['overview', 'engineering', 'community', 'faq', 'A7area', 'school', 'transit', 'news', 'report'];
+                const validTabs = ['overview', 'engineering', 'community', 'faq', 'A7area', 'school', 'transit', 'news'];
                 if (validTabs.includes(hash)) {
                     initialTab = hash;
                 }
