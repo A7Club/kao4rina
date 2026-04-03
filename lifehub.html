@@ -506,7 +506,8 @@
                             <div class="relative z-10 flex flex-col gap-1 lg:gap-2">
                                 <div class="flex-1">
                                     <h4 class="text-sm lg:text-lg font-black text-sky-600 mb-1 flex items-center">
-                                        <div class="w-6 h-6 lg:w-8 lg:h-8 bg-sky-200 text-sky-600 rounded-full flex items-center justify-center mr-2 shadow-sm">
+                                        <div
+                                            class="w-6 h-6 lg:w-8 lg:h-8 bg-sky-200 text-sky-600 rounded-full flex items-center justify-center mr-2 shadow-sm">
                                             <i class="fa-solid fa-magnifying-glass-location text-xs lg:text-sm"></i>
                                         </div>
                                         <span class="hidden lg:inline">一鍵</span>查詢學區
@@ -957,11 +958,11 @@
                     </div>
                 </div>
 
-                <h4 class="text-2xl font-black text-gray-500 mb-4 ml-2 mt-10 flex items-center"><i
+                <h4 class="text-2xl font-black text-gray-500 mb-3 ml-2 mt-8 flex items-center"><i
                         class="fa-solid fa-chalkboard-user mr-2 text-themePurple"></i>學習照顧機構</h4>
 
                 <!-- 新增分類按鈕區塊 -->
-                <div id="education-filter-container" class="flex gap-2.5 overflow-x-auto hide-scrollbar mb-6 px-2 pb-2">
+                <div id="education-filter-container" class="flex gap-2.5 overflow-x-auto hide-scrollbar mb-4 px-2 pb-2">
                     <!-- 分類按鈕將由 JS 動態生成 -->
                 </div>
 
@@ -2125,13 +2126,13 @@
 
                 html += `
                     <div class="${blockBg} border-2 ${blockBorder} rounded-[2rem] p-4 sm:p-5 shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] transition-all hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] relative overflow-hidden flex flex-col fade-in break-inside-avoid mb-6">
-                        <div class="flex items-center justify-between mb-5 relative z-10">
+                        <div class="flex items-center justify-between mb-3.5 relative z-10">
                             <h5 class="text-base sm:text-lg font-black ${headerBg} ${headerText} px-4 py-2 rounded-2xl shadow-sm flex items-center inline-flex w-max">
                                 <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-2"><i class="fa-solid ${headerIcon} text-sm"></i></div>${catName}
                             </h5>
                             <span class="text-${itemColorBase}-600 text-xs font-black bg-white px-3 py-1.5 rounded-xl shadow-sm border border-${itemColorBase}-100 shrink-0 tracking-widest">${items.length} 間</span>
                         </div>
-                        <div class="flex flex-col gap-4 relative z-10">
+                        <div class="flex flex-col gap-3 relative z-10">
                 `;
                 items.forEach(item => {
                     let linkHtml = item.link ? `<a href="${item.link}" target="_blank" class="px-3 py-1.5 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-${itemColorBase}-500 hover:scale-105 hover:bg-${itemColorBase}-50 hover:border-${itemColorBase}-200 transition-all z-20 shrink-0 gap-1.5" title="官方網站/粉專"><i class="fa-solid fa-globe text-sm"></i><span class="text-xs font-black">網站</span></a>` : '';
@@ -2160,7 +2161,7 @@
                     let commentText = commentCount > 0 ? `查看評論 <span class="bg-${itemColorBase}-100 text-${itemColorBase}-600 text-[10px] px-1.5 py-0.5 rounded-md ml-1">${commentCount} 則</span>` : '查看評論';
                     html += `
                         <div class="bg-white rounded-[1.5rem] p-4 shadow-sm border border-white hover:border-${itemColorBase}-200 hover:-translate-y-1 transition-all group/card relative flex flex-col">
-                            <div class="flex justify-between items-start mb-2.5 gap-2 relative z-10 pt-1">
+                            <div class="flex justify-between items-start mb-2.5 gap-2 relative z-10 pt-2">
                                 <span class="bg-${itemColorBase}-50 text-${itemColorBase}-600 text-[10px] font-black px-2.5 py-1 rounded-lg flex items-center shrink-0 border border-${itemColorBase}-100/50 shadow-sm"><i class="fa-solid ${headerIcon} mr-1.5 opacity-60"></i>${smallTagText}</span>
                                 <div class="flex items-center gap-2">${likeBtnHtml}${linkHtml}</div>
                             </div>
