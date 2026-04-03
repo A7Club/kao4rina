@@ -2149,8 +2149,8 @@
                 let domainContentHtml = '';
 
                 // 1. 探索頁面匹配結果
-                const exploreKeywords = ['探索', 'a7', '建案', '社群', '討論', '房子', '社區', '買房', '發展', '區域'];
-                const matchExploreKw = exploreKeywords.some(k => k.toLowerCase().includes(q));
+                const exploreKeywords = ['探索', 'a7', '建案', '社群', '討論', '房子', '社區', '買房', '發展', '區域', '報修', '路燈', '路面', '號誌', '天氣', '空氣', 'aqi', '捷運', '機捷', '公車', '客運', 'youbike', '托嬰', '公托', '建商'];
+                const matchExploreKw = exploreKeywords.some(k => k.toLowerCase().includes(q) || q.includes(k.toLowerCase()));
 
                 if (exploreSnippet || matchExploreKw) {
                     domainContentHtml += `
@@ -2167,8 +2167,8 @@
                 }
 
                 // 2. 安心支援所匹配結果
-                const lifehubKeywords = ['生活', '支援', '醫療', '就學', '學區', '診所', '藥局', '公共', '家長', '評論', '教育'];
-                const matchLifehubKw = lifehubKeywords.some(k => k.toLowerCase().includes(q));
+                const lifehubKeywords = ['生活', '支援', '醫療', '就學', '學區', '診所', '藥局', '公共', '家長', '評論', '教育', '國小', '國中', '長庚', '樂善', '文青', '學校', '急診', '救護', '公托', '托嬰', '幼兒園'];
+                const matchLifehubKw = lifehubKeywords.some(k => k.toLowerCase().includes(q) || q.includes(k.toLowerCase()));
 
                 if (lifehubSnippet || matchLifehubKw) {
                     domainContentHtml += `
