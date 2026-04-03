@@ -1052,7 +1052,12 @@
             const container = document.getElementById('public-schools-container');
             if (!container) return;
 
-            const school = PUBLIC_SCHOOLS[selectedIndex];
+            if (typeof PUBLIC_SCHOOLS === 'undefined' || !Array.isArray(PUBLIC_SCHOOLS) || PUBLIC_SCHOOLS.length === 0) {
+                container.innerHTML = '<div class="col-span-full text-center py-10 text-gray-400 font-bold bg-white rounded-3xl border border-dashed border-gray-200">學區資料載入中，請稍候...</div>';
+                return;
+            }
+
+            const school = PUBLIC_SCHOOLS[selectedIndex] || PUBLIC_SCHOOLS[0];
 
             let styledDistBasic = school.distBasic ? school.distBasic
                 .replace(/bg-gray-100/g, 'bg-slate-800/80')
@@ -1156,7 +1161,19 @@
                 renderPage('search');
                 executeSearchLogic(query);
             } else {
-                renderPage(hash);
+                // 加強：如果 hash 指向的是特定區塊 (如 section-medical) 而非獨立頁面模板，則載入 home
+                const template = document.getElementById('tpl-' + hash);
+                if (!template && hash !== 'home') {
+                    // console.log('Template not found, falling back to home:', hash);
+                    renderPage('home');
+                    // 嘗試捲動到對應 ID 的區塊
+                    setTimeout(() => {
+                        const target = document.getElementById(hash) || document.querySelector(`[name="${hash}"]`);
+                        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 500);
+                } else {
+                    renderPage(hash);
+                }
             }
         }
 
@@ -1633,12 +1650,13 @@
                 const res = await fetch(csvUrl);
                 const csvText = await res.text();
                 const rows = parseCSV(csvText);
+                if (!rows || rows.length === 0) return [];
                 const headers = rows[0];
 
                 let nameIdx = headers.findIndex(k => k.includes('名稱') || k.includes('機構'));
                 if (nameIdx === -1) nameIdx = 0;
                 let catIdx = headers.findIndex(k => k.includes('醫療分類'));
-                if (catIdx === -1) catIdx = 8;
+                if (catIdx === -1) catIdx = headers.length > 8 ? 8 : headers.length - 1;
 
                 const addressIdx = headers.findIndex(k => k.includes('地址'));
                 const phoneIdx = headers.findIndex(k => k.includes('電話'));
@@ -1777,10 +1795,10 @@
                 const res = await fetch(csvUrl);
                 const csvText = await res.text();
                 const rows = parseCSV(csvText);
-                if (rows.length < 2) return [];
+                if (!rows || rows.length === 0) return [];
                 const headers = rows[0];
-                const nameIdx = headers.findIndex(k => k.includes('名稱') || k.includes('機構')) || 1;
-                const catIdx = headers.findIndex(k => k.includes('分類') || k.includes('屬性')) || 2;
+                const nameIdx = headers.findIndex(k => k.includes('名稱') || k.includes('機構')) === -1 ? 1 : headers.findIndex(k => k.includes('名稱') || k.includes('機構'));
+                const catIdx = headers.findIndex(k => k.includes('分類') || k.includes('屬性')) === -1 ? 2 : headers.findIndex(k => k.includes('分類') || k.includes('屬性'));
                 const addressIdx = headers.findIndex(k => k.includes('地址'));
                 const phoneIdx = headers.findIndex(k => k.includes('電話'));
                 const targetIdx = headers.findIndex(k => k.includes('對象') || k.includes('年齡'));
@@ -2436,6 +2454,7 @@
         function highlightAndScrollTo(query) {
             if (!query) return;
             const q = query.toLowerCase();
+            const safeQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
             let node;
             const matches = [];
@@ -2456,7 +2475,7 @@
                     p = p.parentElement;
                 }
                 const text = firstMatch.textContent;
-                const regex = new RegExp(`(${query})`, 'gi');
+                const regex = new RegExp(`(${safeQ})`, 'gi');
                 const span = document.createElement('span');
                 span.innerHTML = text.replace(regex, '<mark class="bg-yellow-200 text-gray-900 px-1 rounded shadow-sm font-black">$1</mark>');
                 parent.replaceChild(span, firstMatch);
