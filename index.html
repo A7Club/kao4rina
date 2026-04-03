@@ -1874,7 +1874,7 @@
                         const htmlText = await res.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(htmlText, 'text/html');
-                        doc.querySelectorAll('script, style, nav, footer, header, template, svg').forEach(el => el.remove());
+                        doc.querySelectorAll('script, style, nav, footer, header, svg').forEach(el => el.remove());
                         const walkDOM = (node) => {
                             if (exploreSnippet) return;
                             if (node.nodeType === Node.TEXT_NODE) {
@@ -1905,6 +1905,8 @@
                                     }
                                     exploreLinkTarget = `explore.html?search=${encodeURIComponent(query)}#${targetTab}`;
                                 }
+                            } else if (node.tagName === 'TEMPLATE') {
+                                walkDOM(node.content);
                             } else {
                                 for (let child of node.childNodes) walkDOM(child);
                             }
@@ -1922,7 +1924,7 @@
                         const htmlText = await res.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(htmlText, 'text/html');
-                        doc.querySelectorAll('script, style, nav, footer, header, template, svg').forEach(el => el.remove());
+                        doc.querySelectorAll('script, style, nav, footer, header, svg').forEach(el => el.remove());
                         const walkDOM = (node) => {
                             if (lifehubSnippet) return;
                             if (node.nodeType === Node.TEXT_NODE) {
@@ -1949,6 +1951,8 @@
                                     }
                                     lifehubLinkTarget = `lifehub.html?search=${encodeURIComponent(query)}${anchorId ? '#' + anchorId : ''}`;
                                 }
+                            } else if (node.tagName === 'TEMPLATE') {
+                                walkDOM(node.content);
                             } else {
                                 for (let child of node.childNodes) walkDOM(child);
                             }
@@ -1991,7 +1995,7 @@
                 let domainContentHtml = '';
 
                 // 1. 探索頁面匹配結果
-                const exploreKeywords = ['探索', 'a7', '建案', '社群', '討論', '房子', '社區', '買房', '發展', '區域', '新聞', '捷運', '機捷', '公車', '客運', '報修', '路面', '號誌', '路燈', '天氣', '空氣', 'AQI'];
+                const exploreKeywords = ['探索', 'a7', '建案', '社群', '討論', '房子', '社區', '買房', '發展', '區域', '新聞', '捷運', '機捷', '公車', '客運', '報修', '路面', '號誌', '路燈', '天氣', '空氣', 'AQI', '變一', '變二', '變三', '文學路', '牛角坡路', '體育大學', '運動中心', '國民運動中心'];
                 const matchExploreKw = exploreKeywords.some(k => k.toLowerCase().includes(q) || q.includes(k.toLowerCase()));
 
                 if (exploreSnippet || matchExploreKw) {
@@ -2009,7 +2013,7 @@
                 }
 
                 // 2. 安心支援所匹配結果
-                const lifehubKeywords = ['生活', '支援', '醫療', '就學', '學區', '診所', '藥局', '公共', '家長', '評論', '教育', '長庚國小', '文青國小', '大埔國小', '樂善國小', '文華國小', '文青國中', '幼兒園', '長庚醫院', '救護', '急診', '消防', '警察', '派出所'];
+                const lifehubKeywords = ['生活', '支援', '醫療', '就學', '學區', '診所', '藥局', '公共', '家長', '評論', '教育', '長庚國小', '文青國小', '大埔國小', '樂善國小', '文華國小', '文桃國小', '文桃幼兒園', '文青國中', '幼兒園', '長庚醫院', '救護', '急診', '消防', '警察', '派出所', '文青里', '長樂里', '樂善里', '文桃里', '文藝里', '文桃里', '學區查詢'];
                 const matchLifehubKw = lifehubKeywords.some(k => k.toLowerCase().includes(q) || q.includes(k.toLowerCase()));
 
                 if (lifehubSnippet || matchLifehubKw) {
