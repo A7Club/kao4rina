@@ -1857,7 +1857,7 @@
 
             try {
                 // 等待所有資料庫完整載入 (全面整合搜尋資料)
-                const [foodData, shoppingData, communityData, buildingData, medicalData, educationData, likesData] = await Promise.all([
+                const results = await Promise.all([
                     loadSharedFoodData(),
                     loadSharedShoppingData(),
                     loadSharedCommunityData(),
@@ -1867,7 +1867,16 @@
                     loadSharedLikesData()
                 ]);
 
+                const foodData = Array.isArray(results[0]) ? results[0] : [];
+                const shoppingData = Array.isArray(results[1]) ? results[1] : [];
+                const communityData = Array.isArray(results[2]) ? results[2] : [];
+                const buildingData = Array.isArray(results[3]) ? results[3] : [];
+                const medicalData = Array.isArray(results[4]) ? results[4] : [];
+                const educationData = Array.isArray(results[5]) ? results[5] : [];
+                const likesData = results[6] || {};
+
                 const q = query.toLowerCase();
+                const safeQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
                 // 新增：動態抓取並搜尋 explore.html 靜態內容
                 let exploreSnippet = null;
@@ -1890,7 +1899,7 @@
                                     let snippet = text.substring(startIndex, endIndex);
                                     if (startIndex > 0) snippet = '...' + snippet;
                                     if (endIndex < text.length) snippet = snippet + '...';
-                                    const regex = new RegExp(`(${q})`, 'gi');
+                                    const regex = new RegExp(`(${safeQ})`, 'gi');
                                     exploreSnippet = snippet.replace(regex, '<span class="bg-purple-200 text-purple-700 px-1 rounded font-black">$1</span>');
                                     let parent = node.parentElement;
                                     let targetTab = 'overview';
@@ -1940,7 +1949,7 @@
                                     let snippet = text.substring(startIndex, endIndex);
                                     if (startIndex > 0) snippet = '...' + snippet;
                                     if (endIndex < text.length) snippet = snippet + '...';
-                                    const regex = new RegExp(`(${q})`, 'gi');
+                                    const regex = new RegExp(`(${safeQ})`, 'gi');
                                     lifehubSnippet = snippet.replace(regex, '<span class="bg-green-200 text-green-700 px-1 rounded font-black">$1</span>');
 
                                     // 尋找內容所屬的錨點 ID
@@ -2004,12 +2013,12 @@
                     (item.address && item.address.toLowerCase().includes(q))
                 );
 
-                const matchedSchools = PUBLIC_SCHOOLS.filter(item =>
+                const matchedSchools = (typeof PUBLIC_SCHOOLS !== 'undefined' && Array.isArray(PUBLIC_SCHOOLS)) ? PUBLIC_SCHOOLS.filter(item =>
                     (item.name && item.name.toLowerCase().includes(q)) ||
                     (item.type && item.type.toLowerCase().includes(q)) ||
                     (item.desc && item.desc.toLowerCase().includes(q)) ||
                     (item.address && item.address.toLowerCase().includes(q))
-                );
+                ) : [];
 
 
                 let html = '';
@@ -2076,7 +2085,7 @@
                             if (startIndex > 0) snippet = '...' + snippet;
                             if (endIndex < text.length) snippet = snippet + '...';
 
-                            const regex = new RegExp(`(${q})`, 'gi');
+                            const regex = new RegExp(`(${safeQ})`, 'gi');
                             snippet = snippet.replace(regex, '<span class="bg-blue-200 text-blue-700 px-1 rounded font-black">$1</span>');
 
                             domainContentHtml += `
@@ -2339,7 +2348,13 @@
 
             } catch (err) {
                 console.error("Search Error:", err);
-                container.innerHTML = `<div class="text-center py-12 text-red-500 font-bold bg-white rounded-[2.5rem] border-4 border-red-50">搜尋時發生錯誤，無法連線至資料庫，請稍後再試。</div>`;
+                const errorDetail = err.message ? `<div class="text-[10px] text-red-300 mt-2 opacity-50">Error diagnostic: ${err.message}</div>` : '';
+                container.innerHTML = `
+                    <div class="text-center py-12 text-red-500 font-bold bg-white rounded-[2.5rem] border-4 border-red-50">
+                        搜尋時發生錯誤，無法連線至資料庫，請稍後再試。
+                        ${errorDetail}
+                    </div>
+                `;
             }
         }
 
@@ -2350,11 +2365,12 @@
                 const res = await fetch(csvUrl);
                 const csvText = await res.text();
                 const rows = parseCSV(csvText);
+                if (!rows || rows.length === 0) return [];
                 const headers = rows[0];
                 let nameIdx = headers.findIndex(k => k.includes('名稱') || k.includes('機構'));
                 if (nameIdx === -1) nameIdx = 0;
                 let catIdx = headers.findIndex(k => k.includes('醫療分類'));
-                if (catIdx === -1) catIdx = 8;
+                if (catIdx === -1) catIdx = headers.length > 8 ? 8 : headers.length - 1;
                 const addressIdx = headers.findIndex(k => k.includes('地址'));
                 return rows.slice(1).map(row => ({
                     name: row[nameIdx]?.trim() || '',
@@ -2370,9 +2386,10 @@
                 const res = await fetch(csvUrl);
                 const csvText = await res.text();
                 const rows = parseCSV(csvText);
+                if (!rows || rows.length === 0) return [];
                 const headers = rows[0];
-                const nameIdx = headers.findIndex(k => k.includes('名稱') || k.includes('機構')) || 1;
-                const catIdx = headers.findIndex(k => k.includes('分類') || k.includes('屬性')) || 2;
+                const nameIdx = headers.findIndex(k => k.includes('名稱') || k.includes('機構')) === -1 ? 1 : headers.findIndex(k => k.includes('名稱') || k.includes('機構'));
+                const catIdx = headers.findIndex(k => k.includes('分類') || k.includes('屬性')) === -1 ? 2 : headers.findIndex(k => k.includes('分類') || k.includes('屬性'));
                 const addressIdx = headers.findIndex(k => k.includes('地址'));
                 return rows.slice(1).map(row => ({
                     name: row[nameIdx]?.trim() || '',
