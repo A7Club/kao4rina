@@ -417,7 +417,7 @@
 
                 <!-- 🔥 置中導航欄 (全螢幕皆為一排小標籤置中) -->
                 <div
-                    class="w-full relative sticky top-[72px] z-30 flex flex-wrap justify-center gap-2.5 sm:gap-4 lg:gap-6 bg-[#FDFBF7]/95 backdrop-blur-md py-3 px-2 lg:px-0">
+                    class="max-w-[90%] lg:w-[90%] mx-auto relative sticky top-[72px] z-30 flex flex-wrap justify-center gap-2.5 sm:gap-4 lg:gap-6 bg-[#FDFBF7]/95 backdrop-blur-md py-3 px-4 lg:px-6 rounded-full border border-gray-100 shadow-sm">
 
                     <!-- 緊急救援標籤 -->
                     <a href="#section-emergency"
@@ -498,7 +498,7 @@
 
                         <!-- 1. 快速學區查詢 (手機並排左側，電腦左上) -->
                         <div
-                            class="col-span-1 lg:col-start-1 lg:row-start-1 w-full bg-gradient-to-br from-sky-100 to-blue-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col justify-center h-full">
+                            class="col-span-1 lg:col-start-1 lg:row-start-1 w-full bg-gradient-to-br from-sky-100 to-blue-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col justify-center min-h-[220px] lg:h-[260px]">
                             <div
                                 class="absolute -right-4 -bottom-4 lg:-right-6 lg:-bottom-6 text-sky-200 text-6xl lg:text-9xl opacity-60 pointer-events-none group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
                                 <i class="fa-solid fa-map-location-dot"></i>
@@ -526,7 +526,7 @@
 
                         <!-- 2. 補習班愛心排行榜 (手機並排右側，電腦左下) -->
                         <div
-                            class="col-span-1 lg:col-start-1 lg:row-start-2 bg-gradient-to-br from-pink-100 to-rose-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full">
+                            class="col-span-1 lg:col-start-1 lg:row-start-2 bg-gradient-to-br from-pink-100 to-rose-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col min-h-[220px] lg:h-[260px]">
                             <div
                                 class="absolute -right-4 -bottom-4 text-pink-200 text-6xl lg:text-8xl opacity-50 pointer-events-none group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
                                 <i class="fa-solid fa-ranking-star"></i>
@@ -546,7 +546,7 @@
 
                         <!-- 3. 最新家長留言 (手機滿版在下方，電腦直立滿版在右側) -->
                         <div
-                            class="col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 bg-gradient-to-br from-purple-100 to-fuchsia-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full">
+                            class="col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 bg-gradient-to-br from-purple-100 to-fuchsia-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full lg:h-[544px]">
                             <div
                                 class="absolute -right-4 -bottom-4 text-purple-200 text-7xl lg:text-8xl opacity-50 pointer-events-none group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
                                 <i class="fa-solid fa-comments"></i>
@@ -1302,7 +1302,7 @@
                         setTimeout(() => {
                             checkSchoolDistrict();
                             const section = document.getElementById('mod-school-registry') || document.querySelector('.bg-blue-50/50');
-                            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }, 800);
                     }
                 }
@@ -1937,7 +1937,7 @@
                 rankedData.sort((a, b) => b.likesCount - a.likesCount);
                 const top3 = rankedData.slice(0, 3);
                 if (top3.length === 0) {
-                    likesContainer.innerHTML = '<div class="text-center text-pink-400 text-xs md:text-sm font-bold py-4 lg:py-6 bg-white/60 backdrop-blur rounded-[1rem] lg:rounded-[1.5rem] border border-white shadow-sm flex flex-col items-center justify-center gap-1.5 lg:gap-2"><i class="fa-solid fa-heart-crack text-lg lg:text-2xl text-pink-300"></i>目前還沒有愛心！</div>';
+                    likesContainer.innerHTML = '<div class="text-center text-pink-400 text-xs md:text-sm font-bold py-4 lg:py-6 bg-white/60 backdrop-blur rounded-[1rem] lg:rounded-[1.5rem] border border-white shadow-sm flex flex-col items-center justify-center gap-1.5 lg:gap-2 h-full"><i class="fa-solid fa-heart-crack text-lg lg:text-2xl text-pink-300"></i>Currently Unavailable (暫時從缺)</div>';
                 } else {
                     let html = '';
                     const medals = ['text-yellow-400', 'text-gray-400', 'text-orange-400'];
