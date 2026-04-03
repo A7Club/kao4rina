@@ -646,7 +646,7 @@
                                     class="num-counter tracking-widest">...</span>)</span>
                         </h3>
                     </div>
-                    <div onclick="loadPage('lifehub')"
+                    <div onclick="window.location.href='lifehub.html'"
                         class="bg-white rounded-[1.5rem] md:rounded-3xl p-4 md:p-6 text-center cursor-pointer transform hover:-translate-y-2 hover:rotate-2 transition-all shadow-cute border-2 border-transparent hover:border-themeGreen group flex flex-col items-center justify-center">
                         <div
                             class="w-12 h-12 md:w-16 md:h-16 bg-green-100 text-themeGreen rounded-full flex items-center justify-center text-2xl md:text-3xl mb-2 md:mb-3 group-hover:scale-110 transition-transform">
@@ -900,20 +900,26 @@
                     </div>
 
                     <!-- 📝 分享在地店家 (已搬移至此) -->
-                    <div class="bg-white rounded-[2.5rem] shadow-cute p-5 sm:p-6 lg:p-8 border-[4px] border-white relative text-center flex flex-col justify-center overflow-hidden group hover:shadow-lg transition-all h-full">
-                        <div class="absolute -top-6 -right-2 text-pink-200 text-6xl floating z-0 pointer-events-none opacity-40"><i class="fa-solid fa-gift"></i></div>
+                    <div
+                        class="bg-white rounded-[2.5rem] shadow-cute p-5 sm:p-6 lg:p-8 border-[4px] border-white relative text-center flex flex-col justify-center overflow-hidden group hover:shadow-lg transition-all h-full">
+                        <div
+                            class="absolute -top-6 -right-2 text-pink-200 text-6xl floating z-0 pointer-events-none opacity-40">
+                            <i class="fa-solid fa-gift"></i></div>
                         <div class="relative z-10 flex flex-col gap-2 h-full">
                             <h2 class="text-lg lg:text-xl font-black text-themePink mb-1 px-1">🙌 我要分享在地店家資訊</h2>
                             <p class="text-xs lg:text-sm text-gray-500 font-bold mb-4">發現了超棒的新店？還是有隱藏版美食？<br>快來告訴大家！</p>
                             <div class="mt-auto">
-                                <button onclick="toggleShareForm()" class="bg-themePink text-white font-black py-2.5 px-6 rounded-full shadow-md hover:scale-105 hover:bg-pink-400 transition-all text-sm">
+                                <button onclick="toggleShareForm()"
+                                    class="bg-themePink text-white font-black py-2.5 px-6 rounded-full shadow-md hover:scale-105 hover:bg-pink-400 transition-all text-sm">
                                     <i class="fa-solid fa-pen-to-square mr-2"></i> 點我填寫分享
                                 </button>
                             </div>
                         </div>
                         <!-- Google Form 嵌入區塊 (預設隱藏) -->
-                        <div id="share-form-container" class="hidden mt-4 w-full relative z-20 bg-pink-50 rounded-2xl p-1.5 border-2 border-pink-100 h-[400px] transition-all duration-300">
-                            <iframe src="https://forms.gle/FyEGds4dPWsiEUUZA" class="w-full h-full rounded-xl border-0 bg-white" frameborder="0">載入中…</iframe>
+                        <div id="share-form-container"
+                            class="hidden mt-4 w-full relative z-20 bg-pink-50 rounded-2xl p-1.5 border-2 border-pink-100 h-[400px] transition-all duration-300">
+                            <iframe src="https://forms.gle/FyEGds4dPWsiEUUZA"
+                                class="w-full h-full rounded-xl border-0 bg-white" frameborder="0">載入中…</iframe>
                         </div>
                     </div>
 
