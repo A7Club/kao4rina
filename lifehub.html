@@ -2099,7 +2099,7 @@
                 categoriesToRender = sortedCategories.filter(c => c === filter);
             }
 
-            let html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 xl:gap-6 items-start">';
+            let html = '<div class="columns-1 md:columns-2 lg:columns-3 gap-5 xl:gap-6 space-y-6">';
             for (const catName of categoriesToRender) {
                 const items = grouped[catName];
                 let headerBg = 'bg-slate-400';
@@ -2124,7 +2124,7 @@
                 }
 
                 html += `
-                    <div class="${blockBg} border-2 ${blockBorder} rounded-[2rem] p-4 sm:p-5 shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] transition-all hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] relative overflow-hidden flex flex-col fade-in">
+                    <div class="${blockBg} border-2 ${blockBorder} rounded-[2rem] p-4 sm:p-5 shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] transition-all hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] relative overflow-hidden flex flex-col fade-in break-inside-avoid mb-6">
                         <div class="flex items-center justify-between mb-5 relative z-10">
                             <h5 class="text-base sm:text-lg font-black ${headerBg} ${headerText} px-4 py-2 rounded-2xl shadow-sm flex items-center inline-flex w-max">
                                 <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-2"><i class="fa-solid ${headerIcon} text-sm"></i></div>${catName}
@@ -2160,7 +2160,7 @@
                     let commentText = commentCount > 0 ? `查看評論 <span class="bg-${itemColorBase}-100 text-${itemColorBase}-600 text-[10px] px-1.5 py-0.5 rounded-md ml-1">${commentCount} 則</span>` : '查看評論';
                     html += `
                         <div class="bg-white rounded-[1.5rem] p-4 shadow-sm border border-white hover:border-${itemColorBase}-200 hover:-translate-y-1 transition-all group/card relative flex flex-col">
-                            <div class="flex justify-between items-start mb-2.5 gap-2 relative z-10">
+                            <div class="flex justify-between items-start mb-2.5 gap-2 relative z-10 pt-1">
                                 <span class="bg-${itemColorBase}-50 text-${itemColorBase}-600 text-[10px] font-black px-2.5 py-1 rounded-lg flex items-center shrink-0 border border-${itemColorBase}-100/50 shadow-sm"><i class="fa-solid ${headerIcon} mr-1.5 opacity-60"></i>${smallTagText}</span>
                                 <div class="flex items-center gap-2">${likeBtnHtml}${linkHtml}</div>
                             </div>
