@@ -467,7 +467,6 @@
 
                     <!-- 教育學習標籤 -->
                     <a href="#section-education-hall"
-                        onclick="event.preventDefault(); document.getElementById('section-education-hall').scrollIntoView({behavior: 'smooth', block: 'start'});"
                         class="group relative flex items-center justify-center p-1.5 pr-3 lg:p-2.5 lg:pr-5 rounded-full bg-white border-2 lg:border-[3px] border-blue-100 hover:border-blue-300 hover:-translate-y-1 hover:shadow-md transition-all shadow-sm shrink-0 overflow-hidden">
                         <div
                             class="absolute -right-2 -bottom-2 lg:-right-3 lg:-bottom-3 text-blue-50 text-4xl lg:text-6xl opacity-80 group-hover:scale-110 transition-transform">
@@ -560,7 +559,7 @@
                                     <i class="fa-regular fa-comment-dots mr-1.5 lg:mr-2 text-purple-400"></i>最新家長評論
                                 </h4>
                                 <button
-                                    onclick="document.getElementById('section-education-list').scrollIntoView({behavior: 'smooth', block: 'start'})"
+                                    onclick="window.location.hash='section-education-list'; document.getElementById('section-education-list').scrollIntoView({behavior: 'smooth', block: 'start'})"
                                     class="text-[10px] lg:text-xs font-black text-purple-500 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full shadow-sm border border-purple-100 transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
                                     了解更多機構 <i class="fa-solid fa-chevron-right text-[8px]"></i>
                                 </button>
@@ -2011,6 +2010,7 @@
                 mainInput.value = val;
                 const targetBlock = document.getElementById('mod-school-registry') || document.getElementById('section-education');
                 if (targetBlock) {
+                    window.location.hash = targetBlock.id;
                     targetBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
                 setTimeout(() => checkSchoolDistrict(), 500);
@@ -2512,6 +2512,30 @@
             const schoolCards = document.querySelectorAll('#school .group');
             schoolCards.forEach(card => { card.classList.remove('ring-4', 'ring-themeBlue', 'ring-offset-2', 'opacity-50'); });
         }
+
+        /**
+         * --- GA 與導覽優化：根據 Hashtag 動態更換標題 ---
+         * 這能幫助 GA 在「網頁標題」維度中區分出各區塊的點擊流向。
+         */
+        const hubTitleMap = {
+            'section-dashboard': '儀表板總覽',
+            'section-medical': '醫療院所資訊',
+            'section-education-hall': '教育學習殿堂',
+            'section-education-list': '學習照顧機構',
+            'section-emergency': '救護與緊急通報'
+        };
+
+        function syncTitleWithHash() {
+            const hash = window.location.hash.replace('#', '');
+            if (hubTitleMap[hash]) {
+                document.title = `A7 Club | 生活通 | ${hubTitleMap[hash]}`;
+            } else {
+                document.title = 'A7 Club | 生活通 - 醫療、教育、緊急救援';
+            }
+        }
+
+        window.addEventListener('hashchange', syncTitleWithHash);
+        window.addEventListener('load', syncTitleWithHash);
     </script>
 </body>
 
