@@ -268,17 +268,17 @@
 
         <div id="mobile-menu"
             class="hidden absolute top-full right-0 mt-2 bg-white rounded-3xl shadow-cute p-5 border-2 border-pink-100 flex-col space-y-3 text-center z-50 w-max min-w-[200px]">
-            <button onclick="window.location.href='index.html#food'"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themePink bg-pink-50 shadow-sm active:scale-95 transition-transform">🍿
-                美食販賣部</button>
-            <button onclick="window.location.href='index.html#shopping'"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeYellow bg-yellow-50 shadow-sm active:scale-95 transition-transform">🛍️
-                生活補給站</button>
-            <button onclick="window.location.href='lifehub.html'; toggleMobileMenu()"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-white bg-themeGreen shadow-md active:scale-95 transition-transform">🩺
-                安心支援所</button>
-            <a href="explore.html"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themePurple bg-purple-50 shadow-sm active:scale-95 transition-transform">🎠
+            <a href="index.html#food" onclick="toggleMobileMenu()"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themePink bg-pink-50 shadow-sm active:scale-95 transition-transform flex items-center justify-center">🍿
+                美食販賣部</a>
+            <a href="index.html#shopping" onclick="toggleMobileMenu()"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeYellow bg-yellow-50 shadow-sm active:scale-95 transition-transform flex items-center justify-center">🛍️
+                生活補給站</a>
+            <a href="lifehub.html" onclick="toggleMobileMenu()"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-white bg-themeGreen shadow-sm active:scale-95 transition-transform flex items-center justify-center">🩺
+                安心支援所</a>
+            <a href="explore.html" onclick="toggleMobileMenu()"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themePurple bg-purple-50 shadow-sm active:scale-95 transition-transform flex items-center justify-center">🎠
                 探索在地A7</a>
         </div>
     </nav>
@@ -2609,6 +2609,20 @@
                 setTimeout(() => highlightAndScrollTo(query), 1200);
             }
         });
+
+        // --- 手機選單切換 ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) {
+                if (menu.classList.contains('hidden')) {
+                    menu.classList.remove('hidden');
+                    menu.classList.add('flex');
+                } else {
+                    menu.classList.remove('flex');
+                    menu.classList.add('hidden');
+                }
+            }
+        }
     </script>
 </body>
 
