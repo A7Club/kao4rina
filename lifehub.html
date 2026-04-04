@@ -512,7 +512,7 @@
                                     <span class="hidden lg:inline">一鍵</span>查詢學區
                                 </h4>
                                 <p
-                                    class="text-[10px] lg:text-sm text-sky-700/80 font-bold leading-tight mt-1 lg:whitespace-nowrap">
+                                    class="text-[10px] lg:text-sm text-sky-700/80 font-bold leading-tight mt-1 ml-10 lg:whitespace-nowrap">
                                     輸入地址快速對照新學區。</p>
                             </div>
                             <div
@@ -1359,14 +1359,19 @@
                 // 加強：如果 hash 指向的是特定區塊 (如 section-medical) 而非獨立頁面模板，則載入 home
                 const template = document.getElementById('tpl-' + hash);
                 if (!template && hash !== 'home') {
-                    // console.log('Template not found, falling back to home:', hash);
-                    renderPage('home');
+                    // 檢查是否已經在 home 頁面，避免重複渲染清空表單
+                    const isAlreadyHome = document.getElementById('section-dashboard') !== null;
+                    if (!isAlreadyHome) {
+                        renderPage('home');
+                    }
                     // 嘗試捲動到對應 ID 的區塊
                     setTimeout(() => {
                         const target = document.getElementById(hash) || document.querySelector(`[name="${hash}"]`);
                         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 500);
+                    }, isAlreadyHome ? 50 : 500);
                 } else {
+                    // 如果確實是跳轉到不同頁面，避免重複渲染
+                    const currentTpl = document.querySelector('#app-root > div');
                     renderPage(hash);
                 }
             }
@@ -2118,13 +2123,13 @@
                 // 1. 先賦值
                 mainInput.value = val;
                 const targetBlock = document.getElementById('mod-school-district') || document.getElementById('section-education-hall');
-                
+
                 // 2. 執行捲動
                 if (targetBlock) {
                     window.location.hash = targetBlock.id;
                     targetBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-                
+
                 // 3. 延遲一點點執行查詢，確保地址已完全填入 DOM
                 setTimeout(() => {
                     if (document.getElementById('school-address-input').value === val) {
