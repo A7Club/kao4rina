@@ -213,17 +213,17 @@
         <!-- 手機版展開選單 -->
         <div id="mobile-menu"
             class="hidden absolute top-full right-0 mt-2 bg-white rounded-3xl shadow-cute p-5 border-2 border-pink-100 flex-col space-y-3 text-center z-50 w-max min-w-[200px]">
-            <a href="index.html#food"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themePink bg-pink-50 shadow-sm active:scale-95 transition-transform">🍿
+            <a href="index.html#food" onclick="toggleMobileMenu()"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themePink bg-pink-50 shadow-sm active:scale-95 transition-transform flex items-center justify-center">🍿
                 美食販賣部</a>
-            <a href="index.html#shopping"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeYellow bg-yellow-50 shadow-sm active:scale-95 transition-transform">🛍️
+            <a href="index.html#shopping" onclick="toggleMobileMenu()"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeYellow bg-yellow-50 shadow-sm active:scale-95 transition-transform flex items-center justify-center">🛍️
                 生活補給站</a>
-            <a href="index.html#lifehub"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeGreen bg-green-50 shadow-sm active:scale-95 transition-transform">🩺
+            <a href="lifehub.html" onclick="toggleMobileMenu()"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-themeGreen bg-green-50 shadow-sm active:scale-95 transition-transform flex items-center justify-center">🩺
                 安心支援所</a>
-            <a href="explore.html"
-                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-white bg-themePurple shadow-sm active:scale-95 transition-transform">🎠
+            <a href="explore.html" onclick="toggleMobileMenu()"
+                class="w-full py-4 px-6 rounded-2xl font-black text-xl tracking-wider text-white bg-themePurple shadow-sm active:scale-95 transition-transform flex items-center justify-center">🎠
                 探索在地A7</a>
         </div>
     </nav>
@@ -372,7 +372,7 @@
 
                 <!-- 💡 路燈報修 (快捷) -->
                 <button
-                    onclick="window.switchTab('overview'); window.openReportIframe('https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC024', '路燈故障申報')"
+                    onclick="window.switchTab('overview'); window.openReportIframe('https://smartstreetlight.tycg.gov.tw:8443/citizen/', '路燈故障申報')"
                     class="bg-white border-white shadow-sm hover:shadow-cute hover:-translate-y-2 hover:border-amber-200 pt-4 pb-3 px-1 sm:px-2 md:pt-5 md:pb-4 lg:pt-6 lg:pb-5 rounded-[1.2rem] md:rounded-[1.5rem] lg:rounded-[2rem] border-2 sm:border-4 transition-all duration-300 flex flex-col items-center justify-center text-center group cursor-pointer focus:outline-none w-full relative overflow-hidden">
                     <div
                         class="absolute -right-4 -top-4 w-16 h-16 bg-amber-50 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700 pointer-events-none">
@@ -5794,6 +5794,20 @@
                 setTimeout(() => highlightAndScrollTo(query), 1200);
             }
         });
+
+        // --- 手機選單切換 ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) {
+                if (menu.classList.contains('hidden')) {
+                    menu.classList.remove('hidden');
+                    menu.classList.add('flex');
+                } else {
+                    menu.classList.remove('flex');
+                    menu.classList.add('hidden');
+                }
+            }
+        }
     </script>
 
     <!-- 引入 Google Maps JS API 並套用專屬金鑰 -->

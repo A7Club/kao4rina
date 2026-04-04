@@ -486,575 +486,573 @@
                         </div>
                     </a>
                 </div>
-                </div>
-
-                <!-- 🔥 內容區塊 (Dashboard 置中滿版) -->
-                <div class="w-full">
-
-                    <!-- 🌟 動態生活儀表板 (Dashboard - 智慧網格) -->
-                    <div id="section-dashboard"
-                        class="grid grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-6 relative z-10 pt-1 pb-4 items-stretch mx-auto">
-
-                        <!-- 1. 快速學區查詢 (手機並排左側，電腦左上) -->
-                        <div
-                            class="col-span-1 lg:col-start-1 lg:row-start-1 w-full bg-gradient-to-br from-sky-100 to-blue-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col lg:h-[180px]">
-                            <div
-                                class="absolute -right-4 -bottom-4 lg:-right-6 lg:-bottom-6 text-sky-200 text-6xl lg:text-9xl opacity-60 pointer-events-none group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
-                                <i class="fa-solid fa-map-location-dot"></i>
-                            </div>
-                            <div class="relative z-10 flex flex-col gap-1 lg:gap-2">
-                                <div class="flex-1">
-                                    <h4
-                                        class="text-base lg:text-lg font-black text-sky-600 mb-2 lg:mb-4 flex items-center">
-                                        <div
-                                            class="w-6 h-6 lg:w-8 lg:h-8 bg-sky-200 text-sky-600 rounded-full flex items-center justify-center mr-2 shadow-sm">
-                                            <i class="fa-solid fa-magnifying-glass-location text-xs lg:text-sm"></i>
-                                        </div>
-                                        <span class="hidden lg:inline">一鍵</span>查詢學區
-                                    </h4>
-                                    <p
-                                        class="text-[10px] lg:text-sm text-sky-700/80 font-bold leading-tight mt-1 lg:whitespace-nowrap">
-                                        輸入地址快速對照新學區。</p>
-                                </div>
-                                <div
-                                    class="flex w-full gap-1.5 lg:gap-2 shrink-0 bg-white/60 backdrop-blur p-1.5 lg:p-2 rounded-full border border-white shadow-sm">
-                                    <input type="text" id="dash-school-input" placeholder="輸入地址..."
-                                        onkeypress="if(event.key === 'Enter') quickCheckSchoolDistrict()"
-                                        class="w-full bg-transparent px-2 lg:px-4 py-1 lg:py-1.5 text-xs lg:text-sm font-bold text-gray-700 focus:outline-none placeholder:text-gray-400 min-w-0">
-                                    <button onclick="quickCheckSchoolDistrict()"
-                                        class="bg-sky-500 hover:bg-sky-600 text-white w-7 h-7 lg:w-9 lg:h-9 rounded-full flex items-center justify-center shadow-md transition-transform active:scale-95 shrink-0 text-xs lg:text-base"><i
-                                            class="fa-solid fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 2. 補習班愛心排行榜 (手機並排訂側，電腦左下) -->
-                        <div
-                            class="col-span-1 lg:col-start-1 lg:row-start-2 bg-gradient-to-br from-pink-100 to-rose-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col lg:h-[260px]">
-                            <div
-                                class="absolute -right-4 -bottom-4 text-pink-200 text-6xl lg:text-8xl opacity-50 pointer-events-none group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
-                                <i class="fa-solid fa-ranking-star"></i>
-                            </div>
-                            <h4
-                                class="text-base lg:text-lg font-black text-pink-500 mb-2 lg:mb-4 flex items-center relative z-10 whitespace-nowrap">
-                                <div
-                                    class="w-6 h-6 lg:w-8 lg:h-8 bg-pink-200 text-pink-500 rounded-full flex items-center justify-center mr-2 shadow-sm">
-                                    <i class="fa-solid fa-crown text-xs lg:text-sm text-yellow-400"></i>
-                                </div>人氣 Top 3
-                            </h4>
-                            <div id="dash-likes-container"
-                                class="flex flex-col gap-2 lg:gap-3 relative z-10 flex-1 justify-center">
-                                <div
-                                    class="text-center text-pink-400 text-xs lg:text-sm font-bold py-4 lg:py-6 bg-white/60 backdrop-blur rounded-xl lg:rounded-[1.5rem] border border-white shadow-sm">
-                                    <i class="fa-solid fa-spinner fa-spin mr-2"></i>載入排行中...
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 3. 最新家長留言 (手機滿版在下方，電腦直立滿版在右側) -->
-                        <div
-                            class="col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 bg-gradient-to-br from-purple-100 to-fuchsia-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full lg:h-[464px]">
-                            <div
-                                class="absolute -right-4 -bottom-4 text-purple-200 text-7xl lg:text-8xl opacity-50 pointer-events-none group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
-                                <i class="fa-solid fa-comments"></i>
-                            </div>
-                            <div class="flex items-center justify-between mb-2 lg:mb-4 relative z-10">
-                                <h4 class="text-base lg:text-lg font-black text-purple-600 flex items-center">
-                                    <div
-                                        class="w-6 h-6 lg:w-8 lg:h-8 bg-purple-200 text-purple-600 rounded-full flex items-center justify-center mr-2 shadow-sm">
-                                        <i class="fa-regular fa-comment-dots text-xs lg:text-sm"></i>
-                                    </div>最新家長評論
-                                </h4>
-                                <button
-                                    onclick="window.location.hash='section-education-list'; document.getElementById('section-education-list').scrollIntoView({behavior: 'smooth', block: 'start'})"
-                                    class="text-[10px] lg:text-xs font-black text-purple-500 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full shadow-sm border border-purple-100 transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
-                                    了解更多機構 <i class="fa-solid fa-chevron-right text-[8px]"></i>
-                                </button>
-                            </div>
-                            <div id="dash-comments-container"
-                                class="flex flex-col gap-2.5 lg:gap-3 relative z-10 flex-1 overflow-y-auto hide-scrollbar">
-                                <div
-                                    class="text-center text-purple-400 text-xs lg:text-sm font-bold py-6 bg-white/60 backdrop-blur rounded-xl lg:rounded-[1.5rem] border border-white shadow-sm">
-                                    <i class="fa-solid fa-spinner fa-spin mr-2"></i>載入留言中...
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
 
-            <!-- 🔥 下方：全版幅寬內容區塊 -->
-            <div class="flex-1 min-w-0 space-y-16 pb-10 mt-12 pt-8 border-t-4 border-dashed border-gray-100 w-full">
+            <!-- 🔥 內容區塊 (Dashboard 置中滿版) -->
+            <div class="w-full">
 
+                <!-- 🌟 動態生活儀表板 (Dashboard - 智慧網格) -->
+                <div id="section-dashboard"
+                    class="grid grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-6 relative z-10 pt-1 pb-4 items-stretch mx-auto">
 
-                <!-- 2. 醫療院所 -->
-                <div id="section-medical" class="scroll-mt-36">
-                    <!-- 升級版：主視覺 Header -->
+                    <!-- 1. 快速學區查詢 (手機並排左側，電腦左上) -->
                     <div
-                        class="bg-gradient-to-br from-emerald-400 via-themeGreen to-teal-500 rounded-[2.5rem] p-6 sm:p-8 text-white shadow-cute relative overflow-hidden mb-6 group border-4 border-green-50/30">
-                        <!-- 背景裝飾 -->
+                        class="col-span-1 lg:col-start-1 lg:row-start-1 w-full bg-gradient-to-br from-sky-100 to-blue-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col lg:h-[180px]">
                         <div
-                            class="absolute top-0 right-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]">
+                            class="absolute -right-4 -bottom-4 lg:-right-6 lg:-bottom-6 text-sky-200 text-6xl lg:text-9xl opacity-60 pointer-events-none group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
+                            <i class="fa-solid fa-map-location-dot"></i>
                         </div>
-                        <div
-                            class="absolute -right-6 -bottom-6 text-8xl sm:text-9xl text-white/20 pointer-events-none transform group-hover:scale-110 group-hover:rotate-12 transition-transform duration-700">
-                            <i class="fa-solid fa-briefcase-medical"></i>
-                        </div>
-                        <div
-                            class="absolute -left-6 top-10 text-6xl text-white/10 pointer-events-none transform -rotate-12">
-                            <i class="fa-solid fa-heart-pulse"></i>
-                        </div>
-
-                        <!-- 內容 -->
-                        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div class="relative z-10 flex flex-col gap-1 lg:gap-2">
                             <div class="flex-1">
-                                <span
-                                    class="bg-white/20 text-white text-[10px] font-black px-3 py-1.5 rounded-xl mb-4 inline-flex items-center shadow-sm backdrop-blur-md border border-white/30 tracking-widest uppercase">
-                                    <i class="fa-solid fa-star-of-life mr-1.5"></i> MEDICAL SYSTEM
-                                </span>
-                                <h3
-                                    class="text-3xl sm:text-4xl font-black flex items-center drop-shadow-md mb-3 tracking-wide">
+                                <h4 class="text-base lg:text-lg font-black text-sky-600 mb-2 lg:mb-4 flex items-center">
                                     <div
-                                        class="w-12 h-12 bg-white text-themeGreen rounded-full flex items-center justify-center mr-3 shadow-md shrink-0">
-                                        <i class="fa-solid fa-laptop-medical text-2xl"></i>
+                                        class="w-6 h-6 lg:w-8 lg:h-8 bg-sky-200 text-sky-600 rounded-full flex items-center justify-center mr-2 shadow-sm">
+                                        <i class="fa-solid fa-magnifying-glass-location text-xs lg:text-sm"></i>
                                     </div>
-                                    樂園救護中心
-                                </h3>
-                                <p class="font-bold text-green-50 text-sm sm:text-base max-w-lg leading-relaxed">
-                                    您的在地健康守護者！我們整理了 A7 周邊的診所與特約藥局，點選下方分類卡片，快速尋找適合的醫療資源。
-                                </p>
+                                    <span class="hidden lg:inline">一鍵</span>查詢學區
+                                </h4>
+                                <p
+                                    class="text-[10px] lg:text-sm text-sky-700/80 font-bold leading-tight mt-1 lg:whitespace-nowrap">
+                                    輸入地址快速對照新學區。</p>
                             </div>
-
-                            <!-- 快速預覽標籤 (動態感) -->
-                            <div class="flex flex-wrap md:flex-col gap-2.5 shrink-0 justify-start md:justify-end">
-                                <div onclick="scrollToMedicalCategory('牙')"
-                                    class="cursor-pointer bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-sm hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white">
-                                        <i class="fa-solid fa-tooth"></i></div>
-                                    <span class="font-black text-sm tracking-wide">牙醫診所</span>
-                                </div>
-                                <div onclick="scrollToMedicalCategory(['小兒', '家醫', '診所'])"
-                                    class="cursor-pointer bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-sm hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white">
-                                        <i class="fa-solid fa-baby"></i></div>
-                                    <span class="font-black text-sm tracking-wide">小兒與家醫</span>
-                                </div>
-                                <div onclick="scrollToMedicalCategory('藥')"
-                                    class="cursor-pointer bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-sm hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white">
-                                        <i class="fa-solid fa-pills"></i></div>
-                                    <span class="font-black text-sm tracking-wide">特約藥局</span>
-                                </div>
+                            <div
+                                class="flex w-full gap-1.5 lg:gap-2 shrink-0 bg-white/60 backdrop-blur p-1.5 lg:p-2 rounded-full border border-white shadow-sm">
+                                <input type="text" id="dash-school-input" placeholder="輸入地址..."
+                                    onkeypress="if(event.key === 'Enter') quickCheckSchoolDistrict()"
+                                    class="w-full bg-transparent px-2 lg:px-4 py-1 lg:py-1.5 text-xs lg:text-sm font-bold text-gray-700 focus:outline-none placeholder:text-gray-400 min-w-0">
+                                <button onclick="quickCheckSchoolDistrict()"
+                                    class="bg-sky-500 hover:bg-sky-600 text-white w-7 h-7 lg:w-9 lg:h-9 rounded-full flex items-center justify-center shadow-md transition-transform active:scale-95 shrink-0 text-xs lg:text-base"><i
+                                        class="fa-solid fa-search"></i></button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 溫馨提示區塊 (升級為卡片式) -->
-                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
+                    <!-- 2. 補習班愛心排行榜 (手機並排訂側，電腦左下) -->
+                    <div
+                        class="col-span-1 lg:col-start-1 lg:row-start-2 bg-gradient-to-br from-pink-100 to-rose-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col lg:h-[260px]">
                         <div
-                            class="flex-1 bg-gradient-to-r from-blue-50 to-indigo-50/50 p-4 sm:p-5 rounded-[1.5rem] border-2 border-blue-100 shadow-sm flex items-start sm:items-center gap-4 group transition-all hover:shadow-md">
-                            <div
-                                class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-500 text-xl shadow-sm shrink-0 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all border border-blue-100">
-                                <i class="fa-solid fa-user-doctor"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h5 class="text-blue-800 font-black text-sm sm:text-base mb-1">看診小叮嚀</h5>
-                                <p class="text-blue-600/80 font-bold text-xs sm:text-sm leading-relaxed">
-                                    就診前請確認機構與醫事人員具合法資格，以保障您的就醫權益與健康安全。
-                                </p>
-                            </div>
-                            <a href="https://ma.mohw.gov.tw/Accessibility/BASSearch/MASearchBAS" target="_blank"
-                                class="hidden sm:flex shrink-0 bg-blue-500 hover:bg-blue-600 text-white font-black text-xs px-4 py-2.5 rounded-xl transition-colors shadow-sm items-center gap-1.5 active:scale-95 group-hover:shadow-md">
-                                <i class="fa-solid fa-magnifying-glass"></i> 衛福部查詢
-                            </a>
+                            class="absolute -right-4 -bottom-4 text-pink-200 text-6xl lg:text-8xl opacity-50 pointer-events-none group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
+                            <i class="fa-solid fa-ranking-star"></i>
                         </div>
-                        <!-- 手機版按鈕 -->
+                        <h4
+                            class="text-base lg:text-lg font-black text-pink-500 mb-2 lg:mb-4 flex items-center relative z-10 whitespace-nowrap">
+                            <div
+                                class="w-6 h-6 lg:w-8 lg:h-8 bg-pink-200 text-pink-500 rounded-full flex items-center justify-center mr-2 shadow-sm">
+                                <i class="fa-solid fa-crown text-xs lg:text-sm text-yellow-400"></i>
+                            </div>人氣 Top 3
+                        </h4>
+                        <div id="dash-likes-container"
+                            class="flex flex-col gap-2 lg:gap-3 relative z-10 flex-1 justify-center">
+                            <div
+                                class="text-center text-pink-400 text-xs lg:text-sm font-bold py-4 lg:py-6 bg-white/60 backdrop-blur rounded-xl lg:rounded-[1.5rem] border border-white shadow-sm">
+                                <i class="fa-solid fa-spinner fa-spin mr-2"></i>載入排行中...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 最新家長留言 (手機滿版在下方，電腦直立滿版在右側) -->
+                    <div
+                        class="col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 bg-gradient-to-br from-purple-100 to-fuchsia-50 rounded-[1.5rem] lg:rounded-[2.5rem] p-4 lg:p-6 shadow-cute border-[3px] lg:border-[4px] border-white relative overflow-hidden group hover:shadow-lg transition-all flex flex-col h-full lg:h-[464px]">
+                        <div
+                            class="absolute -right-4 -bottom-4 text-purple-200 text-7xl lg:text-8xl opacity-50 pointer-events-none group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <div class="flex items-center justify-between mb-2 lg:mb-4 relative z-10">
+                            <h4 class="text-base lg:text-lg font-black text-purple-600 flex items-center">
+                                <div
+                                    class="w-6 h-6 lg:w-8 lg:h-8 bg-purple-200 text-purple-600 rounded-full flex items-center justify-center mr-2 shadow-sm">
+                                    <i class="fa-regular fa-comment-dots text-xs lg:text-sm"></i>
+                                </div>最新家長評論
+                            </h4>
+                            <button
+                                onclick="window.location.hash='section-education-list'; document.getElementById('section-education-list').scrollIntoView({behavior: 'smooth', block: 'start'})"
+                                class="text-[10px] lg:text-xs font-black text-purple-500 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full shadow-sm border border-purple-100 transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
+                                了解更多機構 <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                            </button>
+                        </div>
+                        <div id="dash-comments-container"
+                            class="flex flex-col gap-2.5 lg:gap-3 relative z-10 flex-1 overflow-y-auto hide-scrollbar">
+                            <div
+                                class="text-center text-purple-400 text-xs lg:text-sm font-bold py-6 bg-white/60 backdrop-blur rounded-xl lg:rounded-[1.5rem] border border-white shadow-sm">
+                                <i class="fa-solid fa-spinner fa-spin mr-2"></i>載入留言中...
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔥 下方：全版幅寬內容區塊 -->
+        <div class="flex-1 min-w-0 space-y-16 pb-10 mt-12 pt-8 border-t-4 border-dashed border-gray-100 w-full">
+
+
+            <!-- 2. 醫療院所 -->
+            <div id="section-medical" class="scroll-mt-36">
+                <!-- 升級版：主視覺 Header -->
+                <div
+                    class="bg-gradient-to-br from-emerald-400 via-themeGreen to-teal-500 rounded-[2.5rem] p-6 sm:p-8 text-white shadow-cute relative overflow-hidden mb-6 group border-4 border-green-50/30">
+                    <!-- 背景裝飾 -->
+                    <div
+                        class="absolute top-0 right-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]">
+                    </div>
+                    <div
+                        class="absolute -right-6 -bottom-6 text-8xl sm:text-9xl text-white/20 pointer-events-none transform group-hover:scale-110 group-hover:rotate-12 transition-transform duration-700">
+                        <i class="fa-solid fa-briefcase-medical"></i>
+                    </div>
+                    <div
+                        class="absolute -left-6 top-10 text-6xl text-white/10 pointer-events-none transform -rotate-12">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+
+                    <!-- 內容 -->
+                    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div class="flex-1">
+                            <span
+                                class="bg-white/20 text-white text-[10px] font-black px-3 py-1.5 rounded-xl mb-4 inline-flex items-center shadow-sm backdrop-blur-md border border-white/30 tracking-widest uppercase">
+                                <i class="fa-solid fa-star-of-life mr-1.5"></i> MEDICAL SYSTEM
+                            </span>
+                            <h3
+                                class="text-3xl sm:text-4xl font-black flex items-center drop-shadow-md mb-3 tracking-wide">
+                                <div
+                                    class="w-12 h-12 bg-white text-themeGreen rounded-full flex items-center justify-center mr-3 shadow-md shrink-0">
+                                    <i class="fa-solid fa-laptop-medical text-2xl"></i>
+                                </div>
+                                樂園救護中心
+                            </h3>
+                            <p class="font-bold text-green-50 text-sm sm:text-base max-w-lg leading-relaxed">
+                                您的在地健康守護者！我們整理了 A7 周邊的診所與特約藥局，點選下方分類卡片，快速尋找適合的醫療資源。
+                            </p>
+                        </div>
+
+                        <!-- 快速預覽標籤 (動態感) -->
+                        <div class="flex flex-wrap md:flex-col gap-2.5 shrink-0 justify-start md:justify-end">
+                            <div onclick="scrollToMedicalCategory('牙')"
+                                class="cursor-pointer bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-sm hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white">
+                                    <i class="fa-solid fa-tooth"></i>
+                                </div>
+                                <span class="font-black text-sm tracking-wide">牙醫診所</span>
+                            </div>
+                            <div onclick="scrollToMedicalCategory(['小兒', '家醫', '診所'])"
+                                class="cursor-pointer bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-sm hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white">
+                                    <i class="fa-solid fa-baby"></i>
+                                </div>
+                                <span class="font-black text-sm tracking-wide">小兒與家醫</span>
+                            </div>
+                            <div onclick="scrollToMedicalCategory('藥')"
+                                class="cursor-pointer bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-2.5 flex items-center gap-3 shadow-sm hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white">
+                                    <i class="fa-solid fa-pills"></i>
+                                </div>
+                                <span class="font-black text-sm tracking-wide">特約藥局</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 溫馨提示區塊 (升級為卡片式) -->
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
+                    <div
+                        class="flex-1 bg-gradient-to-r from-blue-50 to-indigo-50/50 p-4 sm:p-5 rounded-[1.5rem] border-2 border-blue-100 shadow-sm flex items-start sm:items-center gap-4 group transition-all hover:shadow-md">
+                        <div
+                            class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-500 text-xl shadow-sm shrink-0 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all border border-blue-100">
+                            <i class="fa-solid fa-user-doctor"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h5 class="text-blue-800 font-black text-sm sm:text-base mb-1">看診小叮嚀</h5>
+                            <p class="text-blue-600/80 font-bold text-xs sm:text-sm leading-relaxed">
+                                就診前請確認機構與醫事人員具合法資格，以保障您的就醫權益與健康安全。
+                            </p>
+                        </div>
                         <a href="https://ma.mohw.gov.tw/Accessibility/BASSearch/MASearchBAS" target="_blank"
-                            class="sm:hidden w-full bg-blue-500 hover:bg-blue-600 text-white font-black text-sm px-4 py-3 rounded-xl transition-colors shadow-sm flex items-center justify-center gap-2 active:scale-95">
-                            <i class="fa-solid fa-magnifying-glass"></i> 前往衛福部系統查詢
+                            class="hidden sm:flex shrink-0 bg-blue-500 hover:bg-blue-600 text-white font-black text-xs px-4 py-2.5 rounded-xl transition-colors shadow-sm items-center gap-1.5 active:scale-95 group-hover:shadow-md">
+                            <i class="fa-solid fa-magnifying-glass"></i> 衛福部查詢
                         </a>
                     </div>
+                    <!-- 手機版按鈕 -->
+                    <a href="https://ma.mohw.gov.tw/Accessibility/BASSearch/MASearchBAS" target="_blank"
+                        class="sm:hidden w-full bg-blue-500 hover:bg-blue-600 text-white font-black text-sm px-4 py-3 rounded-xl transition-colors shadow-sm flex items-center justify-center gap-2 active:scale-95">
+                        <i class="fa-solid fa-magnifying-glass"></i> 前往衛福部系統查詢
+                    </a>
+                </div>
 
-                    <div id="medical-list-container" class="grid grid-cols-1 lg:grid-cols-2 gap-5 w-full items-start">
-                        <div
-                            class="w-full lg:col-span-2 text-center text-themeGreen py-12 bg-white rounded-[2.5rem] border-4 border-green-50 shadow-cute">
-                            <i class="fa-solid fa-spinner fa-spin text-4xl mb-5"></i>
-                            <p class="font-bold">正在連線樂園救護中心庫...</p>
-                        </div>
+                <div id="medical-list-container" class="grid grid-cols-1 lg:grid-cols-2 gap-5 w-full items-start">
+                    <div
+                        class="w-full lg:col-span-2 text-center text-themeGreen py-12 bg-white rounded-[2.5rem] border-4 border-green-50 shadow-cute">
+                        <i class="fa-solid fa-spinner fa-spin text-4xl mb-5"></i>
+                        <p class="font-bold">正在連線樂園救護中心庫...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 教育資源 -->
+            <div id="section-education-hall" class="scroll-mt-32">
+                <div class="flex items-center justify-between mb-5 px-2 ">
+                    <h3 class="text-2xl font-black text-blue-900 flex items-center"><i
+                            class="fa-solid fa-book-open-reader mr-3"></i> 教育學習殿堂</h3>
+                </div>
+
+                <!-- 🏫 在地教育單位 -->
+                <div id="school" class="p-0 md:p-2 my-8 relative overflow-hidden scroll-mt-24">
+                    <div
+                        class="absolute -right-4 -top-4 text-blue-50 text-8xl floating opacity-50 z-0 pointer-events-none">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+
+
+                    <div id="public-schools-container"
+                        class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10 items-start">
+                        <!-- JS 將動態注入大卡片與小列表 -->
                     </div>
                 </div>
 
-                <!-- 3. 教育資源 -->
-                <div id="section-education-hall" class="scroll-mt-32">
-                    <div class="flex items-center justify-between mb-5 px-2 ">
-                        <h3 class="text-2xl font-black text-blue-900 flex items-center"><i
-                                class="fa-solid fa-book-open-reader mr-3"></i> 教育學習殿堂</h3>
-                    </div>
-
-                    <!-- 🏫 在地教育單位 -->
-                    <div id="school" class="p-0 md:p-2 my-8 relative overflow-hidden scroll-mt-24">
-                        <div
-                            class="absolute -right-4 -top-4 text-blue-50 text-8xl floating opacity-50 z-0 pointer-events-none">
-                            <i class="fa-solid fa-school"></i>
-                        </div>
-
-
-                        <div id="public-schools-container"
-                            class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10 items-start">
-                            <!-- JS 將動態注入大卡片與小列表 -->
-                        </div>
-                    </div>
-
-                    <!-- 模組：就學與設籍 -->
+                <!-- 模組：就學與設籍 -->
+                <div
+                    class="bg-white rounded-[2rem] p-6 md:p-8 shadow-cute border-4 border-blue-50 relative overflow-hidden group hover:-translate-y-1 transition-transform">
                     <div
-                        class="bg-white rounded-[2rem] p-6 md:p-8 shadow-cute border-4 border-blue-50 relative overflow-hidden group hover:-translate-y-1 transition-transform">
-                        <div
-                            class="absolute -right-4 -bottom-4 text-8xl text-blue-100 opacity-40 group-hover:scale-110 transition-transform pointer-events-none">
-                            <i class="fa-solid fa-school"></i>
-                        </div>
-                        <div
-                            class="bg-blue-100 text-blue-600 text-xs font-black px-3 py-1.5 rounded-xl flex items-center w-max shadow-sm mb-4">
-                            <i class="fa-solid fa-info-circle mr-1.5"></i>
-                            <a href="https://ws.tycg.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvNjYvcmVsZmlsZS8xMTI4Ni8xNjA4NTkzLzFmMTFkZjY1LThlYTMtNGNmZS05ZTFhLTU0MTFlNjRlOGEyNy5wZGY%3d&n=MTE15a245bm05bqm6b6c5bGx5Y2A5ZyL5rCR5Lit5bCP5a245a245Y2A5LiA6Ka96KGoLnBkZg%3d%3d"
-                                target="_blank" rel="noopener noreferrer" class="hover:underline">依照桃園市教育局公告</a>
-                        </div>
+                        class="absolute -right-4 -bottom-4 text-8xl text-blue-100 opacity-40 group-hover:scale-110 transition-transform pointer-events-none">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+                    <div
+                        class="bg-blue-100 text-blue-600 text-xs font-black px-3 py-1.5 rounded-xl flex items-center w-max shadow-sm mb-4">
+                        <i class="fa-solid fa-info-circle mr-1.5"></i>
+                        <a href="https://ws.tycg.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvNjYvcmVsZmlsZS8xMTI4Ni8xNjA4NTkzLzFmMTFkZjY1LThlYTMtNGNmZS05ZTFhLTU0MTFlNjRlOGEyNy5wZGY%3d&n=MTE15a245bm05bqm6b6c5bGx5Y2A5ZyL5rCR5Lit5bCP5a245a245Y2A5LiA6Ka96KGoLnBkZg%3d%3d"
+                            target="_blank" rel="noopener noreferrer" class="hover:underline">依照桃園市教育局公告</a>
+                    </div>
 
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 relative z-10 items-start">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 relative z-10 items-start">
 
-                            <div class="flex flex-col gap-6">
-                                <div
-                                    class="bg-blue-50/50 p-4 md:p-6 rounded-[1.5rem] border-2 border-blue-100/60 shadow-inner flex flex-col gap-4">
-                                    <div class="w-full flex flex-col justify-center">
-                                        <h4
-                                            class="text-sm md:text-base font-black text-blue-700 mb-2 flex items-center">
-                                            <i
-                                                class="fa-solid fa-magnifying-glass-location mr-1.5 text-blue-500"></i>一鍵查詢我家學區
-                                        </h4>
-                                        <p class="text-xs text-blue-500 font-bold mb-4">
-                                            輸入完整地址即可快速對照最新學區（建議包含門牌號碼以利精確判斷）
-                                        </p>
-                                        <div class="flex gap-2 w-full">
-                                            <input type="text" id="school-address-input" placeholder="例如：文青路100號"
-                                                onkeypress="if(event.key === 'Enter') checkSchoolDistrict()"
-                                                class="flex-1 min-w-0 rounded-xl border-2 border-blue-200 px-3 sm:px-4 py-2 text-sm font-bold text-gray-700 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 bg-white shadow-inner transition-all">
-                                            <button onclick="checkSchoolDistrict()"
-                                                class="bg-blue-500 hover:bg-blue-600 text-white font-black px-4 py-2 rounded-xl transition-transform shadow-sm shrink-0 active:scale-95">查詢</button>
-                                        </div>
-                                    </div>
-                                    <div class="w-full flex flex-col justify-center">
-                                        <div id="school-result" class="hidden w-full h-full"></div>
-                                    </div>
-                                </div>
-
-                                <div class="flex flex-col gap-4">
-                                    <div
-                                        class="text-xs md:text-sm text-gray-500 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-inner flex items-start gap-3">
+                        <div class="flex flex-col gap-6">
+                            <div
+                                class="bg-blue-50/50 p-4 md:p-6 rounded-[1.5rem] border-2 border-blue-100/60 shadow-inner flex flex-col gap-4">
+                                <div class="w-full flex flex-col justify-center">
+                                    <h4 class="text-sm md:text-base font-black text-blue-700 mb-2 flex items-center">
                                         <i
-                                            class="fa-solid fa-circle-exclamation mt-1 shrink-0 text-blue-400 text-lg"></i>
-                                        <div>
-                                            <strong class="text-gray-700 block mb-1">什麼是「自由學區」？</strong>
-                                            指該鄰里被劃分在兩個（或以上）學校的共同學區內，家長可依據自身考量，自由選擇將孩子戶籍遷入並就讀其中一所學校。實際額滿與否及分發順序，需依各校當年度招生簡章為準。
-                                        </div>
+                                            class="fa-solid fa-magnifying-glass-location mr-1.5 text-blue-500"></i>一鍵查詢我家學區
+                                    </h4>
+                                    <p class="text-xs text-blue-500 font-bold mb-4">
+                                        輸入完整地址即可快速對照最新學區（建議包含門牌號碼以利精確判斷）
+                                    </p>
+                                    <div class="flex gap-2 w-full">
+                                        <input type="text" id="school-address-input" placeholder="例如：文青路100號"
+                                            onkeypress="if(event.key === 'Enter') checkSchoolDistrict()"
+                                            class="flex-1 min-w-0 rounded-xl border-2 border-blue-200 px-3 sm:px-4 py-2 text-sm font-bold text-gray-700 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 bg-white shadow-inner transition-all">
+                                        <button onclick="checkSchoolDistrict()"
+                                            class="bg-blue-500 hover:bg-blue-600 text-white font-black px-4 py-2 rounded-xl transition-transform shadow-sm shrink-0 active:scale-95">查詢</button>
                                     </div>
-                                    <div
-                                        class="text-xs md:text-sm text-rose-600 bg-rose-50/50 p-4 rounded-xl border-2 border-rose-100 flex items-start gap-3">
-                                        <i class="fa-solid fa-triangle-exclamation mt-0.5 shrink-0 text-rose-400"></i>
-                                        <p class="font-black leading-relaxed">
-                                            具體學區劃分依照桃園市政府教育局公告「鄰里別」為準，建議設籍前先向區公所或學校教務處確認。
-                                        </p>
-                                    </div>
+                                </div>
+                                <div class="w-full flex flex-col justify-center">
+                                    <div id="school-result" class="hidden w-full h-full"></div>
                                 </div>
                             </div>
 
-                            <div
-                                class="overflow-y-auto max-h-[650px] rounded-[1.5rem] border-2 border-blue-100 shadow-sm bg-white hide-scrollbar h-full">
-                                <table
-                                    class="w-full text-left text-xs sm:text-sm md:text-base border-collapse relative">
-                                    <thead
-                                        class="bg-blue-50 text-blue-800 border-b-2 border-blue-200 sticky top-0 z-20">
-                                        <tr>
-                                            <th
-                                                class="p-3 md:p-5 font-black whitespace-nowrap w-auto sm:w-[30%] md:w-[35%] border-r border-blue-100/50">
-                                                行政里別</th>
-                                            <th class="p-3 md:p-5 font-black">所屬學區 <span
-                                                    class="text-[10px] sm:text-xs text-blue-500 font-normal ml-1 hidden 2xl:inline">(可自由選擇)</span>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-gray-700 font-bold divide-y divide-blue-50">
-                                        <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
-                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                文青里</td>
-                                            <td class="p-3 md:p-5">
-                                                <div class="flex flex-col gap-y-2">
-                                                    <div class="flex items-center flex-wrap gap-1">
-                                                        <span>文青國中小、大埔國小</span>
-                                                        <span
-                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
-                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                文藝里</td>
-                                            <td class="p-3 md:p-5">
-                                                <div class="flex flex-col gap-y-2">
-                                                    <div class="flex items-center flex-wrap gap-1">
-                                                        <span>文青國中小、大埔國小</span>
-                                                        <span
-                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-blue-50/40 transition-colors group/row">
-                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                <div class="flex flex-col gap-y-2">
-                                                    <div class="flex items-center">樂善里 <span
-                                                            class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">1-3鄰</span>
-                                                    </div>
-                                                    <div
-                                                        class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
-                                                        樂善里 <span
-                                                            class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">4-33鄰</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="p-3 md:p-5">
-                                                <div class="flex flex-col gap-y-2">
-                                                    <div class="flex items-center flex-wrap gap-1">
-                                                        <span>樂善國小、文青國中小</span>
-                                                        <span
-                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                    </div>
-                                                    <div
-                                                        class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
-                                                        <span>樂善國小</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-blue-50/40 transition-colors group/row">
-                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                <div class="flex flex-col gap-y-2">
-                                                    <div class="flex items-center">長樂里 <span
-                                                            class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">1-9鄰</span>
-                                                    </div>
-                                                    <div
-                                                        class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
-                                                        長樂里 <span
-                                                            class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">10-21鄰</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="p-3 md:p-5">
-                                                <div class="flex flex-col gap-y-2">
-                                                    <div class="flex items-center flex-wrap gap-1">
-                                                        <span>樂善國小、文青國中小</span>
-                                                        <span
-                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                    </div>
-                                                    <div
-                                                        class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2 flex-wrap gap-1">
-                                                        <span>樂善國小、長庚國小</span>
-                                                        <span
-                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
-                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                文樂里</td>
-                                            <td class="p-3 md:p-5">
-                                                <div class="flex flex-col gap-y-2">
-                                                    <div class="flex items-center flex-wrap gap-1">
-                                                        <span>樂善國小、文青國中小</span>
-                                                        <span
-                                                            class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-blue-50/40 transition-colors group/row">
-                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                文桃里</td>
-                                            <td class="p-3 md:p-5">
-                                                <div class="flex items-center">
-                                                    <span>文青國小、文青國中</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
-                                            <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
-                                                長庚里</td>
-                                            <td class="p-3 md:p-5">
-                                                <div class="flex items-center">
-                                                    <span>長庚國小</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="flex flex-col gap-4">
+                                <div
+                                    class="text-xs md:text-sm text-gray-500 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-inner flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-exclamation mt-1 shrink-0 text-blue-400 text-lg"></i>
+                                    <div>
+                                        <strong class="text-gray-700 block mb-1">什麼是「自由學區」？</strong>
+                                        指該鄰里被劃分在兩個（或以上）學校的共同學區內，家長可依據自身考量，自由選擇將孩子戶籍遷入並就讀其中一所學校。實際額滿與否及分發順序，需依各校當年度招生簡章為準。
+                                    </div>
+                                </div>
+                                <div
+                                    class="text-xs md:text-sm text-rose-600 bg-rose-50/50 p-4 rounded-xl border-2 border-rose-100 flex items-start gap-3">
+                                    <i class="fa-solid fa-triangle-exclamation mt-0.5 shrink-0 text-rose-400"></i>
+                                    <p class="font-black leading-relaxed">
+                                        具體學區劃分依照桃園市政府教育局公告「鄰里別」為準，建議設籍前先向區公所或學校教務處確認。
+                                    </p>
+                                </div>
                             </div>
                         </div>
+
+                        <div
+                            class="overflow-y-auto max-h-[650px] rounded-[1.5rem] border-2 border-blue-100 shadow-sm bg-white hide-scrollbar h-full">
+                            <table class="w-full text-left text-xs sm:text-sm md:text-base border-collapse relative">
+                                <thead class="bg-blue-50 text-blue-800 border-b-2 border-blue-200 sticky top-0 z-20">
+                                    <tr>
+                                        <th
+                                            class="p-3 md:p-5 font-black whitespace-nowrap w-auto sm:w-[30%] md:w-[35%] border-r border-blue-100/50">
+                                            行政里別</th>
+                                        <th class="p-3 md:p-5 font-black">所屬學區 <span
+                                                class="text-[10px] sm:text-xs text-blue-500 font-normal ml-1 hidden 2xl:inline">(可自由選擇)</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-700 font-bold divide-y divide-blue-50">
+                                    <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
+                                        <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                            文青里</td>
+                                        <td class="p-3 md:p-5">
+                                            <div class="flex flex-col gap-y-2">
+                                                <div class="flex items-center flex-wrap gap-1">
+                                                    <span>文青國中小、大埔國小</span>
+                                                    <span
+                                                        class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
+                                        <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                            文藝里</td>
+                                        <td class="p-3 md:p-5">
+                                            <div class="flex flex-col gap-y-2">
+                                                <div class="flex items-center flex-wrap gap-1">
+                                                    <span>文青國中小、大埔國小</span>
+                                                    <span
+                                                        class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/40 transition-colors group/row">
+                                        <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                            <div class="flex flex-col gap-y-2">
+                                                <div class="flex items-center">樂善里 <span
+                                                        class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">1-3鄰</span>
+                                                </div>
+                                                <div
+                                                    class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
+                                                    樂善里 <span
+                                                        class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">4-33鄰</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-3 md:p-5">
+                                            <div class="flex flex-col gap-y-2">
+                                                <div class="flex items-center flex-wrap gap-1">
+                                                    <span>樂善國小、文青國中小</span>
+                                                    <span
+                                                        class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                </div>
+                                                <div
+                                                    class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
+                                                    <span>樂善國小</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/40 transition-colors group/row">
+                                        <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                            <div class="flex flex-col gap-y-2">
+                                                <div class="flex items-center">長樂里 <span
+                                                        class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">1-9鄰</span>
+                                                </div>
+                                                <div
+                                                    class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2">
+                                                    長樂里 <span
+                                                        class="ml-2 text-[9px] sm:text-xs text-gray-400 font-normal bg-gray-100 px-1.5 sm:px-2 py-0.5 rounded">10-21鄰</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-3 md:p-5">
+                                            <div class="flex flex-col gap-y-2">
+                                                <div class="flex items-center flex-wrap gap-1">
+                                                    <span>樂善國小、文青國中小</span>
+                                                    <span
+                                                        class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                </div>
+                                                <div
+                                                    class="flex items-center mt-2 border-t border-dashed border-gray-200 pt-2 flex-wrap gap-1">
+                                                    <span>樂善國小、長庚國小</span>
+                                                    <span
+                                                        class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
+                                        <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                            文樂里</td>
+                                        <td class="p-3 md:p-5">
+                                            <div class="flex flex-col gap-y-2">
+                                                <div class="flex items-center flex-wrap gap-1">
+                                                    <span>樂善國小、文青國中小</span>
+                                                    <span
+                                                        class="text-[9px] sm:text-xs text-blue-600 bg-white border border-blue-200 shadow-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg shrink-0">自由學區</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/40 transition-colors group/row">
+                                        <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                            文桃里</td>
+                                        <td class="p-3 md:p-5">
+                                            <div class="flex items-center">
+                                                <span>文青國小、文青國中</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/40 transition-colors bg-gray-50/30 group/row">
+                                        <td class="p-3 md:p-5 text-gray-800 border-r border-blue-50 leading-snug">
+                                            長庚里</td>
+                                        <td class="p-3 md:p-5">
+                                            <div class="flex items-center">
+                                                <span>長庚國小</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
                 </div>
+
             </div>
+        </div>
 
-            <h4 id="section-education-list"
-                class="text-2xl font-black text-gray-500 ml-2 mt-5 flex items-center scroll-mt-32"><i
-                    class="fa-solid fa-chalkboard-user mr-2 text-themePurple"></i>學習照顧機構</h4>
+        <h4 id="section-education-list"
+            class="text-2xl font-black text-gray-500 ml-2 mt-5 flex items-center scroll-mt-32"><i
+                class="fa-solid fa-chalkboard-user mr-2 text-themePurple"></i>學習照顧機構</h4>
 
-            <!-- 新增分類按鈕區塊 -->
-            <div id="education-filter-container"
-                class="flex gap-2.5 overflow-x-auto hide-scrollbar mt-5 mb-6 px-2 pt-2 pb-3">
-                <!-- 分類按鈕將由 JS 動態生成 -->
-            </div>
+        <!-- 新增分類按鈕區塊 -->
+        <div id="education-filter-container"
+            class="flex gap-2.5 overflow-x-auto hide-scrollbar mt-5 mb-6 px-2 pt-2 pb-3">
+            <!-- 分類按鈕將由 JS 動態生成 -->
+        </div>
 
-            <div id="education-list-container" class="w-full">
-                <div
-                    class="w-full text-center text-themePurple py-12 bg-white rounded-[2.5rem] border-4 border-purple-50 shadow-cute">
-                    <i class="fa-solid fa-spinner fa-spin text-4xl mb-5"></i>
-                    <p class="font-bold">正在連線在地教育機構庫...</p>
-                </div>
-            </div>
-
+        <div id="education-list-container" class="w-full">
             <div
-                class="bg-[#2C3E50] rounded-3xl p-6 md:p-8 shadow-cute relative overflow-hidden border-4 border-[#1A252F] flex flex-col md:flex-row items-center justify-between gap-6">
+                class="w-full text-center text-themePurple py-12 bg-white rounded-[2.5rem] border-4 border-purple-50 shadow-cute">
+                <i class="fa-solid fa-spinner fa-spin text-4xl mb-5"></i>
+                <p class="font-bold">正在連線在地教育機構庫...</p>
+            </div>
+        </div>
+
+        <div
+            class="bg-[#2C3E50] rounded-3xl p-6 md:p-8 shadow-cute relative overflow-hidden border-4 border-[#1A252F] flex flex-col md:flex-row items-center justify-between gap-6">
+            <div
+                class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]">
+            </div>
+            <div class="relative z-10 flex items-center gap-4 text-left w-full md:w-auto">
+                <div class="text-4xl sm:text-5xl animate-bounce drop-shadow-lg shrink-0">🖍️</div>
+                <div>
+                    <h5 class="font-black text-white text-xl sm:text-2xl tracking-wide drop-shadow-md mb-1">
+                        在地補教機構招募中</h5>
+                    <p class="text-gray-300 font-bold text-xs sm:text-sm leading-relaxed max-w-lg">提供 A7
+                        區域內的幼兒園、安親班、才藝補習班等資訊，一起完善在地教育地圖！</p>
+                </div>
+            </div>
+            <button onclick="window.location.href='https://forms.gle/FyEGds4dPWsiEUUZA'"
+                class="relative z-10 w-full md:w-auto px-6 py-3.5 bg-themeYellow text-gray-800 font-black rounded-full shadow-[0_4px_0_#9D70FF] hover:translate-y-[2px] hover:shadow-[0_2px_0_#9D70FF] active:translate-y-[4px] active:shadow-none transition-all flex items-center justify-center gap-2 text-base shrink-0"><i
+                    class="fa-solid fa-hand-sparkles"></i> 提供資訊</button>
+        </div>
+
+        <!-- 1. 緊急救援 -->
+        <div id="section-emergency" class="scroll-mt-36 mt-16 lg:mt-24">
+            <div class="flex items-center justify-between mb-6 px-2 ">
+                <h3 class="text-2xl font-black text-red-500 flex items-center"><i
+                        class="fa-solid fa-truck-medical mr-3"></i> 救護與緊急通報</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                <!-- 警察局卡片 (專業通報面板風格) -->
                 <div
-                    class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]">
-                </div>
-                <div class="relative z-10 flex items-center gap-4 text-left w-full md:w-auto">
-                    <div class="text-4xl sm:text-5xl animate-bounce drop-shadow-lg shrink-0">🖍️</div>
-                    <div>
-                        <h5 class="font-black text-white text-xl sm:text-2xl tracking-wide drop-shadow-md mb-1">
-                            在地補教機構招募中</h5>
-                        <p class="text-gray-300 font-bold text-xs sm:text-sm leading-relaxed max-w-lg">提供 A7
-                            區域內的幼兒園、安親班、才藝補習班等資訊，一起完善在地教育地圖！</p>
-                    </div>
-                </div>
-                <button onclick="window.location.href='https://forms.gle/FyEGds4dPWsiEUUZA'"
-                    class="relative z-10 w-full md:w-auto px-6 py-3.5 bg-themeYellow text-gray-800 font-black rounded-full shadow-[0_4px_0_#9D70FF] hover:translate-y-[2px] hover:shadow-[0_2px_0_#9D70FF] active:translate-y-[4px] active:shadow-none transition-all flex items-center justify-center gap-2 text-base shrink-0"><i
-                        class="fa-solid fa-hand-sparkles"></i> 提供資訊</button>
-            </div>
-
-            <!-- 1. 緊急救援 -->
-            <div id="section-emergency" class="scroll-mt-36 mt-16 lg:mt-24">
-                <div class="flex items-center justify-between mb-6 px-2 ">
-                    <h3 class="text-2xl font-black text-red-500 flex items-center"><i
-                            class="fa-solid fa-truck-medical mr-3"></i> 救護與緊急通報</h3>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-                    <!-- 警察局卡片 (專業通報面板風格) -->
+                    class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 border-l-[16px] border-l-blue-600 relative overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all h-full">
                     <div
-                        class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 border-l-[16px] border-l-blue-600 relative overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all h-full">
-                        <div
-                            class="absolute right-0 bottom-0 text-blue-50 text-9xl pointer-events-none transform translate-x-1/4 translate-y-1/4 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
+                        class="absolute right-0 bottom-0 text-blue-50 text-9xl pointer-events-none transform translate-x-1/4 translate-y-1/4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
 
-                        <div
-                            class="px-6 md:px-8 py-6 border-b border-gray-50 flex items-center justify-between relative z-10 bg-gradient-to-r from-blue-50/50 to-transparent">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl shadow-inner">
-                                    <i class="fa-solid fa-building-shield"></i>
-                                </div>
-                                <h4 class="text-2xl md:text-3xl font-black text-gray-800 tracking-wide">警察局 </h4>
-                            </div>
+                    <div
+                        class="px-6 md:px-8 py-6 border-b border-gray-50 flex items-center justify-between relative z-10 bg-gradient-to-r from-blue-50/50 to-transparent">
+                        <div class="flex items-center gap-4">
                             <div
-                                class="flex items-center gap-2 bg-rose-50 text-rose-600 px-3 py-1.5 rounded-full text-xs font-black shadow-sm border border-rose-100">
-                                <span class="relative flex h-2 w-2">
-                                    <span
-                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-                                </span>
-                                24H 執勤
+                                class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl shadow-inner">
+                                <i class="fa-solid fa-building-shield"></i>
                             </div>
+                            <h4 class="text-2xl md:text-3xl font-black text-gray-800 tracking-wide">警察局 </h4>
                         </div>
-
-                        <div class="p-6 md:p-8 flex flex-col gap-6 relative z-10">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                <div>
-                                    <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
-                                            class="fa-solid fa-location-crosshairs text-blue-500"></i> 大埔派出所</div>
-                                    <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
-                                            class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區文德二路80號
-                                    </div>
-                                </div>
-                                <a href="tel:03-3202554"
-                                    class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] active:scale-95 shrink-0"><i
-                                        class="fa-solid fa-phone-volume animate-pulse"></i> 03-3202554</a>
-                            </div>
-                            <div class="h-px w-full bg-gray-100"></div>
-                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                <div>
-                                    <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
-                                            class="fa-solid fa-location-crosshairs text-blue-500"></i> 坪頂派出所</div>
-                                    <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
-                                            class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區大湖一路65號
-                                    </div>
-                                </div>
-                                <a href="tel:03-3282570"
-                                    class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] active:scale-95 shrink-0"><i
-                                        class="fa-solid fa-phone-volume animate-pulse"></i> 03-3282570</a>
-                            </div>
+                        <div
+                            class="flex items-center gap-2 bg-rose-50 text-rose-600 px-3 py-1.5 rounded-full text-xs font-black shadow-sm border border-rose-100">
+                            <span class="relative flex h-2 w-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                            </span>
+                            24H 執勤
                         </div>
                     </div>
 
-                    <!-- 消防隊卡片 (專業通報面板風格) -->
+                    <div class="p-6 md:p-8 flex flex-col gap-6 relative z-10">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div>
+                                <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
+                                        class="fa-solid fa-location-crosshairs text-blue-500"></i> 大埔派出所</div>
+                                <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
+                                        class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區文德二路80號
+                                </div>
+                            </div>
+                            <a href="tel:03-3202554"
+                                class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] active:scale-95 shrink-0"><i
+                                    class="fa-solid fa-phone-volume animate-pulse"></i> 03-3202554</a>
+                        </div>
+                        <div class="h-px w-full bg-gray-100"></div>
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div>
+                                <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
+                                        class="fa-solid fa-location-crosshairs text-blue-500"></i> 坪頂派出所</div>
+                                <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
+                                        class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區大湖一路65號
+                                </div>
+                            </div>
+                            <a href="tel:03-3282570"
+                                class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] active:scale-95 shrink-0"><i
+                                    class="fa-solid fa-phone-volume animate-pulse"></i> 03-3282570</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 消防隊卡片 (專業通報面板風格) -->
+                <div
+                    class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 border-l-[16px] border-l-red-600 relative overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all h-full">
                     <div
-                        class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 border-l-[16px] border-l-red-600 relative overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all h-full">
-                        <div
-                            class="absolute right-0 bottom-0 text-red-50 text-9xl pointer-events-none transform translate-x-1/4 translate-y-1/4 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-fire-extinguisher"></i>
-                        </div>
+                        class="absolute right-0 bottom-0 text-red-50 text-9xl pointer-events-none transform translate-x-1/4 translate-y-1/4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-fire-extinguisher"></i>
+                    </div>
 
-                        <div
-                            class="px-6 md:px-8 py-6 border-b border-gray-50 flex items-center justify-between relative z-10 bg-gradient-to-r from-red-50/50 to-transparent">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-2xl shadow-inner">
-                                    <i class="fa-solid fa-truck-medical"></i>
-                                </div>
-                                <h4 class="text-2xl md:text-3xl font-black text-gray-800 tracking-wide">消防隊 </h4>
-                            </div>
+                    <div
+                        class="px-6 md:px-8 py-6 border-b border-gray-50 flex items-center justify-between relative z-10 bg-gradient-to-r from-red-50/50 to-transparent">
+                        <div class="flex items-center gap-4">
                             <div
-                                class="flex items-center gap-2 bg-rose-50 text-rose-600 px-3 py-1.5 rounded-full text-xs font-black shadow-sm border border-rose-100">
-                                <span class="relative flex h-2 w-2">
-                                    <span
-                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-                                </span>
-                                24H 待命
+                                class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-2xl shadow-inner">
+                                <i class="fa-solid fa-truck-medical"></i>
                             </div>
+                            <h4 class="text-2xl md:text-3xl font-black text-gray-800 tracking-wide">消防隊 </h4>
                         </div>
+                        <div
+                            class="flex items-center gap-2 bg-rose-50 text-rose-600 px-3 py-1.5 rounded-full text-xs font-black shadow-sm border border-rose-100">
+                            <span class="relative flex h-2 w-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                            </span>
+                            24H 待命
+                        </div>
+                    </div>
 
-                        <div class="p-6 md:p-8 flex flex-col gap-6 relative z-10 h-full">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                <div>
-                                    <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
-                                            class="fa-solid fa-location-crosshairs text-red-500"></i> 坪頂消防分隊</div>
-                                    <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
-                                            class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區復興三路80號
-                                    </div>
+                    <div class="p-6 md:p-8 flex flex-col gap-6 relative z-10 h-full">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div>
+                                <div class="text-lg font-black text-gray-800 flex items-center gap-2"><i
+                                        class="fa-solid fa-location-crosshairs text-red-500"></i> 坪頂消防分隊</div>
+                                <div class="text-sm text-gray-500 font-bold mt-1.5 flex items-center"><i
+                                        class="fa-solid fa-map-pin w-5 text-center text-gray-300"></i>龜山區復興三路80號
                                 </div>
-                                <a href="tel:03-3280309"
-                                    class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(220,38,38,0.3)] active:scale-95 shrink-0"><i
-                                        class="fa-solid fa-phone-volume animate-pulse"></i> 03-3280309</a>
                             </div>
+                            <a href="tel:03-3280309"
+                                class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-[0_4px_15px_rgba(220,38,38,0.3)] active:scale-95 shrink-0"><i
+                                    class="fa-solid fa-phone-volume animate-pulse"></i> 03-3280309</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         </div>
         </div>
@@ -2699,7 +2697,7 @@
         function scrollToMedicalCategory(keyword) {
             const accordions = document.querySelectorAll('details[name="medical-accordion"]');
             let target = null;
-            
+
             // 支援傳入單一字串或陣列
             const keywords = Array.isArray(keyword) ? keyword : [keyword];
 
@@ -2707,7 +2705,7 @@
             for (let acc of accordions) {
                 // 取得分類標題 span (對應渲染邏輯中的 cat 變數)
                 const catTitle = acc.querySelector('span.text-xl')?.innerText || acc.innerText;
-                
+
                 if (keywords.some(k => catTitle.includes(k))) {
                     target = acc;
                     break;

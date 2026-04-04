@@ -2176,12 +2176,13 @@
                 // 新增：網域內容與頁面搜尋 (SPA Templates + Explore.html)
                 let domainContentHtml = '';
 
-                // 1. 探索頁面匹配結果
+                // 1. 探索頁面匹配結果 (先暫存，稍後放最後)
+                let exploreResultHtml = '';
                 const exploreKeywords = ['探索', 'a7', '建案', '社群', '討論', '房子', '社區', '買房', '發展', '區域', '新聞', '捷運', '機捷', '公車', '客運', '報修', '路面', '號誌', '路燈', '天氣', '空氣', 'AQI', '變一', '變二', '變三', '文學路', '牛角坡路', '體育大學', '運動中心', '國民運動中心'];
                 const matchExploreKw = exploreKeywords.some(k => k.toLowerCase().includes(q) || q.includes(k.toLowerCase()));
 
                 if (exploreSnippet || matchExploreKw) {
-                    domainContentHtml += `
+                    exploreResultHtml = `
                         <a href="${exploreLinkTarget}" class="block bg-purple-50 p-4 rounded-2xl shadow-sm border border-white hover:-translate-y-1 hover:shadow-md transition-all group mb-3">
                             <div class="flex items-center gap-3 mb-2">
                                 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-themePurple text-xl shadow-sm shrink-0"><i class="fa-solid fa-compass"></i></div>
@@ -2478,6 +2479,18 @@
                                         </div>
                                     </div>
                                 `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // 渲染探索柒結果 (排在最後)
+                if (exploreResultHtml) {
+                    html += `
+                        <div class="bg-white rounded-[2rem] p-6 shadow-cute border-4 border-purple-50 relative overflow-hidden mt-6">
+                            <h3 class="text-2xl font-black text-themePurple mb-4 border-b-2 border-purple-100 pb-2"><i class="fa-solid fa-compass mr-2"></i> 網域內容：探索柒</h3>
+                            <div class="relative z-10">
+                                ${exploreResultHtml}
                             </div>
                         </div>
                     `;
