@@ -1133,13 +1133,13 @@
                 </div>
                 <!-- 📝 分享在地店家 (右欄：20%) -->
                 <div
-                    class="w-full lg:w-[20%] flex flex-col items-center lg:items-start lg:pt-20 py-2 lg:py-0 gap-4 relative z-20">
+                    class="w-full lg:w-[20%] flex flex-col items-center lg:items-start lg:py-2 lg:py-0 gap-4 relative z-20">
                     <div class="relative w-[90%] sm:w-[60%] lg:w-full group cursor-pointer floating drop-shadow-[0_10px_15px_rgba(193,151,255,0.3)] hover:drop-shadow-[0_15px_20px_rgba(193,151,255,0.5)] transition-all duration-300"
                         onclick="toggleShareForm()">
 
                         <!-- 對話框本體 (漸層背景) -->
                         <div
-                            class="bg-gradient-to-br from-[#FF9EBB] to-[#C197FF] rounded-[4rem] p-6 lg:p-7 border-4 border-white/50 relative text-center flex flex-col items-center z-10 shadow-xl w-fit min-w-[180px] group-hover:-rotate-2 transition-transform duration-300">
+                            class="bg-gradient-to-br from-[#FF9EBB] to-[#C197FF] rounded-[4rem] p-6 lg:p-7 border-4 border-white relative text-center flex flex-col items-center z-10 shadow-xl w-fit min-w-[180px] group-hover:-rotate-2 transition-transform duration-300">
 
                             <!-- 裝飾元素 -->
                             <div class="absolute top-4 left-6 text-white/40 text-lg animate-pulse"><i
@@ -1165,15 +1165,18 @@
 
                             <!-- 對話框尾巴 (電腦版：向左指拉霸機 - 粉色) -->
                             <div
-                                class="hidden lg:block absolute top-[65%] -left-[10px] w-6 h-6 bg-[#FF9EBB] border-b-4 border-l-4 border-white/50 transform -translate-y-1/2 rotate-45 z-20 rounded-bl-[4px]">
+                                class="hidden lg:block absolute top-[65%] -left-[10px] w-6 h-6 bg-[#FF9EBB] border-b-4 border-l-4 border-white transform -translate-y-1/2 rotate-45 z-20 rounded-bl-[4px]">
                             </div>
 
                             <!-- 對話框尾巴 (手機版：向上指拉霸機 - 粉色) -->
                             <div
-                                class="lg:hidden absolute -top-[10px] left-[50%] w-6 h-6 bg-[#FF9EBB] border-t-4 border-l-4 border-white/50 transform -translate-x-1/2 rotate-45 z-20 rounded-tl-[4px]">
+                                class="lg:hidden absolute -top-[10px] left-[50%] w-6 h-6 bg-[#FF9EBB] border-t-4 border-l-4 border-white transform -translate-x-1/2 rotate-45 z-20 rounded-tl-[4px]">
                             </div>
                         </div>
                     </div>
+
+                    <!-- 💖 美食愛心排行榜 (由 JS 動態渲染) -->
+                    <div id="food-heart-ranking-container" class="w-full mt-0 relative z-30 px-2 lg:px-0"></div>
                 </div>
             </div>
 
@@ -2851,7 +2854,7 @@
             const overviewContainer = document.getElementById('bus-overview-fastest-container');
             if (overviewContainer) {
                 if (activeBuses.length > 0) {
-                    overviewContainer.innerHTML = activeBuses.map(item => 
+                    overviewContainer.innerHTML = activeBuses.map(item =>
                         createOverviewBusCard(item.dir, item.route, item.time, item.color, '捷運體育大學站')
                     ).join('');
                 } else {
@@ -3127,10 +3130,65 @@
                         counter.innerText = '0';
                     }
                 }
+
+                // 新增：渲染美食愛心排行榜
+                if (foodData && likesData) {
+                    renderFoodRankings(foodData, likesData);
+                }
             } catch (error) {
                 console.error("取得統計數字失敗:", error);
                 document.querySelectorAll('.num-counter').forEach(el => el.innerText = '0');
             }
+        }
+
+        // --- 渲染美食愛心排行榜 ---
+        function renderFoodRankings(foodData, likesData) {
+            const container = document.getElementById('food-heart-ranking-container');
+            if (!container) return;
+
+            // 準備資料並合併按讚數
+            const rankedFood = foodData.map(item => {
+                const localLikes = likesData[item.name] ? likesData[item.name].users.length : 0;
+                const totalLikes = Math.max((item.likesCount || 0), localLikes);
+                return { ...item, totalLikes };
+            })
+                .filter(item => item.totalLikes > 0)
+                .sort((a, b) => b.totalLikes - a.totalLikes)
+                .slice(0, 3);
+
+            if (rankedFood.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            const rankingHtml = rankedFood.map((item, index) => {
+                const rankIcons = ['🥇', '🥈', '🥉'];
+                const rankColor = index === 0 ? 'text-yellow-500' : index === 1 ? 'text-gray-400' : index === 2 ? 'text-orange-400' : 'text-gray-300';
+                const bgClass = index === 0 ? 'bg-yellow-50/30 border-yellow-100' : 'bg-white/60 border-gray-100';
+
+                return `
+                    <div onclick="loadPage('food'); setTimeout(()=>updateFoodMap('${(item.address || '').replace(/'/g, "\\'")}', '${(item.name || '').replace(/'/g, "\\'")}', ${item.lat || null}, ${item.lng || null}, '${(item.category || '').replace(/'/g, "\\'")}', true), 500);" 
+                         class="flex items-center gap-3 p-3 rounded-2xl border-2 ${bgClass} hover:bg-white hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer group mb-2 shadow-sm">
+                        <div class="w-8 h-8 flex items-center justify-center font-black ${rankColor} text-lg shrink-0">
+                            ${rankIcons[index]}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-gray-800 text-sm truncate group-hover:text-themePink transition-colors">${item.name}</h4>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="bg-white/30 backdrop-blur-md rounded-[2.5rem] p-5 shadow-cute border-4 border-pink-50/20 w-full animate-fade-in mt-2">
+                    <h3 class="text-lg font-black text-themePink mb-4 flex items-center gap-2 drop-shadow-sm">
+                        <i class="fa-solid fa-crown text-yellow-400"></i> Top Food
+                    </h3>
+                    <div class="flex flex-col">
+                        ${rankingHtml}
+                    </div>
+                </div>
+            `;
         }
 
         function animateSingleCounter(counter, target) {
