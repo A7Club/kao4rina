@@ -2040,7 +2040,7 @@
                 rankedData.sort((a, b) => b.likesCount - a.likesCount);
                 const top3 = rankedData.slice(0, 3);
                 if (top3.length === 0) {
-                    likesContainer.innerHTML = '<div class="text-center text-pink-400 text-xs md:text-sm font-bold py-4 lg:py-6 bg-white/60 backdrop-blur rounded-[1rem] lg:rounded-[1.5rem] border border-white shadow-sm flex flex-col items-center justify-center gap-1.5 lg:gap-2 h-full"><i class="fa-solid fa-heart-crack text-lg lg:text-2xl text-pink-300"></i>Currently Unavailable (暫時從缺)</div>';
+                    likesContainer.innerHTML = '<div class="text-center text-pink-400 text-xs md:text-sm font-bold py-4 lg:py-6 bg-white/60 backdrop-blur rounded-[1rem] lg:rounded-[1.5rem] border border-white shadow-sm flex flex-col items-center justify-center gap-1.5 lg:gap-2 h-full"><i class="fa-solid fa-heart-crack text-lg lg:text-2xl text-pink-300"></i>Vacant 你還沒投票嗎？</div>';
                 } else {
                     let html = '';
                     const medals = ['text-yellow-400', 'text-gray-400', 'text-orange-400'];
