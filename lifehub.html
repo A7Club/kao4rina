@@ -416,9 +416,9 @@
 
             <div class="flex flex-col gap-6 lg:gap-8 items-center w-full">
 
-                <!-- 🔥 置中導航欄 (全螢幕皆為一排小標籤置中) -->
+                <!-- 🔥 置中導航欄 (全透明背景，僅保留內部標籤) -->
                 <div
-                    class="w-full mb-5 max-w-6xl mx-auto relative sticky top-[72px] z-30 flex flex-nowrap justify-center gap-2 sm:gap-4 lg:gap-6 bg-transparent sm:backdrop-blur-md py-2 px-2 sm:py-3 sm:px-4 lg:px-8 lg:py-4 rounded-full sm:shadow-sm overflow-x-auto hide-scrollbar">
+                    class="w-full mb-5 max-w-6xl mx-auto relative sticky top-[72px] z-30 flex flex-nowrap justify-center gap-2 sm:gap-4 lg:gap-6 bg-transparent px-2 py-2 lg:px-8 lg:py-4 rounded-full overflow-x-auto hide-scrollbar">
 
                     <!-- 緊急救援標籤 -->
                     <a href="#section-emergency"
@@ -712,7 +712,7 @@
                 </div>
 
                 <!-- 模組：就學與設籍 -->
-                <div id="mod-school-registry"
+                <div id="mod-school-district"
                     class="bg-white rounded-[2rem] p-6 md:p-8 shadow-cute border-4 border-blue-50 relative overflow-hidden group hover:-translate-y-1 transition-transform">
                     <div
                         class="absolute -right-4 -bottom-4 text-8xl text-blue-100 opacity-40 group-hover:scale-110 transition-transform pointer-events-none">
@@ -2115,13 +2115,25 @@
             if (!val) return;
             const mainInput = document.getElementById('school-address-input');
             if (mainInput) {
+                // 1. 先賦值
                 mainInput.value = val;
-                const targetBlock = document.getElementById('mod-school-registry') || document.getElementById('section-education-hall');
+                const targetBlock = document.getElementById('mod-school-district') || document.getElementById('section-education-hall');
+                
+                // 2. 執行捲動
                 if (targetBlock) {
                     window.location.hash = targetBlock.id;
                     targetBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-                setTimeout(() => checkSchoolDistrict(), 500);
+                
+                // 3. 延遲一點點執行查詢，確保地址已完全填入 DOM
+                setTimeout(() => {
+                    if (document.getElementById('school-address-input').value === val) {
+                        checkSchoolDistrict();
+                    } else {
+                        mainInput.value = val; // 二次確認賦值
+                        checkSchoolDistrict();
+                    }
+                }, 300);
             }
         }
 
