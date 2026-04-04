@@ -339,11 +339,12 @@
             </div>
 
             <!-- 懸浮在右下角的輸入/登入卡片 -->
-            <div class="absolute bottom-6 right-6 z-30 flex flex-col items-end pointer-events-none">
+            <div
+                class="absolute bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-6 z-30 flex flex-col items-center sm:items-end pointer-events-none">
 
                 <!-- 展開的輸入區 (預設隱藏) -->
                 <div id="floating-input-panel"
-                    class="pointer-events-auto bg-white/95 backdrop-blur-md border-2 border-purple-100 shadow-[0_15px_40px_rgba(0,0,0,0.15)] rounded-3xl p-5 w-[calc(100vw-3rem)] sm:w-80 mb-4 hidden flex-col transition-all origin-bottom-right">
+                    class="pointer-events-auto bg-white/95 backdrop-blur-md border-2 border-purple-100 shadow-[0_15px_40px_rgba(0,0,0,0.15)] rounded-3xl p-5 w-[calc(100vw-3rem)] sm:w-80 mb-4 hidden flex-col transition-all origin-bottom sm:origin-bottom-right">
 
                     <!-- 關閉輸入區小按鈕 -->
                     <button onclick="toggleCommentPanel()"
@@ -510,7 +511,7 @@
                                 </h4>
                                 <p
                                     class="text-sm text-sky-700/80 font-bold leading-tight mt-1 mb-1 lg:whitespace-nowrap">
-                                    輸入地址快速對照新學區。</p>
+                                    輸入地址快速查詢學區。</p>
                             </div>
                             <div
                                 class="flex w-full gap-1.5 lg:gap-2 shrink-0 bg-white/60 backdrop-blur p-1.5 lg:p-2 rounded-full border border-white shadow-sm">
@@ -950,7 +951,7 @@
                     </button>
                 </div>
                 <iframe
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSdZoyIK93bZLqAMJ7QaL-LK8Ss_Koz7udwxELNHqG0BpqD3bQ/viewform?embedded=true"
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSdZoyIK93bZLqAMJ7QaL-LK8Ss_Koz7udwxELNHqG0BpqD3bQ/viewform?usp=pp_url&entry.1920834380=%E6%95%99%E8%82%B2"
                     class="w-full h-[700px] sm:h-[850px] rounded-2xl" frameborder="0" marginheight="0"
                     marginwidth="0">載入中…</iframe>
             </div>
