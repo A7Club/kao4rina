@@ -574,22 +574,22 @@
     <div id="share-store-modal" class="fixed inset-0 z-[150] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeShareStoreModal()">
         </div>
-        <div class="bg-white rounded-[2rem] border-4 border-pink-200 w-full max-w-4xl h-[90vh] flex flex-col shadow-2xl transform scale-95 opacity-0 transition-all duration-300 overflow-hidden relative z-10"
+        <div class="bg-white rounded-[2rem] border-4 border-purple-200 w-full max-w-4xl h-[90vh] flex flex-col shadow-2xl transform scale-95 opacity-0 transition-all duration-300 overflow-hidden relative z-10"
             id="share-store-modal-content">
 
             <!-- Modal 標題列 -->
-            <div class="px-6 py-4 border-b-2 border-pink-100 flex justify-between items-center bg-pink-50 shrink-0">
-                <h3 class="text-xl font-black text-themePink flex items-center gap-2 truncate pr-4">
-                    <i class="fa-solid fa-gift shrink-0"></i> <span>分享在地店家資訊</span>
+            <div class="px-6 py-4 border-b-2 border-purple-100 flex justify-between items-center bg-purple-50 shrink-0">
+                <h3 class="text-xl font-black text-themePurple flex items-center gap-2 truncate pr-4">
+                    <i class="fa-solid fa-share-nodes shrink-0"></i> <span>分享在地店家資訊</span>
                 </h3>
                 <div class="flex gap-2">
                     <a href="https://forms.gle/FyEGds4dPWsiEUUZA" target="_blank"
-                        class="w-10 h-10 bg-white border-2 border-pink-100 rounded-full flex items-center justify-center text-themePink hover:bg-themePink hover:text-white transition-all shadow-sm shrink-0"
+                        class="w-10 h-10 bg-white border-2 border-purple-100 rounded-full flex items-center justify-center text-themePurple hover:bg-themePurple hover:text-white transition-all shadow-sm shrink-0"
                         title="在新分頁開啟">
                         <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
                     </a>
                     <button onclick="closeShareStoreModal()"
-                        class="w-10 h-10 bg-white border-2 border-pink-100 rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all shadow-sm shrink-0">
+                        class="w-10 h-10 bg-white border-2 border-purple-100 rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all shadow-sm shrink-0">
                         <i class="fa-solid fa-xmark text-xl"></i>
                     </button>
                 </div>
@@ -598,7 +598,7 @@
             <!-- Modal 內容區 -->
             <div class="flex-1 w-full bg-gray-50 relative">
                 <div id="share-modal-loading"
-                    class="absolute inset-0 flex flex-col items-center justify-center text-themePink bg-gray-50 z-10">
+                    class="absolute inset-0 flex flex-col items-center justify-center text-themePurple bg-gray-50 z-10">
                     <i class="fa-solid fa-spinner fa-spin text-4xl mb-3"></i>
                     <p class="font-bold">載入表單中...</p>
                 </div>
@@ -943,94 +943,31 @@
                         </div>
                     </div>
 
-                    <!-- 🛠️ 獨立報修區塊 -->
-                    <div class="bg-white/70 backdrop-blur-md rounded-[2rem] p-4 lg:p-5 border-2 border-white shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-red-500 text-white flex items-center justify-center shadow-sm">
-                                <i class="fa-solid fa-screwdriver-wrench"></i>
-                            </div>
-                            <div>
-                                <h5 class="text-sm lg:text-base font-black text-gray-800">公共設施報修</h5>
-                                <p class="text-[10px] lg:text-xs text-gray-500 font-bold">桃園 1999 快速申報</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-6 lg:gap-8 pr-2">
-                            <a href="https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC024" target="_blank"
-                                class="flex flex-col items-center gap-1.5 group/btn">
-                                <div
-                                    class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-red-500 border border-red-100 group-hover/btn:bg-red-500 group-hover/btn:text-white transition-all duration-300">
-                                    <i class="fa-solid fa-lightbulb text-sm lg:text-lg"></i>
-                                </div>
-                                <span
-                                    class="text-[9px] lg:text-[10px] font-black text-gray-500 group-hover/btn:text-red-500">路燈</span>
-                            </a>
-                            <a href="https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC017" target="_blank"
-                                class="flex flex-col items-center gap-1.5 group/btn">
-                                <div
-                                    class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-red-600 border border-red-100 group-hover/btn:bg-red-400 group-hover/btn:text-white transition-all duration-300">
-                                    <i class="fa-solid fa-road text-sm lg:text-lg"></i>
-                                </div>
-                                <span
-                                    class="text-[9px] lg:text-[10px] font-black text-gray-500 group-hover/btn:text-red-400">路面</span>
-                            </a>
-                            <a href="https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC034" target="_blank"
-                                class="flex flex-col items-center gap-1.5 group/btn">
-                                <div
-                                    class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-red-600 border border-red-100 group-hover/btn:bg-red-600 group-hover/btn:text-white transition-all duration-300">
-                                    <i class="fa-solid fa-traffic-light text-sm lg:text-lg"></i>
-                                </div>
-                                <span
-                                    class="text-[9px] lg:text-[10px] font-black text-gray-500 group-hover/btn:text-red-600">號誌</span>
-                            </a>
-                        </div>
+
+                    <!-- 🛠️ 公共設施報修按鈕列 (背景明顯色塊組合) -->
+                    <div class="flex items-center justify-between gap-1 sm:gap-4 w-full mt-2 px-2 sm:px-4 lg:px-8">
+                        <a href="https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC024" target="_blank"
+                            class="bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-full w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 aspect-square flex flex-col items-center justify-center gap-0.5 sm:gap-1 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group shrink-0">
+                            <i
+                                class="fa-solid fa-lightbulb text-lg sm:text-xl lg:text-2xl group-hover:scale-110 transition-transform"></i>
+                            <span class="text-[10px] sm:text-sm lg:text-base font-black whitespace-nowrap">修路燈</span>
+                        </a>
+                        <a href="https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC017" target="_blank"
+                            class="bg-gradient-to-br from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white rounded-full w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 aspect-square flex flex-col items-center justify-center gap-0.5 sm:gap-1 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group shrink-0">
+                            <i
+                                class="fa-solid fa-road text-lg sm:text-xl lg:text-2xl group-hover:scale-110 transition-transform"></i>
+                            <span class="text-[10px] sm:text-sm lg:text-base font-black whitespace-nowrap">修路面</span>
+                        </a>
+                        <a href="https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC034" target="_blank"
+                            class="bg-gradient-to-br from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-white rounded-full w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 aspect-square flex flex-col items-center justify-center gap-0.5 sm:gap-1 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group shrink-0">
+                            <i
+                                class="fa-solid fa-traffic-light text-lg sm:text-xl lg:text-2xl group-hover:scale-110 transition-transform"></i>
+                            <span class="text-[10px] sm:text-sm lg:text-base font-black whitespace-nowrap">修號誌</span>
+                        </a>
                     </div>
                 </div>
 
-                <!-- 📝 分享在地店家 (中欄：20%) -->
-                <div class="w-full lg:w-[20%] flex flex-col relative z-20 justify-center items-center py-2 lg:py-0">
-                    <div class="relative w-[90%] sm:w-[60%] lg:w-full group cursor-pointer floating drop-shadow-[0_10px_15px_rgba(255,158,187,0.3)] hover:drop-shadow-[0_15px_20px_rgba(255,158,187,0.5)] transition-all duration-300"
-                        onclick="toggleShareForm()">
 
-                        <!-- 對話框本體 -->
-                        <div
-                            class="bg-white rounded-[3.5rem] p-5 xl:p-6 border-4 border-themePink relative text-center flex flex-col justify-center items-center z-10 aspect-auto xl:aspect-square w-full h-full min-h-[170px] lg:min-h-0 shadow-inner">
-
-                            <!-- 裝飾元素 -->
-                            <div class="absolute top-4 left-6 text-pink-300 text-lg animate-pulse"><i
-                                    class="fa-solid fa-sparkles"></i></div>
-                            <div class="absolute bottom-6 right-6 text-pink-200 text-2xl -rotate-12"><i
-                                    class="fa-solid fa-utensils"></i></div>
-
-                            <!-- 機器人/輪盤代表頭像 (換成愛心食味圖示) -->
-                            <div
-                                class="w-12 h-12 xl:w-14 xl:h-14 bg-gradient-to-br from-themePink to-rose-400 text-white rounded-full flex items-center justify-center text-2xl xl:text-3xl mb-3 shadow-md border-2 border-white lg:-mt-4 relative z-10">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-
-                            <h2 class="text-xl xl:text-2xl font-black text-themePink mb-1 leading-tight relative z-10 tracking-tight">
-                                有好料？<br>快分享！
-                            </h2>
-                            <p class="text-[11px] xl:text-xs text-gray-400 font-bold mb-4 relative z-10">
-                                🙌 推薦愛店 讓大家抽！
-                            </p>
-
-                            <button
-                                class="bg-themePink text-white font-black py-2 px-6 rounded-full group-hover:bg-pink-400 group-hover:scale-105 transition-all text-xs xl:text-sm whitespace-nowrap flex items-center gap-2 mt-auto mb-1 relative z-10">
-                                <i class="fa-solid fa-pen-to-square"></i> 我要推薦
-                            </button>
-                        </div>
-
-                        <!-- 對話框尾巴 (電腦版：向右指拉霸機 - 非置中) -->
-                        <div
-                            class="hidden lg:block absolute top-[65%] -right-[10px] w-6 h-6 bg-white border-t-4 border-r-4 border-themePink transform -translate-y-1/2 rotate-45 z-20 rounded-tr-[4px]">
-                        </div>
-
-                        <!-- 對話框尾巴 (手機版：向下指拉霸機 - 非置中) -->
-                        <div
-                            class="lg:hidden absolute -bottom-[10px] left-[75%] w-6 h-6 bg-white border-b-4 border-r-4 border-themePink transform -translate-x-1/2 rotate-45 z-20 rounded-br-[4px]">
-                        </div>
-                    </div>
-                </div>
 
                 <!-- 🎰 美食部拉霸機 (右欄：35%) -->
                 <div id="food-gacha"
@@ -1194,6 +1131,50 @@
                         </button>
                     </div>
                 </div>
+                <!-- 📝 分享在地店家 (右欄：20%) -->
+                <div
+                    class="w-full lg:w-[20%] flex flex-col items-center lg:items-start lg:pt-20 py-2 lg:py-0 gap-4 relative z-20">
+                    <div class="relative w-[90%] sm:w-[60%] lg:w-full group cursor-pointer floating drop-shadow-[0_10px_15px_rgba(193,151,255,0.3)] hover:drop-shadow-[0_15px_20px_rgba(193,151,255,0.5)] transition-all duration-300"
+                        onclick="toggleShareForm()">
+
+                        <!-- 對話框本體 (漸層背景) -->
+                        <div
+                            class="bg-gradient-to-br from-[#FF9EBB] to-[#C197FF] rounded-[4rem] p-6 lg:p-7 border-4 border-white/50 relative text-center flex flex-col items-center z-10 shadow-xl w-fit min-w-[180px] group-hover:-rotate-2 transition-transform duration-300">
+
+                            <!-- 裝飾元素 -->
+                            <div class="absolute top-4 left-6 text-white/40 text-lg animate-pulse"><i
+                                    class="fa-solid fa-sparkles"></i></div>
+                            <div class="absolute bottom-6 right-6 text-white/30 text-2xl -rotate-12"><i
+                                    class="fa-solid fa-utensils"></i></div>
+
+                            <!-- 機器人/輪盤代表頭像 (愛心圖示) -->
+                            <div
+                                class="w-12 h-12 xl:w-14 xl:h-14 bg-white/20 text-white rounded-full flex items-center justify-center text-2xl xl:text-3xl mt-2 mb-3 shadow-md border-2 border-white/50 lg:-mt-4 relative z-10 glass-effect">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+
+                            <h2
+                                class="text-xl xl:text-2xl font-black text-white mb-1 leading-tight relative z-10 tracking-tight drop-shadow-sm mb-3">
+                                推薦巷口美食！
+                            </h2>
+
+                            <button
+                                class="bg-white text-themePurple font-black py-2 px-6 rounded-full hover:bg-gray-100 hover:scale-105 transition-all text-base whitespace-nowrap flex items-center gap-2 mt-auto mb-1 relative z-10 shadow-sm">
+                                <i class="fa-solid fa-pen-to-square"></i> 我要分享
+                            </button>
+
+                            <!-- 對話框尾巴 (電腦版：向左指拉霸機 - 粉色) -->
+                            <div
+                                class="hidden lg:block absolute top-[65%] -left-[10px] w-6 h-6 bg-[#FF9EBB] border-b-4 border-l-4 border-white/50 transform -translate-y-1/2 rotate-45 z-20 rounded-bl-[4px]">
+                            </div>
+
+                            <!-- 對話框尾巴 (手機版：向上指拉霸機 - 粉色) -->
+                            <div
+                                class="lg:hidden absolute -top-[10px] left-[50%] w-6 h-6 bg-[#FF9EBB] border-t-4 border-l-4 border-white/50 transform -translate-x-1/2 rotate-45 z-20 rounded-tl-[4px]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- 🎉 在地新商家情報 -->
@@ -1206,12 +1187,7 @@
                         class="text-lg sm:text-2xl font-black text-orange-400 flex items-center whitespace-nowrap shrink-0">
                         <i class="fa-solid fa-gift mr-2 sm:mr-3"></i> 在地新商家情報
                     </h2>
-                    <a href="https://line.me/ti/g2/moTJsgUwRu2-lABYleiQLH8ZqhccDhy0alxYlA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
-                        target="_blank"
-                        class="w-fit bg-[#00B900] hover:bg-[#009900] text-white text-[11px] sm:text-xs font-black px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 shrink-0">
-                        <i class="fa-brands fa-line text-sm sm:text-base"></i> <span
-                            class="hidden sm:inline">提供活動資訊</span><span class="sm:hidden">提供資訊</span>
-                    </a>
+
                 </div>
 
                 <!-- 外層使用 Flex 控制電腦版與手機版的佈局切換 -->
@@ -1362,6 +1338,8 @@
                         </div>
                     </div>
                 </div>
+
+
 
 
 
@@ -2855,19 +2833,36 @@
                 return matchingBuses[0].status;
             };
 
-            const transitData = {
-                buses: {
-                    overview: [
-                        createOverviewBusCard('台北市府', '967', getGasBusTime('967', '捷運體育大學'), 'bg-blue-500 text-white', '捷運體育大學站'),
-                        createOverviewBusCard('長庚醫院', '202', getGasBusTime('202', '捷運體育大學'), 'bg-emerald-500 text-white', '捷運體育大學站'),
-                        createOverviewBusCard('長庚社區', 'L317', getGasBusTime('L317', '捷運體育大學'), 'bg-amber-100 text-amber-700 border border-amber-200', '捷運體育大學站'),
-                        createOverviewBusCard('新莊迴龍', '898', getGasBusTime('898', '捷運體育大學'), 'bg-fuchsia-500 text-white shadow-sm border border-fuchsia-600', '捷運體育大學站')
-                    ]
-                }
-            };
+            const busConfigs = [
+                { dir: '台北市府', route: '967', color: 'bg-blue-500 text-white' },
+                { dir: '長庚醫院', route: '202', color: 'bg-emerald-500 text-white' },
+                { dir: '長庚社區', route: 'L317', color: 'bg-amber-100 text-amber-700 border border-amber-200' },
+                { dir: '新莊迴龍', route: '898', color: 'bg-fuchsia-500 text-white shadow-sm border border-fuchsia-600' }
+            ];
+
+            const activeBuses = busConfigs.map(conf => {
+                const time = getGasBusTime(conf.route, '捷運體育大學');
+                return { ...conf, time };
+            }).filter(item => {
+                const t = item.time;
+                return t !== '未發車' && t !== '尚未發車' && t !== '末班已過' && t !== '今日未營運' && t !== '交管不停靠' && t !== '連線異常' && t !== '請更新GAS';
+            });
 
             const overviewContainer = document.getElementById('bus-overview-fastest-container');
-            if (overviewContainer) overviewContainer.innerHTML = transitData.buses.overview.join('');
+            if (overviewContainer) {
+                if (activeBuses.length > 0) {
+                    overviewContainer.innerHTML = activeBuses.map(item => 
+                        createOverviewBusCard(item.dir, item.route, item.time, item.color, '捷運體育大學站')
+                    ).join('');
+                } else {
+                    overviewContainer.innerHTML = `
+                        <div class="py-4 text-center">
+                            <i class="fa-solid fa-bus-simple text-gray-200 text-3xl mb-2 block"></i>
+                            <span class="text-gray-400 font-bold text-sm">目前無班車發車資訊</span>
+                        </div>
+                    `;
+                }
+            }
 
             const timeElement = document.getElementById('mrt-update-time');
             if (timeElement) timeElement.textContent = `更新: ${cache.updateTime}`;
