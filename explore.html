@@ -530,95 +530,94 @@
                 <div class="max-w-5xl mx-auto px-2">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
 
-                    <!-- 左側：空氣品質 (薄荷綠漸層質感) -->
-                    <div
-                        class="bg-gradient-to-br from-teal-50 to-emerald-100 rounded-[2.5rem] border-4 border-white p-5 md:p-7 shadow-cute flex flex-col justify-between relative overflow-hidden group/air hover:shadow-lg transition-all min-w-0 min-h-[160px]">
+                        <!-- 左側：空氣品質 (薄荷綠漸層質感) -->
                         <div
-                            class="absolute -right-4 -bottom-4 text-emerald-200/40 text-7xl md:text-8xl z-0 pointer-events-none group-hover/air:scale-110 transition-transform">
-                            <i class="fa-solid fa-wind"></i>
-                        </div>
-
-                        <div class="flex items-center justify-between w-full relative z-10 mb-4">
-                            <div class="flex items-center gap-2.5">
-                                <div
-                                    class="aqi-icon-container w-8 h-8 md:w-9 md:h-9 rounded-2xl bg-white/80 text-emerald-500 flex items-center justify-center text-xs md:text-sm shrink-0 shadow-sm transition-colors">
-                                    <i class="fa-solid fa-leaf"></i>
-                                </div>
-                                <div class="text-lg text-emerald-800/70 font-black tracking-widest">環境空氣品質
-                                </div>
-                            </div>
+                            class="bg-gradient-to-br from-teal-50 to-emerald-100 rounded-[2.5rem] border-4 border-white p-5 md:p-7 shadow-cute flex flex-col justify-between relative overflow-hidden group/air hover:shadow-lg transition-all min-w-0 min-h-[160px]">
                             <div
-                                class="air-update-time text-[10px] md:text-xs text-emerald-700/50 font-bold bg-white/60 px-2 py-1 rounded-lg backdrop-blur-sm border border-white/40">
-                                更新: --:--</div>
-                        </div>
+                                class="absolute -right-4 -bottom-4 text-emerald-200/40 text-7xl md:text-8xl z-0 pointer-events-none group-hover/air:scale-110 transition-transform">
+                                <i class="fa-solid fa-wind"></i>
+                            </div>
 
-                        <div class="flex items-end justify-between mt-auto relative z-10 w-full pt-4">
-                            <div class="flex flex-col gap-2 w-full">
-                                <div class="flex items-baseline gap-2">
-                                    <span
-                                        class="aqi-status text-4xl md:text-5xl lg:text-6xl font-black text-emerald-500 tracking-tighter leading-none drop-shadow-sm transition-colors">連線</span>
-                                    <span
-                                        class="aqi-value text-lg font-bold text-emerald-600/60 ml-1 transition-colors">(AQI:
-                                        --)</span>
-                                </div>
-                                <div class="flex flex-wrap items-center gap-2 mt-2">
+                            <div class="flex items-center justify-between w-full relative z-10 mb-4">
+                                <div class="flex items-center gap-2.5">
                                     <div
-                                        class="flex items-baseline gap-1.5 bg-white/60 px-3 py-1.5 rounded-xl shadow-sm border border-white/80">
-                                        <span
-                                            class="text-lg font-black text-emerald-700/60 mr-1">PM2.5</span>
-                                        <span
-                                            class="pm25-value text-lg md:text-xl font-black text-emerald-500 leading-none transition-colors">--</span>
+                                        class="aqi-icon-container w-8 h-8 md:w-9 md:h-9 rounded-2xl bg-white/80 text-emerald-500 flex items-center justify-center text-xs md:text-sm shrink-0 shadow-sm transition-colors">
+                                        <i class="fa-solid fa-leaf"></i>
                                     </div>
-                                    <!-- 新增：濕氣 -->
-                                    <div id="humidity-badge" style="display: none;"
-                                        class="flex items-baseline gap-1.5 bg-blue-50/70 px-3 py-1.5 rounded-xl shadow-sm border border-blue-100/60">
-                                        <i class="fa-solid fa-droplet text-xs text-blue-400 mr-0.5"></i>
-                                        <span
-                                            class="humidity-value text-lg md:text-xl font-black text-blue-500 leading-none">--</span><span
-                                            class="text-lg font-black text-blue-400">%</span>
+                                    <div class="text-lg text-emerald-800/70 font-black tracking-widest">環境空氣品質
                                     </div>
-                                    <!-- 新增：起霧通知 -->
-                                    <div id="fog-alert" style="display: none;"
-                                        class="flex items-center gap-2 bg-gray-500/80 px-3 py-2 rounded-xl shadow-sm border border-gray-400 backdrop-blur-sm animate-pulse">
-                                        <i class="fa-solid fa-smog text-xs text-gray-100"></i>
-                                        <span class="text-lg font-black text-white leading-none">起霧注意</span>
+                                </div>
+                                <div
+                                    class="air-update-time text-[10px] md:text-xs text-emerald-700/50 font-bold bg-white/60 px-2 py-1 rounded-lg backdrop-blur-sm border border-white/40">
+                                    更新: --:--</div>
+                            </div>
+
+                            <div class="flex items-end justify-between mt-auto relative z-10 w-full pt-4">
+                                <div class="flex flex-col gap-2 w-full">
+                                    <div class="flex items-baseline gap-2">
+                                        <span
+                                            class="aqi-status text-4xl md:text-5xl lg:text-6xl font-black text-emerald-500 tracking-tighter leading-none drop-shadow-sm transition-colors">連線</span>
+                                        <span
+                                            class="aqi-value text-lg font-bold text-emerald-600/60 ml-1 transition-colors">(AQI:
+                                            --)</span>
+                                    </div>
+                                    <div class="flex flex-wrap items-center gap-2 mt-2">
+                                        <div
+                                            class="flex items-baseline gap-1.5 bg-white/60 px-3 py-1.5 rounded-xl shadow-sm border border-white/80">
+                                            <span class="text-lg font-black text-emerald-700/60 mr-1">PM2.5</span>
+                                            <span
+                                                class="pm25-value text-lg md:text-xl font-black text-emerald-500 leading-none transition-colors">--</span>
+                                        </div>
+                                        <!-- 新增：濕氣 -->
+                                        <div id="humidity-badge" style="display: none;"
+                                            class="flex items-baseline gap-1.5 bg-blue-50/70 px-3 py-1.5 rounded-xl shadow-sm border border-blue-100/60">
+                                            <i class="fa-solid fa-droplet text-xs text-blue-400 mr-0.5"></i>
+                                            <span
+                                                class="humidity-value text-lg md:text-xl font-black text-blue-500 leading-none">--</span><span
+                                                class="text-lg font-black text-blue-400">%</span>
+                                        </div>
+                                        <!-- 新增：起霧通知 -->
+                                        <div id="fog-alert" style="display: none;"
+                                            class="flex items-center gap-2 bg-gray-500/80 px-3 py-2 rounded-xl shadow-sm border border-gray-400 backdrop-blur-sm animate-pulse">
+                                            <i class="fa-solid fa-smog text-xs text-gray-100"></i>
+                                            <span class="text-lg font-black text-white leading-none">起霧注意</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- 右側：天氣預報 -->
-                    <div
-                        class="bg-gradient-to-br from-sky-400 to-blue-500 rounded-[2.5rem] border-4 border-white/40 p-5 md:p-7 shadow-cute flex flex-col justify-between relative overflow-hidden text-white min-w-0 min-h-[160px]">
+                        <!-- 右側：天氣預報 -->
                         <div
-                            class="absolute -right-2 -bottom-2 text-sky-200/30 text-7xl md:text-8xl z-0 pointer-events-none hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-cloud"></i>
-                        </div>
+                            class="bg-gradient-to-br from-sky-400 to-blue-500 rounded-[2.5rem] border-4 border-white/40 p-5 md:p-7 shadow-cute flex flex-col justify-between relative overflow-hidden text-white min-w-0 min-h-[160px]">
+                            <div
+                                class="absolute -right-2 -bottom-2 text-sky-200/30 text-7xl md:text-8xl z-0 pointer-events-none hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-cloud"></i>
+                            </div>
 
-                        <div class="flex flex-col items-start gap-2 relative z-10 w-full mb-4">
-                            <div
-                                class="text-lg font-black text-sky-50 flex items-center bg-black/15 px-3 py-1 rounded-lg backdrop-blur-md shadow-sm border border-white/15 w-max">
-                                <i class="fa-solid fa-location-dot mr-1.5 text-sky-100"></i>桃園龜山
+                            <div class="flex flex-col items-start gap-2 relative z-10 w-full mb-4">
+                                <div
+                                    class="text-lg font-black text-sky-50 flex items-center bg-black/15 px-3 py-1 rounded-lg backdrop-blur-md shadow-sm border border-white/15 w-max">
+                                    <i class="fa-solid fa-location-dot mr-1.5 text-sky-100"></i>桃園龜山
+                                </div>
+                                <div
+                                    class="text-xs font-black text-sky-50 bg-black/15 px-3 py-1 rounded-lg shadow-sm border border-white/15 weather-hl whitespace-nowrap w-max">
+                                    -- / --</div>
                             </div>
-                            <div
-                                class="text-xs font-black text-sky-50 bg-black/15 px-3 py-1 rounded-lg shadow-sm border border-white/15 weather-hl whitespace-nowrap w-max">
-                                -- / --</div>
-                        </div>
 
-                        <div class="flex items-end justify-between relative z-10 w-full mt-auto pt-4">
-                            <div class="flex flex-col">
-                                <span
-                                    class="text-5xl md:text-6xl lg:text-7xl font-black drop-shadow-md weather-temp leading-none tracking-tighter">--°C</span>
-                                <span
-                                    class="text-lg font-black drop-shadow-sm weather-desc tracking-widest mt-3 whitespace-nowrap bg-white/10 px-2 py-0.5 rounded w-fit">讀取中</span>
-                            </div>
-                            <div
-                                class="text-5xl md:text-6xl lg:text-7xl drop-shadow-2xl weather-icon text-white shrink-0 leading-none mb-2">
-                                <i class="fa-solid fa-cloud-sun"></i>
+                            <div class="flex items-end justify-between relative z-10 w-full mt-auto pt-4">
+                                <div class="flex flex-col">
+                                    <span
+                                        class="text-5xl md:text-6xl lg:text-7xl font-black drop-shadow-md weather-temp leading-none tracking-tighter">--°C</span>
+                                    <span
+                                        class="text-lg font-black drop-shadow-sm weather-desc tracking-widest mt-3 whitespace-nowrap bg-white/10 px-2 py-0.5 rounded w-fit">讀取中</span>
+                                </div>
+                                <div
+                                    class="text-5xl md:text-6xl lg:text-7xl drop-shadow-2xl weather-icon text-white shrink-0 leading-none mb-2">
+                                    <i class="fa-solid fa-cloud-sun"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
                     </div>
                 </div>

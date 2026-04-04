@@ -360,9 +360,6 @@
                         <div class="scale-90 transform origin-center">
                             <div id="google-login-btn"></div> <!-- Google Button renders here -->
                         </div>
-                        <button onclick="mockLogin()"
-                            class="mt-4 text-[10px] font-bold text-gray-400 bg-gray-50 hover:bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 shadow-sm"><i
-                                class="fa-solid fa-flask"></i> 預覽測試免授權登入</button>
                     </div>
 
                     <!-- Logged In State -->
@@ -418,7 +415,7 @@
 
                 <!-- 🔥 置中導航欄 (全透明背景，僅保留內部標籤) -->
                 <div
-                    class="w-full mb-5 max-w-6xl mx-auto relative sticky top-[72px] z-30 flex flex-nowrap justify-center gap-2 sm:gap-4 lg:gap-6 bg-transparent px-2 py-2 lg:px-8 lg:py-4 rounded-full overflow-x-auto hide-scrollbar">
+                    class="w-full mb-5 max-w-6xl mx-auto relative sticky top-[72px] z-30 flex flex-wrap justify-center gap-x-2 gap-y-3 sm:gap-4 lg:gap-6 bg-transparent px-2 py-2 lg:px-8 lg:py-4 rounded-full">
 
                     <!-- 緊急救援標籤 -->
                     <a href="#section-emergency"
@@ -512,7 +509,7 @@
                                     <span class="hidden lg:inline">一鍵</span>查詢學區
                                 </h4>
                                 <p
-                                    class="text-[10px] lg:text-sm text-sky-700/80 font-bold leading-tight mt-1 ml-10 lg:whitespace-nowrap">
+                                    class="text-sm text-sky-700/80 font-bold leading-tight mt-1 mb-1 lg:whitespace-nowrap">
                                     輸入地址快速對照新學區。</p>
                             </div>
                             <div
@@ -560,7 +557,7 @@
                         <div class="flex items-center justify-between mb-2 lg:mb-4 relative z-10">
                             <h4 class="text-base lg:text-lg font-black text-purple-600 flex items-center">
                                 <div
-                                    class="w-6 h-6 lg:w-8 lg:h-8 bg-purple-200 text-purple-600 rounded-full flex items-center justify-center mr-2 shadow-sm">
+                                    class="w-6 h-6 lg:w-8 lg:h-8 bg-purple-200 text-purple-600 rounded-full flex items-center justify-center mr-2 mb-5 shadow-sm">
                                     <i class="fa-regular fa-comment-dots text-xs lg:text-sm"></i>
                                 </div>最新家長評論
                             </h4>
@@ -621,7 +618,7 @@
                                 樂園救護中心
                             </h3>
                             <p class="font-bold text-green-50 text-sm sm:text-base max-w-lg leading-relaxed">
-                                您的在地健康守護者！我們整理了 A7 周邊的診所與特約藥局，點選下方分類卡片，快速尋找適合的醫療資源。
+                                您的在地健康守護者！我們整理了 A7 周邊的診所與特約藥局，點選分類卡片更快速尋找適合的醫療資源。
                             </p>
                         </div>
 
@@ -911,8 +908,7 @@
                 class="fa-solid fa-chalkboard-user mr-2 text-themePurple"></i>學習照顧機構</h4>
 
         <!-- 新增分類按鈕區塊 -->
-        <div id="education-filter-container"
-            class="flex gap-2.5 overflow-x-auto hide-scrollbar mt-5 mb-6 px-2 pt-2 pb-3">
+        <div id="education-filter-container" class="flex flex-wrap gap-2.5 mt-5 mb-6 px-2 pt-2 pb-3">
             <!-- 分類按鈕將由 JS 動態生成 -->
         </div>
 
@@ -938,9 +934,26 @@
                         區域內的幼兒園、安親班、才藝補習班等資訊，一起完善在地教育地圖！</p>
                 </div>
             </div>
-            <button onclick="window.location.href='https://forms.gle/FyEGds4dPWsiEUUZA'"
+            <button onclick="toggleEducationForm()" id="edu-form-btn"
                 class="relative z-10 w-full md:w-auto px-6 py-3.5 bg-themeYellow text-gray-800 font-black rounded-full shadow-[0_4px_0_#9D70FF] hover:translate-y-[2px] hover:shadow-[0_2px_0_#9D70FF] active:translate-y-[4px] active:shadow-none transition-all flex items-center justify-center gap-2 text-base shrink-0"><i
                     class="fa-solid fa-hand-sparkles"></i> 提供資訊</button>
+        </div>
+
+        <!-- 🔽 摺疊式表單回填分頁 -->
+        <div id="education-form-panel" class="hidden mt-8 animate-fadeIn">
+            <div
+                class="bg-white rounded-[2.5rem] p-2 sm:p-4 shadow-cute border-4 border-purple-100 overflow-hidden relative">
+                <div class="absolute top-4 right-4 z-20">
+                    <button onclick="toggleEducationForm()"
+                        class="bg-white/80 backdrop-blur hover:bg-white text-gray-400 hover:text-gray-600 w-10 h-10 rounded-full flex items-center justify-center shadow-sm border border-gray-100 transition-all active:scale-95">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSdZoyIK93bZLqAMJ7QaL-LK8Ss_Koz7udwxELNHqG0BpqD3bQ/viewform?embedded=true"
+                    class="w-full h-[700px] sm:h-[850px] rounded-2xl" frameborder="0" marginheight="0"
+                    marginwidth="0">載入中…</iframe>
+            </div>
         </div>
 
         <!-- 1. 緊急救援 -->
@@ -1464,15 +1477,6 @@
                 name: payload.name,
                 email: payload.email,
                 picture: payload.picture
-            };
-            updateLoginUI();
-        }
-
-        function mockLogin() {
-            currentUser = {
-                name: "A7測試住戶",
-                email: "test_user@a7club.com",
-                picture: "https://ui-avatars.com/api/?name=A7&background=C197FF&color=fff"
             };
             updateLoginUI();
         }
@@ -2100,12 +2104,14 @@
                                 <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full ${profile.color} flex items-center justify-center text-sm sm:text-lg shrink-0 border-2 border-white shadow-sm mt-1 z-10">
                                     ${profile.icon}
                                 </div>
-                                <div class="flex-1 bg-white/90 backdrop-blur p-3 sm:p-4 rounded-[1.25rem] sm:rounded-[1.5rem] rounded-tl-sm border border-white shadow-[0_4px_15px_rgba(0,0,0,0.03)] group-hover/comment:shadow-[0_6px_20px_rgba(193,151,255,0.2)] transition-all relative">
-                                    <div class="flex items-center justify-between mb-1.5 border-b border-gray-50 pb-1.5">
-                                        <span class="text-[10px] sm:text-xs font-black text-themePurple truncate max-w-[130px] sm:max-w-[200px]"><i class="fa-solid fa-store mr-1.5 opacity-60"></i>${c.storeName}</span>
-                                        <span class="text-[9px] sm:text-[10px] text-gray-400 font-bold bg-gray-50 px-1.5 py-0.5 rounded">${dateStr}</span>
+                                <div class="flex-1 flex flex-col gap-1.5 overflow-hidden">
+                                    <div class="flex items-center justify-between px-1">
+                                        <span class="text-[10px] sm:text-xs font-black text-themePurple truncate max-w-[150px] sm:max-w-[250px]"><i class="fa-solid fa-store mr-1 opacity-60"></i>${c.storeName}</span>
+                                        <span class="text-[9px] sm:text-[10px] text-gray-400 font-bold px-1">${dateStr}</span>
                                     </div>
-                                    <p class="text-xs sm:text-sm lg:text-base font-bold text-gray-700 line-clamp-2 leading-relaxed">${c.content}</p>
+                                    <div class="bg-white/90 backdrop-blur p-3 sm:p-4 rounded-[1.25rem] sm:rounded-[1.5rem] rounded-tl-sm border border-white shadow-[0_4px_15px_rgba(0,0,0,0.03)] group-hover/comment:shadow-[0_6px_20px_rgba(193,151,255,0.2)] transition-all relative">
+                                        <p class="text-xs sm:text-sm lg:text-base font-bold text-gray-700 line-clamp-2 leading-relaxed">${c.content}</p>
+                                    </div>
                                 </div>
                             </div>
                         `;
@@ -2303,6 +2309,25 @@
             }
             html += '</div>';
             container.innerHTML = html;
+        }
+
+        function toggleEducationForm() {
+            const panel = document.getElementById('education-form-panel');
+            const btn = document.getElementById('edu-form-btn');
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                btn.innerHTML = '<i class="fa-solid fa-chevron-up"></i> 收起表單';
+                btn.classList.replace('bg-themeYellow', 'bg-gray-100');
+                btn.classList.replace('text-gray-800', 'text-gray-400');
+                setTimeout(() => {
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                panel.classList.add('hidden');
+                btn.innerHTML = '<i class="fa-solid fa-hand-sparkles"></i> 提供資訊';
+                btn.classList.replace('bg-gray-100', 'bg-themeYellow');
+                btn.classList.replace('text-gray-400', 'text-gray-800');
+            }
         }
 
         function openStoreModal(name, tag, color, desc, addr, hrs, img, map) {
@@ -2707,6 +2732,18 @@
             if (query) {
                 // 等待資料載入與地圖初始化後再執行
                 setTimeout(() => highlightAndScrollTo(query), 1200);
+            }
+
+            // 處理從 index.html 傳遞過來的學區查詢 (address 參數)
+            const addressQuery = params.get('address');
+            if (addressQuery) {
+                const schoolInput = document.getElementById('school-address-input');
+                if (schoolInput) {
+                    schoolInput.value = addressQuery;
+                    setTimeout(() => {
+                        checkSchoolDistrict();
+                    }, 500); // 延遲等待其他初始化完成
+                }
             }
         });
 
