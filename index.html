@@ -2856,18 +2856,26 @@
                 { dir: '新莊迴龍', route: '898', color: 'bg-fuchsia-500 text-white shadow-sm border border-fuchsia-600' }
             ];
 
-            const activeBuses = busConfigs.map(conf => {
+            const allResolvedBuses = busConfigs.map(conf => {
                 const time = getGasBusTime(conf.route, '捷運體育大學');
-                return { ...conf, time };
-            }).filter(item => {
-                const t = item.time;
-                return t !== '未發車' && t !== '尚未發車' && t !== '末班已過' && t !== '今日未營運' && t !== '交管不停靠' && t !== '連線異常' && t !== '請更新GAS';
+                const isActive = (time !== '未發車' && time !== '尚未發車' && time !== '末班已過' && time !== '今日未營運' && time !== '交管不停靠' && time !== '連線異常' && time !== '請更新GAS');
+                return { ...conf, time, isActive };
             });
+
+            const activeBuses = allResolvedBuses.filter(b => b.isActive);
+            let displayBuses = activeBuses;
+
+            // 如果活耀路線不足 3 條，則補足至 3 條 (從非活耀中取)
+            if (displayBuses.length < 3) {
+                const inactiveBuses = allResolvedBuses.filter(b => !b.isActive);
+                const needed = 3 - displayBuses.length;
+                displayBuses = displayBuses.concat(inactiveBuses.slice(0, needed));
+            }
 
             const overviewContainer = document.getElementById('bus-overview-fastest-container');
             if (overviewContainer) {
-                if (activeBuses.length > 0) {
-                    overviewContainer.innerHTML = activeBuses.map(item =>
+                if (displayBuses.length > 0) {
+                    overviewContainer.innerHTML = displayBuses.map(item =>
                         createOverviewBusCard(item.dir, item.route, item.time, item.color, '捷運體育大學站')
                     ).join('');
                 } else {
