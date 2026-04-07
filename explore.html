@@ -452,7 +452,7 @@
             <div id="mod-report" class="content-module mb-8 hidden" data-shows-on="overview">
                 <!-- Iframe 顯示區域 (由頂端捷徑按鈕觸發) -->
                 <div id="report-iframe-container"
-                    class="hidden opacity-0 transform translate-y-4 transition-all duration-500 max-w-5xl mx-auto px-4 md:px-0">
+                    class="hidden opacity-0 transform translate-y-4 transition-all duration-500 max-w-3xl mx-auto px-4 md:px-0">
                     <div
                         class="bg-white rounded-[2.5rem] border-4 border-amber-200 overflow-hidden shadow-cute relative">
                         <!-- 標題列 -->
@@ -3480,7 +3480,7 @@
 
             if (!container || !guidanceView || !iframeView) return;
 
-            const isGov = url.includes('tycg.gov.tw');
+            const isGov = url.includes('gov.tw');
             titleEl.textContent = title;
             externalLink.href = url;
 
