@@ -170,10 +170,25 @@
             scrollbar-width: none;
         }
 
-        /* 醫療系統雙欄動態延展排版 */
+        /* 醫療系統雙欄動態延展排版 - 升級為側邊欄模式 */
         @media (min-width: 1024px) {
-            #medical-list-container details[open] {
-                grid-column: span 2 / span 2;
+            #medical-list-container {
+                display: grid;
+                grid-template-columns: 280px 1fr;
+                align-items: start;
+                gap: 2rem;
+            }
+
+            .medical-sidebar {
+                position: sticky;
+                top: 100px;
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .medical-content {
+                min-width: 0;
             }
         }
 
@@ -679,9 +694,8 @@
                     </a>
                 </div>
 
-                <div id="medical-list-container" class="grid grid-cols-1 lg:grid-cols-2 gap-5 w-full items-start">
-                    <div
-                        class="w-full lg:col-span-2 text-center text-themeGreen py-12 bg-white rounded-[2.5rem] border-4 border-green-50 shadow-cute">
+                <div id="medical-list-container" class="flex flex-col lg:grid lg:grid-cols-[280px_1fr] gap-6 w-full items-start">
+                    <div class="w-full lg:col-span-2 text-center text-themeGreen py-12 bg-white rounded-[2.5rem] border-4 border-green-50 shadow-cute">
                         <i class="fa-solid fa-spinner fa-spin text-4xl mb-5"></i>
                         <p class="font-bold">正在連線樂園救護中心庫...</p>
                     </div>
@@ -1898,11 +1912,20 @@
             renderMedicalData(data);
         }
 
+        // 新增全域變數追蹤當前啟動的醫療分類
+        let currentMedicalCategory = '醫療中心';
+
+        window.setMedicalFilter = function (cat) {
+            currentMedicalCategory = cat;
+            if (globalMedicalData) {
+                renderMedicalData(globalMedicalData);
+            }
+        }
+
         function renderMedicalData(data) {
             const container = document.getElementById('medical-list-container');
             if (!container) return;
 
-            let html = '';
             const grouped = {};
             data.forEach(i => {
                 const catName = i.category || '一般/其他醫療';
@@ -1916,7 +1939,7 @@
             }
 
             const sortedCats = Object.keys(grouped).sort((a, b) => {
-                const order = ['牙', '小兒', '眼', '診所', '藥'];
+                const order = ['醫療中心', '牙', '小兒', '眼', '診所', '藥'];
                 let aIdx = order.findIndex(o => a.includes(o));
                 let bIdx = order.findIndex(o => b.includes(o));
                 aIdx = aIdx === -1 ? 99 : aIdx;
@@ -1924,71 +1947,102 @@
                 return aIdx - bIdx;
             });
 
-            for (const cat of sortedCats) {
+            // 確保預設的分類存在，若不存在則取第一個
+            if (!grouped[currentMedicalCategory] && sortedCats.length > 0) {
+                currentMedicalCategory = sortedCats[0];
+            }
+
+            // 1. 建立左側導覽 (Sidebar)
+            let sidebarHtml = '<div class="medical-sidebar w-full flex flex-col gap-3">';
+            sortedCats.forEach(cat => {
                 const items = grouped[cat];
                 let catIcon = 'fa-stethoscope';
-                let catColor = 'text-green-600';
-                let catBg = 'bg-green-50';
-                let catBorderColor = 'border-green-500';
-                let btnColor = 'bg-green-500';
-                let btnHoverColor = 'hover:bg-green-600';
-                let ringColor = 'ring-green-300';
+                let activeColor = 'bg-themeGreen text-white shadow-md';
+                let inactiveColor = 'bg-white text-gray-500 hover:bg-green-50 hover:text-themeGreen border border-gray-100';
 
-                if (cat.includes('牙')) { catIcon = 'fa-tooth'; catColor = 'text-blue-600'; catBg = 'bg-blue-50'; catBorderColor = 'border-blue-500'; btnColor = 'bg-blue-500'; btnHoverColor = 'hover:bg-blue-600'; ringColor = 'ring-blue-300'; }
-                else if (cat.includes('小兒') || cat.includes('婦產') || cat.includes('兒童')) { catIcon = 'fa-baby'; catColor = 'text-pink-600'; catBg = 'bg-pink-50'; catBorderColor = 'border-pink-500'; btnColor = 'bg-pink-500'; btnHoverColor = 'hover:bg-pink-600'; ringColor = 'ring-pink-300'; }
-                else if (cat.includes('眼')) { catIcon = 'fa-eye'; catColor = 'text-purple-600'; catBg = 'bg-purple-50'; catBorderColor = 'border-purple-500'; btnColor = 'bg-purple-500'; btnHoverColor = 'hover:bg-purple-600'; ringColor = 'ring-purple-300'; }
-                else if (cat.includes('藥')) { catIcon = 'fa-pills'; catColor = 'text-orange-600'; catBg = 'bg-orange-50'; catBorderColor = 'border-orange-500'; btnColor = 'bg-orange-500'; btnHoverColor = 'hover:bg-orange-600'; ringColor = 'ring-orange-300'; }
-                else if (cat.includes('骨') || cat.includes('復健')) { catIcon = 'fa-bone'; catColor = 'text-yellow-600'; catBg = 'bg-yellow-50'; catBorderColor = 'border-yellow-500'; btnColor = 'bg-yellow-500'; btnHoverColor = 'hover:bg-yellow-600'; ringColor = 'ring-yellow-300'; }
+                if (cat.includes('醫療中心')) catIcon = 'fa-hospital-alt';
+                else if (cat.includes('牙')) catIcon = 'fa-tooth';
+                else if (cat.includes('小兒') || cat.includes('婦產') || cat.includes('兒童')) catIcon = 'fa-baby';
+                else if (cat.includes('眼')) catIcon = 'fa-eye';
+                else if (cat.includes('藥')) catIcon = 'fa-pills';
+                else if (cat.includes('骨') || cat.includes('復健')) catIcon = 'fa-bone';
 
-                html += `
-                    <details name="medical-accordion" id="med-cat-${cat}" class="group bg-white rounded-[1.5rem] shadow-sm border border-gray-200 overflow-hidden transition-all duration-300 open:shadow-lg open:border-transparent open:ring-2 open:${ringColor}" open>
-                        <summary class="list-none flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 transition-colors">
-                            <div class="flex items-center gap-4 sm:gap-6">
-                                <div class="w-14 h-14 sm:w-16 sm:h-16 ${catBg} ${catColor} rounded-2xl flex items-center justify-center text-3xl shadow-inner group-hover:scale-110 transition-transform shrink-0">
-                                    <i class="fa-solid ${catIcon}"></i>
-                                </div>
-                                <div class="flex flex-col text-left">
-                                    <span class="text-xl sm:text-2xl font-black text-gray-800 tracking-wide group-open:${catColor} transition-colors">${cat}</span>
-                                    <span class="text-xs sm:text-sm font-bold text-gray-500 mt-1 flex items-center"><i class="fa-solid fa-house-medical mr-1.5 text-gray-400"></i>共有 ${items.length} 間機構</span>
-                                </div>
-                            </div>
-                            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 group-open:rotate-180 group-open:${btnColor} group-open:text-white transition-all shadow-inner shrink-0">
-                                <i class="fa-solid fa-chevron-down text-lg"></i>
-                            </div>
-                        </summary>
-                        <div class="px-4 sm:px-6 pb-6 bg-gray-50/80 border-t border-gray-100">
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-                                ${items.map(item => `
-                                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md hover:${catBorderColor} transition-all relative overflow-hidden group/clinic flex flex-col h-full">
-                                        <div class="absolute top-0 left-0 right-0 h-1.5 ${btnColor} opacity-0 group-hover/clinic:opacity-100 transition-opacity z-10"></div>
-                                        ${item.img ? `
-                                        <div class="w-full h-32 sm:h-40 rounded-xl overflow-hidden mb-4 shrink-0 relative border border-gray-50">
-                                            <img src="${item.img}" class="w-full h-full object-cover group-hover/clinic:scale-105 transition-transform duration-500" alt="${item.name}">
-                                        </div>
-                                        ` : ''}
-                                        <div class="flex items-start justify-between mb-4 ${item.img ? '' : 'mt-1'} border-b border-gray-50 pb-3 gap-2">
-                                            <div class="flex flex-col">
-                                                <h4 class="font-black text-gray-800 text-lg leading-snug group-hover/clinic:${catColor} transition-colors">${item.name}</h4>
-                                                ${item.license ? `<div class="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex items-center w-fit mt-1.5 border border-gray-200 shadow-sm"><i class="fa-regular fa-id-badge mr-1 text-gray-400"></i>${item.license.includes('字第') ? item.license : '衛醫診字第 ' + item.license}</div>` : ''}
-                                            </div>
-                                        </div>
-                                        <div class="space-y-2.5 mb-5 flex-1">
-                                            <div class="flex items-start text-sm font-bold text-gray-600 bg-gray-50 px-3 py-2 rounded-lg w-full border border-gray-100 group-hover/clinic:bg-white transition-colors">
-                                                <i class="fa-solid fa-location-dot text-gray-400 w-5 text-center mr-1 mt-0.5"></i> 
-                                                <span class="line-clamp-2 leading-relaxed">${item.address || '未提供地址'}</span>
-                                            </div>
-                                        </div>
-                                        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address || item.name)}" target="_blank" class="w-full ${btnColor} ${btnHoverColor} text-white px-4 py-3 rounded-xl text-sm font-black flex items-center justify-center gap-2 transition-all shadow-sm active:scale-95 mt-auto">
-                                            <i class="fa-regular fa-calendar-check"></i> 查看地圖 / 導航
-                                        </a>
-                                    </div>
-                                `).join('')}
+                const isActive = currentMedicalCategory === cat;
+                sidebarHtml += `
+                    <button onclick="setMedicalFilter('${cat.replace(/'/g, "\\'")}')" 
+                        class="w-full flex items-center justify-between p-4 rounded-2xl font-black transition-all ${isActive ? activeColor : inactiveColor} group/nav active:scale-95">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid ${catIcon} text-lg ${isActive ? 'text-white' : 'text-gray-400 group-hover/nav:text-themeGreen'}"></i>
+                            <span class="tracking-wide">${cat}</span>
+                        </div>
+                        <span class="text-[10px] ${isActive ? 'bg-white/20' : 'bg-gray-100'} px-2 py-0.5 rounded-full">${items.length}</span>
+                    </button>
+                `;
+            });
+            sidebarHtml += '</div>';
+
+            // 2. 建立右側內容 (Content Area)
+            const activeItems = grouped[currentMedicalCategory] || [];
+            let catIcon = 'fa-stethoscope';
+            let catColor = 'text-green-600';
+            let catBg = 'bg-green-50';
+            let catBorderColor = 'border-green-500';
+            let btnColor = 'bg-green-500';
+            let btnHoverColor = 'hover:bg-green-600';
+
+            const cat = currentMedicalCategory;
+            if (cat.includes('醫療中心')) { catIcon = 'fa-hospital-alt'; catColor = 'text-emerald-600'; catBg = 'bg-emerald-50'; catBorderColor = 'border-emerald-500'; btnColor = 'bg-emerald-500'; btnHoverColor = 'hover:bg-emerald-600'; }
+            else if (cat.includes('牙')) { catIcon = 'fa-tooth'; catColor = 'text-blue-600'; catBg = 'bg-blue-50'; catBorderColor = 'border-blue-500'; btnColor = 'bg-blue-500'; btnHoverColor = 'hover:bg-blue-600'; }
+            else if (cat.includes('小兒') || cat.includes('婦產') || cat.includes('兒童')) { catIcon = 'fa-baby'; catColor = 'text-pink-600'; catBg = 'bg-pink-50'; catBorderColor = 'border-pink-500'; btnColor = 'bg-pink-500'; btnHoverColor = 'hover:bg-pink-600'; }
+            else if (cat.includes('眼')) { catIcon = 'fa-eye'; catColor = 'text-purple-600'; catBg = 'bg-purple-50'; catBorderColor = 'border-purple-500'; btnColor = 'bg-purple-500'; btnHoverColor = 'hover:bg-purple-600'; }
+            else if (cat.includes('藥')) { catIcon = 'fa-pills'; catColor = 'text-orange-600'; catBg = 'bg-orange-50'; catBorderColor = 'border-orange-500'; btnColor = 'bg-orange-500'; btnHoverColor = 'hover:bg-orange-600'; }
+            else if (cat.includes('骨') || cat.includes('復健')) { catIcon = 'fa-bone'; catColor = 'text-yellow-600'; catBg = 'bg-yellow-50'; catBorderColor = 'border-yellow-500'; btnColor = 'bg-yellow-500'; btnHoverColor = 'hover:bg-yellow-600'; }
+
+            let contentHtml = `
+                <div class="medical-content fade-in">
+                    <div class="bg-white rounded-[2rem] border-2 border-gray-100 p-6 sm:p-8 shadow-sm mb-6 relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 text-gray-50 text-9xl pointer-events-none opacity-50"><i class="fa-solid ${catIcon}"></i></div>
+                        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 relative z-10">
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 ${catBg} ${catColor} rounded-[1.5rem] flex items-center justify-center text-4xl shadow-inner shrink-0"><i class="fa-solid ${catIcon}"></i></div>
+                            <div class="text-center sm:text-left">
+                                <h3 class="text-2xl sm:text-3xl font-black text-gray-800 tracking-wide">${cat}</h3>
+                                <p class="text-sm font-bold text-gray-500 mt-1">目前 A7 重劃區周邊共有 ${activeItems.length} 間相關機構</p>
                             </div>
                         </div>
-                    </details>
-                `;
-            }
-            container.innerHTML = html;
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+                        ${activeItems.map(item => `
+                            <div class="bg-white p-5 rounded-[2rem] border border-gray-200 shadow-sm hover:shadow-md hover:${catBorderColor} transition-all relative overflow-hidden group/clinic flex flex-col h-full">
+                                <div class="absolute top-0 left-0 right-0 h-2 ${btnColor} opacity-0 group-hover/clinic:opacity-100 transition-opacity z-10"></div>
+                                ${item.img ? `
+                                <div class="w-full h-32 sm:h-44 rounded-2xl overflow-hidden mb-4 shrink-0 relative border border-gray-50">
+                                    <img src="${item.img}" class="w-full h-full object-cover group-hover/clinic:scale-105 transition-transform duration-500" alt="${item.name}">
+                                </div>
+                                ` : ''}
+                                <div class="flex items-start justify-between mb-4 ${item.img ? '' : 'mt-2'} border-b border-gray-50 pb-3 gap-2">
+                                    <div class="flex flex-col">
+                                        <h4 class="font-black text-gray-800 text-lg md:text-xl leading-snug group-hover/clinic:${catColor} transition-colors">${item.name}</h4>
+                                        ${item.license ? `<div class="text-[10px] text-gray-500 bg-gray-100 px-2 py-1 rounded-lg flex items-center w-fit mt-2 border border-gray-200 shadow-sm"><i class="fa-regular fa-id-badge mr-1.5 text-gray-400"></i>${item.license.includes('字第') ? item.license : '衛醫診字第 ' + item.license}</div>` : ''}
+                                    </div>
+                                </div>
+                                <div class="space-y-3 mb-6 flex-1">
+                                    <div class="flex items-start text-sm font-bold text-gray-600 bg-gray-50 px-4 py-3 rounded-xl w-full border border-gray-100 group-hover/clinic:bg-white transition-colors">
+                                        <i class="fa-solid fa-location-dot text-gray-400 w-5 text-center mr-2 mt-1"></i> 
+                                        <span class="line-clamp-2 leading-relaxed">${item.address || '未提供地址'}</span>
+                                    </div>
+                                </div>
+                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address || item.name)}" target="_blank" class="w-full ${btnColor} ${btnHoverColor} text-white px-5 py-3.5 rounded-2xl text-base font-black flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 mt-auto">
+                                    <i class="fa-regular fa-calendar-check"></i> 導航 / 官網掛號
+                                </a>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = sidebarHtml + contentHtml;
+
             const countMed = document.getElementById('count-medical');
             if (countMed) countMed.innerHTML = `<i class="fa-solid fa-house-medical mr-1.5 opacity-70 hidden lg:inline"></i>${data.length} 間`;
         }
@@ -2754,33 +2808,33 @@
 
         // 🌟 新增：捲動並開啟醫療分類面板
         function scrollToMedicalCategory(keyword) {
-            const accordions = document.querySelectorAll('details[name="medical-accordion"]');
-            let target = null;
-
             // 支援傳入單一字串或陣列
             const keywords = Array.isArray(keyword) ? keyword : [keyword];
-
-            // 搜尋標題包含任一關鍵字的面板
-            for (let acc of accordions) {
-                // 取得分類標題 span (對應渲染邏輯中的 cat 變數)
-                const catTitle = acc.querySelector('span.text-xl')?.innerText || acc.innerText;
-
-                if (keywords.some(k => catTitle.includes(k))) {
-                    target = acc;
-                    break;
+            
+            if (globalMedicalData) {
+                const grouped = {};
+                globalMedicalData.forEach(i => {
+                    const catName = i.category || '一般/其他醫療';
+                    if (!grouped[catName]) grouped[catName] = [];
+                    grouped[catName].push(i);
+                });
+                
+                const cats = Object.keys(grouped);
+                for (let c of cats) {
+                    if (keywords.some(k => c.includes(k))) {
+                        setMedicalFilter(c);
+                        setTimeout(() => {
+                            const target = document.getElementById('medical-list-container');
+                            if (target) {
+                                const headerOffset = 150;
+                                const elementPosition = target.getBoundingClientRect().top;
+                                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                            }
+                        }, 100);
+                        break;
+                    }
                 }
-            }
-
-            if (target) {
-                target.open = true;
-                setTimeout(() => {
-                    const headerOffset = 150;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                }, 50);
-            } else {
-                console.warn('找不到對應的醫療分類:', keyword);
             }
         }
 
