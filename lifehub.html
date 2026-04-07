@@ -1941,7 +1941,7 @@
                 else if (cat.includes('骨') || cat.includes('復健')) { catIcon = 'fa-bone'; catColor = 'text-yellow-600'; catBg = 'bg-yellow-50'; catBorderColor = 'border-yellow-500'; btnColor = 'bg-yellow-500'; btnHoverColor = 'hover:bg-yellow-600'; ringColor = 'ring-yellow-300'; }
 
                 html += `
-                    <details name="medical-accordion" id="med-cat-${cat}" class="group bg-white rounded-[1.5rem] shadow-sm border border-gray-200 overflow-hidden transition-all duration-300 open:shadow-lg open:border-transparent open:ring-2 open:${ringColor}">
+                    <details name="medical-accordion" id="med-cat-${cat}" class="group bg-white rounded-[1.5rem] shadow-sm border border-gray-200 overflow-hidden transition-all duration-300 open:shadow-lg open:border-transparent open:ring-2 open:${ringColor}" open>
                         <summary class="list-none flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 transition-colors">
                             <div class="flex items-center gap-4 sm:gap-6">
                                 <div class="w-14 h-14 sm:w-16 sm:h-16 ${catBg} ${catColor} rounded-2xl flex items-center justify-center text-3xl shadow-inner group-hover:scale-110 transition-transform shrink-0">
@@ -2023,7 +2023,8 @@
                         phone: phoneIdx !== -1 ? row[phoneIdx]?.trim() : '',
                         target: targetIdx !== -1 ? row[targetIdx]?.trim() : '',
                         img: finalImg,
-                        link: linkIdx !== -1 ? row[linkIdx]?.trim() : ''
+                        link: linkIdx !== -1 ? row[linkIdx]?.trim() : '',
+                        license: row[16] ? row[16].trim() : ''
                     }
                 }).filter(item => item.name);
                 return globalEducationData;
@@ -2294,6 +2295,9 @@
                                 <div class="flex items-center gap-2">${likeBtnHtml}${linkHtml}</div>
                             </div>
                             <h4 class="font-black text-gray-800 text-base md:text-lg mb-3 leading-snug group-hover/card:text-${itemColorBase}-600 transition-colors relative z-10">${item.name}</h4>
+                            <div class="mb-3">
+                                ${item.license ? `<div class="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex items-center w-fit border border-gray-200 shadow-sm"><i class="fa-regular fa-id-badge mr-1 text-gray-400"></i>立案字號：${item.license}</div>` : ''}
+                            </div>
                             <div class="space-y-1.5 flex-1 relative z-10">
                                 ${item.target ? `<div class="text-[11px] sm:text-xs font-bold text-gray-600 flex items-center bg-gray-50 px-2 py-1.5 rounded-lg border border-gray-100"><i class="fa-solid fa-user-check w-4 text-center mr-1 text-${itemColorBase}-400"></i>招收：${item.target}</div>` : ''}
                                 ${item.phone ? `<a href="tel:${item.phone}" class="text-[11px] sm:text-xs font-bold text-gray-600 flex items-center bg-gray-50 px-2 py-1.5 rounded-lg border border-gray-100 hover:bg-${itemColorBase}-50 hover:text-${itemColorBase}-600 transition-colors cursor-pointer w-full"><i class="fa-solid fa-phone w-4 text-center mr-1 text-${itemColorBase}-400 shrink-0"></i>${item.phone}</a>` : ''}
