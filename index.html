@@ -946,17 +946,17 @@
 
                     <!-- 🛠️ 公共設施報修按鈕列 (背景明顯色塊組合) -->
                     <div class="flex items-center justify-center gap-6 sm:gap-8 w-full mt-4 px-4 lg:px-8">
-                        <a href="https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC024" target="_blank"
+                        <a href="https://smartstreetlight.tycg.gov.tw:8443/citizen/" target="_blank"
                             class="bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-[1.5rem] sm:rounded-full w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 aspect-square flex flex-col items-center justify-center gap-1.5 sm:gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1.5 transition-all group shrink-0 border-2 border-white/50">
                             <i
                                 class="fa-solid fa-lightbulb text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform drop-shadow-sm"></i>
                             <span class="text-xs sm:text-base lg:text-lg font-black whitespace-nowrap">修路燈</span>
                         </a>
-                        <a href="https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC017" target="_blank"
+                        <a href="https://generalwaste.tyoem.gov.tw/Prosecution/Create" target="_blank"
                             class="bg-gradient-to-br from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white rounded-[1.5rem] sm:rounded-full w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 aspect-square flex flex-col items-center justify-center gap-1.5 sm:gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1.5 transition-all group shrink-0 border-2 border-white/50">
                             <i
-                                class="fa-solid fa-road text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform drop-shadow-sm"></i>
-                            <span class="text-xs sm:text-base lg:text-lg font-black whitespace-nowrap">修路面</span>
+                                class="fa-solid fa-trash-can text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform drop-shadow-sm"></i>
+                            <span class="text-xs sm:text-base lg:text-lg font-black whitespace-nowrap">環境檢舉</span>
                         </a>
                         <a href="https://taotalk.tycg.gov.tw/main/PageCtrl?p=p_2&sc_Id=SC034" target="_blank"
                             class="bg-gradient-to-br from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-white rounded-[1.5rem] sm:rounded-full w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 aspect-square flex flex-col items-center justify-center gap-1.5 sm:gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1.5 transition-all group shrink-0 border-2 border-white/50">
@@ -2178,7 +2178,7 @@
 
                 // 1. 探索頁面匹配結果 (先暫存，稍後放最後)
                 let exploreResultHtml = '';
-                const exploreKeywords = ['探索', 'a7', '建案', '社群', '討論', '房子', '社區', '買房', '發展', '區域', '新聞', '捷運', '機捷', '公車', '客運', '報修', '路面', '號誌', '路燈', '天氣', '空氣', 'AQI', '變一', '變二', '變三', '文學路', '牛角坡路', '體育大學', '運動中心', '國民運動中心'];
+                const exploreKeywords = ['探索', 'a7', '建案', '社群', '討論', '房子', '社區', '買房', '發展', '區域', '新聞', '捷運', '機捷', '公車', '客運', '報修', '環境', '檢舉', '號誌', '路燈', '天氣', '空氣', 'AQI', '變一', '變二', '變三', '文學路', '牛角坡路', '體育大學', '運動中心', '國民運動中心'];
                 const matchExploreKw = exploreKeywords.some(k => k.toLowerCase().includes(q) || q.includes(k.toLowerCase()));
 
                 if (exploreSnippet || matchExploreKw) {
