@@ -477,27 +477,26 @@
                         </div>
                     </a>
 
-                    <!-- 教育學習標籤 -->
-                    <a href="#section-education-hall"
-                        class="group relative flex items-center justify-center p-1.5 pr-3 lg:p-3 lg:px-6 rounded-full bg-white border-2 lg:border-4 border-blue-100 hover:border-blue-300 hover:-translate-y-1 hover:shadow-md transition-all shadow-sm shrink-0 overflow-hidden">
+                    <!-- 教育學習標籤 (拆分為學校與補教) -->
+                    <div
+                        class="group relative flex items-center justify-center p-1.5 pr-3 lg:p-3 lg:px-6 rounded-full bg-white border-2 lg:border-4 border-blue-100 shadow-sm shrink-0 overflow-hidden">
                         <div
-                            class="absolute -right-2 -bottom-2 lg:-right-3 lg:-bottom-3 text-blue-50 text-4xl lg:text-5xl opacity-80 group-hover:scale-110 transition-transform">
+                            class="absolute -right-2 -bottom-2 lg:-right-3 lg:-bottom-3 text-blue-50 text-4xl lg:text-5xl opacity-80 group-hover:scale-110 transition-transform pointer-events-none">
                             <i class="fa-solid fa-school"></i>
                         </div>
                         <div class="flex items-center gap-1.5 lg:gap-2.5 relative z-10">
                             <div
-                                class="w-7 h-7 lg:w-11 lg:h-11 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 shrink-0 group-hover:bg-blue-500 group-hover:text-white transition-colors shadow-inner">
+                                class="w-7 h-7 lg:w-11 lg:h-11 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 shrink-0 shadow-inner">
                                 <i class="fa-solid fa-school text-xs lg:text-xl"></i>
                             </div>
-                            <div class="flex items-center gap-1.5 lg:gap-2">
-                                <span
-                                    class="font-black text-base lg:text-lg text-gray-800 group-hover:text-blue-600 transition-colors tracking-wide whitespace-nowrap">教育學習</span>
-                                <span id="count-education"
-                                    class="bg-white text-blue-600 text-[10px] lg:text-sm font-black px-1.5 lg:px-2.5 py-0.5 lg:py-1 rounded shadow-sm border border-blue-100 flex items-center whitespace-nowrap"><i
-                                        class="fa-solid fa-spinner fa-spin mr-1 opacity-70 hidden lg:inline"></i>載入中</span>
+                            <div class="flex flex-col lg:flex-row lg:items-center gap-1.5 lg:gap-2">
+                                <span class="font-black text-xs lg:text-lg text-gray-400 tracking-wide whitespace-nowrap">教育學習</span>
+                                <div id="count-education" class="flex items-center gap-1 lg:gap-2">
+                                    <i class="fa-solid fa-spinner fa-spin text-blue-400"></i>
+                                </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
 
@@ -2224,7 +2223,14 @@
             if (countEdu) {
                 const schoolCount = (typeof PUBLIC_SCHOOLS !== 'undefined') ? PUBLIC_SCHOOLS.length : 8;
                 const cramCount = data.length;
-                countEdu.innerHTML = `<i class="fa-solid fa-school mr-1.5 opacity-70 hidden lg:inline"></i>學校 ${schoolCount} 間、補教 ${cramCount} 間`;
+                countEdu.innerHTML = `
+                    <a href="#section-education-hall" class="bg-white text-blue-600 text-[10px] lg:text-sm font-black px-1.5 lg:px-2.5 py-0.5 lg:py-1 rounded shadow-sm border border-blue-100 hover:bg-blue-500 hover:text-white transition-colors flex items-center whitespace-nowrap">
+                        學校 ${schoolCount} 間
+                    </a>
+                    <a href="#section-education-list" class="bg-white text-blue-600 text-[10px] lg:text-sm font-black px-1.5 lg:px-2.5 py-0.5 lg:py-1 rounded shadow-sm border border-blue-100 hover:bg-blue-500 hover:text-white transition-colors flex items-center whitespace-nowrap">
+                        補教 ${cramCount} 間
+                    </a>
+                `;
             }
 
             const grouped = {};
