@@ -1,0 +1,368 @@
+import React, { useState, useEffect } from 'react';
+import { Link, Copy, ExternalLink, Check, AlertCircle, Loader2, BookOpen, PenTool, Hash, Sparkles, ArrowRight, Settings } from 'lucide-react';
+
+export default function App() {
+  const [links, setLinks] = useState([]);
+  const [longUrl, setLongUrl] = useState('');
+  const [slashTag, setSlashTag] = useState('');
+  const [error, setError] = useState('');
+  const [copiedTag, setCopiedTag] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
+  const [redirecting, setRedirecting] = useState(false);
+  
+  // 您的 Google Apps Script API 網址
+  const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbzux6h7rNY0MyzcGm3gCLs_m9Zw7JgYisjynJRufPDwsTMlnERizBzEw8WmyplLUeQKjQ/exec';
+  
+  // 🌟 您可以在這裡設定您的正式網域，讓顯示更精簡 🌟
+  // 例如改為 'a7club.life' 或 'yourname.github.io'
+  const DISPLAY_DOMAIN = 'a7club.life'; 
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tag = params.get('s');
+    
+    if (tag) {
+      setRedirecting(true);
+      performRedirect(tag);
+    } else {
+      fetchLinks();
+    }
+  }, []);
+
+  const performRedirect = async (tag) => {
+    try {
+      const response = await fetch(GAS_API_URL);
+      const data = await response.json();
+      const target = data.find(l => l.tag === tag);
+      
+      if (target) {
+        fetch(GAS_API_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({ action: 'click', tag: tag })
+        });
+        window.location.replace(target.originalUrl);
+      } else {
+        setRedirecting(false);
+        setError('指定されたリンクは存在しません (找不到該短連結)。');
+        fetchLinks();
+      }
+    } catch (err) {
+      setRedirecting(false);
+      setError('接続エラーが発生しました。');
+    }
+  };
+
+  const fetchLinks = async () => {
+    try {
+      const response = await fetch(GAS_API_URL);
+      const data = await response.json();
+      setLinks(Array.isArray(data) ? data : []);
+    } catch (err) {
+      console.error('Data fetch failed', err);
+    } finally {
+      setIsFetching(false);
+    }
+  };
+
+  const generateRandomTag = () => Math.random().toString(36).substring(2, 8);
+
+  const isValidUrl = (string) => {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!longUrl) return setError('元の URL を入力してください。');
+    if (!isValidUrl(longUrl)) return setError('正しい形式の URL を入力してください。');
+
+    const finalTag = slashTag.trim() || generateRandomTag();
+    const tagRegex = /^[a-zA-Z0-9-]+$/;
+    
+    if (!tagRegex.test(finalTag)) {
+      return setError('Slashtag は英數字とハイフンのみ使用できます。');
+    }
+
+    if (links.some(link => link.tag === finalTag)) {
+      return setError('この Slashtag は既に使用されています。');
+    }
+
+    setIsLoading(true);
+
+    // 取得當前的網址路徑，確保測試時也能跳轉
+    const currentPath = window.location.origin + window.location.pathname;
+
+    const newLink = {
+      id: Date.now().toString(),
+      originalUrl: longUrl,
+      tag: finalTag,
+      // 實際功能網址 (用於預覽測試)
+      realShortUrl: `${currentPath}?s=${finalTag}`, 
+      // 漂亮顯示網址 (用於列表展示)
+      displayShortUrl: `${DISPLAY_DOMAIN}/?s=${finalTag}`,
+      clicks: 0,
+      createdAt: new Date().toLocaleString('ja-JP'),
+    };
+
+    try {
+      await fetch(GAS_API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({ action: 'create', ...newLink, shortUrl: newLink.displayShortUrl }),
+      });
+      
+      setTimeout(() => {
+        setLinks([newLink, ...links]);
+        setLongUrl('');
+        setSlashTag('');
+        setIsLoading(false);
+      }, 1000);
+      
+    } catch (err) {
+      setError('サーバーとの通信に失敗しました。');
+      setIsLoading(false);
+    }
+  };
+
+  const handleCopy = (url, tag) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = url;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      setCopiedTag(tag);
+      setTimeout(() => setCopiedTag(null), 2000);
+    } catch (err) {
+      console.error('Copy failed', err);
+    }
+    document.body.removeChild(textArea);
+  };
+
+  const handleVisit = async (id, url, tag) => {
+    setLinks(links.map(link => 
+      link.id === id ? { ...link, clicks: link.clicks + 1 } : link
+    ));
+    window.open(url, '_blank', 'noopener,noreferrer');
+
+    try {
+      await fetch(GAS_API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({ action: 'click', tag: tag })
+      });
+    } catch (err) {
+      console.error('Click record failed', err);
+    }
+  };
+
+  if (redirecting) {
+    return (
+      <div className="min-h-screen bg-[#faf9f6] flex flex-col items-center justify-center p-4 text-center font-serif">
+        <Loader2 className="w-10 h-10 text-[#7a8a7c] animate-spin mb-6" />
+        <h1 className="text-xl tracking-[0.2em] text-[#4a4a4a] mb-2 font-medium">目的地へ移動中</h1>
+        <p className="text-sm text-[#8c8c8c] tracking-wider italic">Connecting to the destination...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#faf9f6] text-[#4a4a4a] relative pb-20 font-serif selection:bg-[#e0e5df]">
+      <div className="h-1.5 w-full bg-[#7a8a7c]"></div>
+
+      <header className="pt-12 pb-10 px-6 border-b border-[#e5e5e5] mb-12">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-end justify-between gap-6">
+          <div className="flex flex-col items-start">
+            <span className="text-[10px] tracking-[0.4em] text-[#b0b0b0] uppercase mb-3 font-sans font-bold">The Art of Connection</span>
+            <h1 className="text-4xl font-bold tracking-[0.1em] text-[#333] flex items-center gap-2">
+              LinkCut<span className="text-[#7a8a7c]">.</span>
+            </h1>
+          </div>
+          <div className="text-right hidden md:block border-l border-[#eee] pl-6">
+            <p className="text-[10px] text-[#8c8c8c] tracking-[0.15em] leading-relaxed uppercase">
+              Current Domain:<br/>
+              <span className="text-[#333] font-bold">{DISPLAY_DOMAIN}</span>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-5xl mx-auto px-6">
+        
+        <div className="grid lg:grid-cols-12 gap-16 items-start">
+          
+          <div className="lg:col-span-5 space-y-12">
+            <section>
+              <div className="flex items-center gap-2 mb-10">
+                <PenTool className="w-4 h-4 text-[#7a8a7c]" />
+                <h2 className="text-xs tracking-[0.3em] text-[#4a4a4a] uppercase font-bold">New Archive</h2>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-10">
+                <div className="space-y-4">
+                  <label className="block text-[11px] font-bold tracking-[0.2em] text-[#8c8c8c] uppercase">
+                    Target URL
+                  </label>
+                  <div className="relative group">
+                    <input
+                      type="text"
+                      value={longUrl}
+                      onChange={(e) => setLongUrl(e.target.value)}
+                      className="w-full bg-transparent border-b border-[#d1d1d1] pb-3 text-sm focus:outline-none focus:border-[#7a8a7c] transition-all placeholder:text-[#e0e0e0] font-sans"
+                      placeholder="https://example.com/long-url"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <label className="block text-[11px] font-bold tracking-[0.2em] text-[#8c8c8c] uppercase">
+                    Custom Slashtag
+                  </label>
+                  <div className="flex items-end border-b border-[#d1d1d1] focus-within:border-[#7a8a7c] transition-all pb-3 font-sans">
+                    <span className="text-xs text-[#b0b0b0] pr-1 tracking-tight">
+                      {DISPLAY_DOMAIN}/?s=
+                    </span>
+                    <input
+                      type="text"
+                      value={slashTag}
+                      onChange={(e) => setSlashTag(e.target.value)}
+                      className="flex-1 bg-transparent text-sm focus:outline-none placeholder:text-[#e0e0e0]"
+                      placeholder="my-tag"
+                    />
+                  </div>
+                </div>
+
+                {error && (
+                  <div className="bg-[#fffafa] border border-[#f5e6e6] text-[#c94c4c] px-4 py-4 text-xs tracking-wider flex items-start gap-3">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span className="leading-relaxed">{error}</span>
+                  </div>
+                )}
+
+                <button
+                  disabled={isLoading || isFetching}
+                  className="group relative w-full bg-[#333] hover:bg-[#4a4a4a] text-[#faf9f6] text-[11px] tracking-[0.3em] uppercase py-5 transition-all flex items-center justify-center gap-3 overflow-hidden shadow-sm active:translate-y-px"
+                >
+                  {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                  {isLoading ? 'Processing...' : 'Generate Link'}
+                </button>
+              </form>
+            </section>
+
+            <section className="bg-[#f2f1ed] p-8 border border-[#e5e5e2]">
+              <div className="flex items-center gap-2 mb-4">
+                <Settings className="w-3.5 h-3.5 text-[#7a8a7c]" />
+                <h3 className="text-xs font-bold tracking-[0.2em] text-[#4a4a4a] uppercase">Studio Note</h3>
+              </div>
+              <p className="text-[11px] text-[#7a7a7a] leading-loose tracking-wider">
+                現在のドメインは <span className="font-bold text-[#333]">{DISPLAY_DOMAIN}</span> に設定されています。
+                正式な運用時は、ご自身のサイトに合わせて代碼内の定数を調整してください。
+              </p>
+            </section>
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="flex items-center justify-between mb-10 pb-4 border-b border-[#333]">
+              <div className="flex items-center gap-3">
+                <BookOpen className="w-5 h-5 text-[#333]" />
+                <h2 className="text-xs tracking-[0.3em] text-[#333] uppercase font-bold">Collection</h2>
+              </div>
+              <span className="text-[11px] font-sans font-bold text-[#b0b0b0] bg-[#eee] px-2 py-0.5 rounded">
+                {links.length}
+              </span>
+            </div>
+            
+            {isFetching ? (
+              <div className="py-32 flex flex-col items-center justify-center text-[#b0b0b0]">
+                <Loader2 className="w-8 h-8 animate-spin mb-4 opacity-30" />
+                <span className="text-[10px] tracking-[0.3em] uppercase">Fetching archives...</span>
+              </div>
+            ) : links.length === 0 ? (
+              <div className="border border-dashed border-[#d1d1d1] py-32 flex flex-col items-center justify-center text-[#b0b0b0] bg-[#fdfcfb]/50">
+                <Hash className="w-8 h-8 mb-4 opacity-20" />
+                <span className="text-[10px] tracking-[0.3em] uppercase">No archives yet</span>
+              </div>
+            ) : (
+              <div className="divide-y divide-[#eee]">
+                {links.map((link) => (
+                  <div key={link.id} className="py-8 first:pt-0 group">
+                    <div className="flex flex-col md:flex-row gap-6 justify-between">
+                      <div className="flex-1 min-w-0 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <span className="text-[10px] font-bold text-[#7a8a7c] bg-[#eef2ef] px-1.5 py-0.5 rounded-sm">
+                            {link.tag}
+                          </span>
+                          <span className="text-[10px] text-[#ccc] font-sans">
+                            {link.createdAt.split(' ')[0]}
+                          </span>
+                        </div>
+                        
+                        <div className="flex flex-col space-y-1">
+                          <a 
+                            href={link.realShortUrl || link.shortUrl} 
+                            onClick={(e) => { e.preventDefault(); handleVisit(link.id, link.originalUrl, link.tag); }}
+                            className="text-xl text-[#333] hover:text-[#7a8a7c] transition-colors tracking-tight font-sans font-medium break-all"
+                          >
+                            {link.displayShortUrl || link.shortUrl.replace(/^https?:\/\//, '')}
+                          </a>
+                          <div className="flex items-center gap-2 text-[10px] text-[#a0a0a0] font-sans truncate">
+                            <ArrowRight size={10} className="text-[#d1d1d1]" />
+                            <span className="truncate italic">{link.originalUrl}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-8 md:gap-6 self-end md:self-center">
+                        <div className="text-right">
+                          <p className="text-[9px] tracking-[0.2em] text-[#b0b0b0] uppercase mb-0.5 font-bold">Hits</p>
+                          <p className="text-lg font-sans font-light text-[#555]">{link.clicks}</p>
+                        </div>
+
+                        <div className="flex items-center gap-1">
+                          <button 
+                            onClick={() => handleCopy(link.displayShortUrl || link.shortUrl, link.tag)}
+                            className={`p-3 rounded-full transition-all ${copiedTag === link.tag ? 'bg-[#7a8a7c] text-white shadow-md' : 'text-[#8c8c8c] hover:bg-white hover:text-[#333]'}`}
+                            title="Copy link"
+                          >
+                            {copiedTag === link.tag ? <Check size={18} /> : <Copy size={18} />}
+                          </button>
+                          <button
+                            onClick={() => handleVisit(link.id, link.originalUrl, link.tag)}
+                            className="p-3 text-[#8c8c8c] hover:bg-white hover:text-[#333] rounded-full transition-all"
+                            title="Open link"
+                          >
+                            <ExternalLink size={18} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
+
+      <footer className="mt-32 pt-12 pb-16 border-t border-[#e5e5e5] px-6">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-[10px] tracking-[0.2em] text-[#b0b0b0] uppercase font-bold font-sans">
+            Minimalist Shortener System
+          </div>
+          <div className="flex gap-8">
+            <span className="text-[10px] text-[#b0b0b0] uppercase tracking-widest border-b border-[#ddd] pb-1 cursor-pointer">Archive</span>
+            <span className="text-[10px] text-[#b0b0b0] uppercase tracking-widest border-b border-[#ddd] pb-1 cursor-pointer">Stats</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
