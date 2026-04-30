@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>柒樂部 | 管理員專屬縮網址</title>
+    <title>柒樂部 | 管理專屬縮網址</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入黑體(內文)與明體(標題/文青感) -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
@@ -275,6 +275,30 @@
                 </div>`;
         }
 
+        // --- 新增：自動抓取網頁標題的功能 ---
+        async function fetchTitleFallback(url) {
+            try {
+                // 透過 allorigins 公共代理繞過 CORS 抓取網頁原始碼
+                const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                const data = await res.json();
+                const match = data.contents.match(/<title[^>]*>([^<]+)<\/title>/i);
+                if (match && match[1]) {
+                    // 簡易解碼 HTML Entity (例如 &amp;)
+                    const txt = document.createElement("textarea");
+                    txt.innerHTML = match[1];
+                    return txt.value.trim();
+                }
+            } catch (e) {
+                // 若抓取失敗則忽略
+            }
+            // 若抓不到標題，則優雅降級顯示網域名稱
+            try {
+                return new URL(url).hostname;
+            } catch (e) {
+                return url;
+            }
+        }
+
         const submitBtn = document.getElementById('submitBtn');
         submitBtn.addEventListener('click', async () => {
             const longUrl = document.getElementById('longUrl').value.trim();
@@ -289,18 +313,23 @@
 
             errorMsg.classList.add('hidden');
             submitBtn.disabled = true;
-            document.getElementById('btnText').textContent = "印製中... 🖨️";
+            document.getElementById('btnText').textContent = "印製與抓取中... 🖨️";
 
             try {
                 const params = new URLSearchParams();
                 params.append('url', longUrl);
                 params.append('tag', tag);
 
-                const response = await fetch(GAS_API_URL, { 
-                    method: 'POST', 
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: params 
-                });
+                // 利用 Promise.all 同時執行 GAS 儲存與網頁標題抓取，不拖慢速度
+                const [response, pageTitle] = await Promise.all([
+                    fetch(GAS_API_URL, { 
+                        method: 'POST', 
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: params 
+                    }),
+                    fetchTitleFallback(longUrl)
+                ]);
+
                 const result = await response.json();
 
                 if (result.status === "success") {
@@ -308,7 +337,8 @@
                     document.getElementById('shortUrl').value = finalUrl;
                     document.getElementById('resultArea').classList.remove('hidden');
                     
-                    saveToHistory(result.tag, finalUrl, longUrl);
+                    // 傳入抓取到的 pageTitle
+                    saveToHistory(result.tag, finalUrl, longUrl, pageTitle);
                 } else {
                     errorMsg.textContent = "※ " + (result.message || "發生了一點小錯誤 🥲");
                     errorMsg.classList.remove('hidden');
@@ -344,11 +374,12 @@
         // --- 歷史紀錄邏輯 ---
         function getHistory() { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
 
-        function saveToHistory(tag, shortUrl, longUrl) {
+        function saveToHistory(tag, shortUrl, longUrl, pageTitle) {
             let history = getHistory();
             const exists = history.find(item => item.tag === tag);
             if (!exists) {
-                history.unshift({ tag, shortUrl, longUrl, clicks: 0, date: new Date().toLocaleDateString() });
+                // 將標題 title 存入本地端
+                history.unshift({ tag, shortUrl, longUrl, title: pageTitle, clicks: 0, date: new Date().toLocaleDateString() });
                 if(history.length > 10) history.pop(); 
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
                 renderHistory();
@@ -381,7 +412,8 @@
                             <a href="${item.shortUrl}" target="_blank" class="text-sm font-black text-[#5C5454] hover:text-[#BDE0FE] truncate hover:underline font-serif">/${item.tag}</a>
                             <span class="text-[10px] bg-[#FFFDF9] text-[#A69F98] px-2 py-0.5 rounded border border-[#F0EAE1] ml-1">${item.date}</span>
                         </div>
-                        <p class="text-xs text-[#A69F98] truncate ml-5">${item.longUrl}</p>
+                        <!-- 修改這裡：優先顯示抓取到的標題，懸浮時可查看原始網址 -->
+                        <p class="text-xs text-[#A69F98] truncate ml-5" title="${item.longUrl}">${item.title || item.longUrl}</p>
                     </div>
                     <div class="flex flex-col items-center justify-center bg-[#FFFDF9] px-3 py-2 rounded-lg min-w-[55px]">
                         <span class="text-[9px] font-bold text-[#A69F98] tracking-widest uppercase mb-1">Hits</span>
