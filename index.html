@@ -410,6 +410,9 @@
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-[#FFC2D1] text-xs">🔗</span>
                             <a href="${item.shortUrl}" target="_blank" class="text-sm font-black text-[#5C5454] hover:text-[#BDE0FE] truncate hover:underline font-serif">?${item.tag}</a>
+                            <button class="history-copy-btn text-[#A69F98] hover:text-[#E2CBF7] transition-colors focus:outline-none" title="複製短網址">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            </button>
                             <span class="text-[10px] bg-[#FFFDF9] text-[#A69F98] px-2 py-0.5 rounded border border-[#F0EAE1] ml-1">${item.date}</span>
                         </div>
                         <!-- 修改這裡：優先顯示抓取到的標題，懸浮時可查看原始網址 -->
@@ -421,6 +424,28 @@
                     </div>
                 `;
                 listContainer.appendChild(li);
+
+                // 為每個歷史紀錄項目的複製按鈕綁定點擊事件
+                const copyHistoryBtn = li.querySelector('.history-copy-btn');
+                copyHistoryBtn.addEventListener('click', function() {
+                    const input = document.createElement('input');
+                    input.value = item.shortUrl;
+                    document.body.appendChild(input);
+                    input.select();
+                    try {
+                        document.execCommand('copy');
+                        const originalHTML = this.innerHTML;
+                        this.innerHTML = '<span class="text-xs text-[#BDE0FE] font-bold">OK!</span>';
+                        this.classList.remove('hover:text-[#E2CBF7]');
+                        setTimeout(() => { 
+                            this.innerHTML = originalHTML; 
+                            this.classList.add('hover:text-[#E2CBF7]');
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Copy failed');
+                    }
+                    document.body.removeChild(input);
+                });
             });
         }
 
