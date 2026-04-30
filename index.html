@@ -3,77 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>柒樂部 | 日系簡約縮網址</title>
+    <title>柒樂部 | 繽紛樂園縮網址</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #faf9f6; overflow-x: hidden; }
-        .macaron-blob { position: absolute; filter: blur(80px); z-index: -1; opacity: 0.6; animation: float 10s ease-in-out infinite; }
-        .blob-pink { background-color: #ffb3ba; width: 300px; height: 300px; top: -50px; left: -50px; }
-        .blob-blue { background-color: #bae1ff; width: 250px; height: 250px; bottom: 10%; right: -20px; animation-delay: 2s; }
-        .blob-yellow { background-color: #ffffba; width: 200px; height: 200px; top: 40%; left: 20%; animation-delay: 4s; }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        .btn-macaron { background: linear-gradient(135deg, #baffc9 0%, #bae1ff 100%); transition: all 0.3s ease; }
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            /* 日系遊樂園點點背景 */
+            background-color: #FDFBF7;
+            background-image: radial-gradient(#E8E3D9 2px, transparent 2px);
+            background-size: 30px 30px;
+            overflow-x: hidden; 
+        }
+
+        /* 繽紛幾何漂浮裝飾 */
+        .shape { position: absolute; z-index: -1; opacity: 0.8; animation: float 8s ease-in-out infinite; }
+        .shape-circle { width: 120px; height: 120px; border-radius: 50%; background: #FFAAA5; top: 10%; left: 5%; box-shadow: 0 10px 30px rgba(255, 170, 165, 0.4); }
+        .shape-triangle { width: 0; height: 0; border-left: 60px solid transparent; border-right: 60px solid transparent; border-bottom: 100px solid #A8E6CF; bottom: 15%; right: 8%; animation-delay: 2s; filter: drop-shadow(0 10px 20px rgba(168, 230, 207, 0.4)); }
+        .shape-pill { width: 80px; height: 160px; border-radius: 40px; background: #AEE1EA; top: 40%; right: -20px; transform: rotate(45deg); animation-delay: 4s; box-shadow: 0 10px 30px rgba(174, 225, 234, 0.4); }
+        .shape-square { width: 90px; height: 90px; border-radius: 20px; background: #FCF6BD; bottom: -20px; left: 15%; transform: rotate(-15deg); animation-delay: 1s; box-shadow: 0 10px 30px rgba(252, 246, 189, 0.4); }
+
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+
+        /* 樂園票卷風格的主卡片 */
+        .ticket-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
+            position: relative;
+            border: 2px solid #ffffff;
+        }
+        /* 票卷頂部彩色條紋 */
+        .ticket-strip {
+            height: 12px;
+            background: repeating-linear-gradient(
+                45deg,
+                #FFAAA5, #FFAAA5 15px,
+                #FCF6BD 15px, #FCF6BD 30px,
+                #A8E6CF 30px, #A8E6CF 45px,
+                #AEE1EA 45px, #AEE1EA 60px
+            );
+            border-radius: 24px 24px 0 0;
+        }
+
+        /* 漸層按鈕 */
+        .btn-amusement { 
+            background: linear-gradient(135deg, #A8E6CF 0%, #AEE1EA 100%); 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: 0 8px 20px -6px rgba(174, 225, 234, 0.6);
+        }
+        .btn-amusement:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px -6px rgba(174, 225, 234, 0.8); }
+        .btn-amusement:active { transform: translateY(0px) scale(0.98); }
+
+        /* 歷史票卷列表項目 */
+        .history-item {
+            border-left: 6px dashed #FFAAA5;
+            transition: all 0.2s ease;
+        }
+        .history-item:hover { transform: translateX(4px); border-left-color: #AEE1EA; }
+
         .fade-in { animation: fadeIn 0.6s ease forwards; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 隱藏滾動條 */
+        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center relative px-4 text-gray-700">
+<body class="min-h-screen flex flex-col items-center py-12 px-4 text-gray-700 relative">
 
-    <div class="macaron-blob blob-pink"></div>
-    <div class="macaron-blob blob-blue"></div>
-    <div class="macaron-blob blob-yellow"></div>
+    <!-- 繽紛漂浮裝飾 -->
+    <div class="shape shape-circle"></div>
+    <div class="shape shape-triangle"></div>
+    <div class="shape shape-pill"></div>
+    <div class="shape shape-square"></div>
 
-    <!-- 1. 產生器 UI (預設顯示) -->
-    <main id="generatorUI" class="bg-white/80 backdrop-blur-xl w-full max-w-lg rounded-[2.5rem] p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50 relative z-10 hidden">
-        <div class="text-center mb-10">
-            <h1 class="text-3xl font-bold tracking-widest text-gray-800 mb-3">柒樂部</h1>
-            <p class="text-sm text-gray-500 tracking-wider">將繁雜的軌跡，化作簡約的印記。</p>
+    <!-- 1. 產生器 UI -->
+    <main id="generatorUI" class="w-full max-w-lg z-10 hidden flex-col gap-8">
+        
+        <!-- 主要生成卡片 -->
+        <div class="ticket-card">
+            <div class="ticket-strip"></div>
+            <div class="p-8 sm:p-10">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-black tracking-widest text-gray-800 mb-2 flex items-center justify-center gap-2">
+                        🎡 柒樂部
+                    </h1>
+                    <p class="text-sm text-gray-500 tracking-wider font-medium">專屬你的繽紛樂園通行證</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-gray-600 ml-1">📍 原始長網址</label>
+                        <input type="url" id="longUrl" placeholder="https://..." class="w-full px-5 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-[#AEE1EA] focus:ring-4 focus:ring-[#AEE1EA]/20 outline-none transition-all font-medium">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-gray-600 ml-1">🏷️ 自訂後綴 (選填)</label>
+                        <div class="relative">
+                            <input type="text" id="customTag" placeholder="my-ticket" class="w-full px-5 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-[#A8E6CF] focus:ring-4 focus:ring-[#A8E6CF]/20 outline-none transition-all font-medium">
+                        </div>
+                    </div>
+
+                    <p id="errorMsg" class="hidden text-[#FFAAA5] text-sm font-bold ml-1"></p>
+
+                    <button id="submitBtn" class="btn-amusement w-full py-4 rounded-2xl text-gray-800 font-bold tracking-widest flex justify-center items-center gap-2 mt-2">
+                        <span id="btnText">產生樂園通行證</span>
+                    </button>
+                </div>
+
+                <!-- 單次生成結果展示 -->
+                <div id="resultArea" class="hidden mt-8 pt-8 border-t border-dashed border-gray-200 fade-in">
+                    <p class="text-sm font-bold text-gray-600 mb-3 ml-1">✨ 通行證已開立！</p>
+                    <div class="flex items-center gap-2 bg-[#FDFBF7] p-2 rounded-2xl border border-gray-100">
+                        <input type="text" id="shortUrl" readonly class="w-full bg-transparent border-none outline-none text-gray-700 px-3 text-sm font-medium">
+                        <button id="copyBtn" class="bg-white hover:bg-gray-50 px-5 py-2.5 rounded-xl text-sm font-bold shadow-sm border border-gray-100 transition-colors text-gray-600">複製</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="space-y-6">
-            <div class="space-y-2">
-                <label class="block text-sm font-medium text-gray-600 ml-1">原始長網址</label>
-                <input type="url" id="longUrl" placeholder="https://..." class="w-full px-5 py-4 rounded-2xl bg-gray-50/50 border border-gray-100 outline-none focus:ring-4 focus:ring-[#bae1ff]/20 transition-all">
+        <!-- 歷史紀錄列表區塊 -->
+        <div id="historyArea" class="ticket-card p-6 sm:p-8 hidden fade-in">
+            <h2 class="text-lg font-black text-gray-800 mb-5 flex items-center justify-between">
+                <span>🎫 我的通行證列表</span>
+                <button id="refreshStatsBtn" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-600 px-3 py-1.5 rounded-lg transition-colors font-medium flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    更新點擊
+                </button>
+            </h2>
+            <div id="historyList" class="space-y-3 max-h-[300px] overflow-y-auto pr-2">
+                <!-- 列表項目將透過 JS 動態生成 -->
             </div>
-
-            <div class="space-y-2">
-                <label class="block text-sm font-medium text-gray-600 ml-1">自訂後綴 (選填)</label>
-                <input type="text" id="customTag" placeholder="my-link" class="w-full px-5 py-4 rounded-2xl bg-gray-50/50 border border-gray-100 outline-none focus:ring-4 focus:ring-[#baffc9]/20 transition-all">
-            </div>
-
-            <p id="errorMsg" class="hidden text-red-400 text-sm ml-1"></p>
-
-            <button id="submitBtn" class="btn-macaron w-full py-4 rounded-2xl text-gray-700 font-medium tracking-widest flex justify-center items-center gap-2">
-                <span id="btnText">產生簡約網址</span>
-            </button>
-        </div>
-
-        <div id="resultArea" class="hidden mt-8 pt-8 border-t border-gray-100 fade-in">
-            <p class="text-sm font-medium text-gray-600 mb-3 ml-1">生成的簡約網址 ✨</p>
-            <div class="flex items-center gap-2 bg-[#faf9f6] p-2 rounded-2xl border border-gray-100">
-                <input type="text" id="shortUrl" readonly class="w-full bg-transparent border-none outline-none text-gray-700 px-3 text-sm">
-                <button id="copyBtn" class="bg-white px-5 py-2.5 rounded-xl text-sm font-medium shadow-sm border border-gray-100">複製</button>
+            <div id="emptyHistory" class="text-center py-6 text-gray-400 text-sm font-medium">
+                尚未開立任何通行證哦！
             </div>
         </div>
     </main>
 
-    <!-- 2. 導轉中 UI (有 ID 參數時顯示) -->
-    <div id="redirectUI" class="text-center z-10 hidden fade-in">
+    <!-- 2. 導轉中 UI -->
+    <div id="redirectUI" class="text-center z-10 hidden fade-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
         <div class="mb-6 relative inline-block">
-             <div class="animate-ping absolute inset-0 rounded-full bg-[#bae1ff] opacity-20"></div>
-             <div class="bg-white p-6 rounded-full shadow-sm relative">
-                <svg class="w-12 h-12 text-[#bae1ff] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+             <div class="animate-ping absolute inset-0 rounded-full bg-[#AEE1EA] opacity-40"></div>
+             <div class="bg-white p-6 rounded-full shadow-lg relative border-4 border-[#FDFBF7]">
+                <span class="text-4xl animate-bounce inline-block">🎢</span>
              </div>
         </div>
-        <h2 class="text-xl font-medium tracking-widest text-gray-800">正在前往目的地</h2>
-        <p class="text-sm text-gray-400 mt-2">請稍候，柒樂部正在為您導航...</p>
+        <h2 class="text-2xl font-black tracking-widest text-gray-800">準備進入樂園</h2>
+        <p class="text-sm text-gray-500 mt-2 font-medium">柒樂部正在為您驗票導航中...</p>
     </div>
 
     <script>
-        // 使用者提供的 GAS 網址
+        // ！！！請替換為你的 GAS 網址 ！！！
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzux6h7rNY0MyzcGm3gCLs_m9Zw7JgYisjynJRufPDwsTMlnERizBzEw8WmyplLUeQKjQ/exec";
         const BASE_DOMAIN = window.location.origin + window.location.pathname;
+
+        // 歷史紀錄儲存鍵值
+        const STORAGE_KEY = "a7club_urls";
 
         window.onload = async () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -83,28 +169,34 @@
                 // --- 導轉模式 ---
                 document.getElementById('redirectUI').classList.remove('hidden');
                 try {
-                    // 使用 GET 請求查詢對應的長網址
                     const response = await fetch(`${GAS_API_URL}?id=${id}`);
                     const result = await response.json();
                     if (result.status === "success" && result.url) {
                         window.location.replace(result.url);
                     } else {
-                        document.body.innerHTML = `
-                            <div class="text-center z-10">
-                                <h1 class="text-4xl font-bold text-gray-800 mb-4">404</h1>
-                                <p class="text-gray-500 mb-6">哎呀！此連結已失效或不存在。</p>
-                                <a href="${BASE_DOMAIN}" class="btn-macaron px-8 py-3 rounded-xl text-gray-700 font-medium inline-block">返回首頁</a>
-                            </div>`;
+                        show404();
                     }
                 } catch (e) {
-                    console.error("Redirect error:", e);
-                    document.body.innerHTML = `<div class="text-center z-10"><p class="text-gray-500">跳轉服務暫時不可用，請稍後再試。</p></div>`;
+                    show404();
                 }
             } else {
                 // --- 產生器模式 ---
                 document.getElementById('generatorUI').classList.remove('hidden');
+                document.getElementById('generatorUI').classList.add('flex');
+                renderHistory();
+                fetchClickStats(); // 載入時自動更新一次點擊數
             }
         };
+
+        function show404() {
+            document.body.innerHTML = `
+                <div class="text-center z-10 flex flex-col items-center justify-center min-h-screen">
+                    <span class="text-6xl mb-4">🎈</span>
+                    <h1 class="text-4xl font-black text-gray-800 mb-2">404</h1>
+                    <p class="text-gray-500 mb-8 font-medium">哎呀！這張樂園通行證已失效或飛走了。</p>
+                    <a href="${BASE_DOMAIN}" class="btn-amusement px-8 py-3 rounded-xl text-gray-800 font-bold inline-block">返回樂園入口</a>
+                </div>`;
+        }
 
         // 產生按鈕邏輯
         const submitBtn = document.getElementById('submitBtn');
@@ -121,7 +213,7 @@
 
             errorMsg.classList.add('hidden');
             submitBtn.disabled = true;
-            document.getElementById('btnText').textContent = "處理中...";
+            document.getElementById('btnText').textContent = "驗證中...";
 
             try {
                 const params = new URLSearchParams();
@@ -139,16 +231,19 @@
                     const finalUrl = `${BASE_DOMAIN}?id=${result.tag}`;
                     document.getElementById('shortUrl').value = finalUrl;
                     document.getElementById('resultArea').classList.remove('hidden');
+                    
+                    // 儲存到本地歷史紀錄
+                    saveToHistory(result.tag, finalUrl, longUrl);
                 } else {
                     errorMsg.textContent = result.message || "發生錯誤";
                     errorMsg.classList.remove('hidden');
                 }
             } catch (e) {
-                errorMsg.textContent = "無法連線至 API，請確認 GAS 權限設定。";
+                errorMsg.textContent = "無法連線至 API，請確認網路狀態。";
                 errorMsg.classList.remove('hidden');
             } finally {
                 submitBtn.disabled = false;
-                document.getElementById('btnText').textContent = "產生簡約網址";
+                document.getElementById('btnText').textContent = "產生樂園通行證";
             }
         });
 
@@ -159,16 +254,112 @@
             input.setSelectionRange(0, 99999);
             try {
                 document.execCommand('copy');
-                this.textContent = "已複製";
-                this.classList.add('text-green-500');
+                this.textContent = "已複製!";
+                this.classList.add('bg-[#A8E6CF]', 'text-gray-800', 'border-[#A8E6CF]');
                 setTimeout(() => { 
                     this.textContent = "複製"; 
-                    this.classList.remove('text-green-500');
+                    this.classList.remove('bg-[#A8E6CF]', 'text-gray-800', 'border-[#A8E6CF]');
                 }, 2000);
             } catch (err) {
                 console.error('Copy failed');
             }
         });
+
+        // --- 歷史紀錄與點擊次數邏輯 ---
+
+        function getHistory() {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        }
+
+        function saveToHistory(tag, shortUrl, longUrl) {
+            let history = getHistory();
+            // 檢查是否已存在，避免重複加入
+            const exists = history.find(item => item.tag === tag);
+            if (!exists) {
+                history.unshift({ tag, shortUrl, longUrl, clicks: 0, date: new Date().toLocaleDateString() });
+                // 只保留最近 10 筆
+                if(history.length > 10) history.pop(); 
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+                renderHistory();
+            }
+        }
+
+        function renderHistory() {
+            const history = getHistory();
+            const listContainer = document.getElementById('historyList');
+            const emptyState = document.getElementById('emptyHistory');
+            const historyArea = document.getElementById('historyArea');
+
+            if (history.length === 0) {
+                emptyState.classList.remove('hidden');
+                historyArea.classList.remove('hidden'); // 但沒有項目
+                return;
+            }
+
+            historyArea.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+            listContainer.innerHTML = '';
+
+            history.forEach(item => {
+                const li = document.createElement('div');
+                li.className = "history-item bg-white p-4 rounded-xl shadow-sm flex items-center justify-between gap-4 border border-gray-50";
+                li.innerHTML = `
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 mb-1">
+                            <a href="${item.shortUrl}" target="_blank" class="text-sm font-bold text-[#AEE1EA] hover:text-[#7acadd] truncate hover:underline">/${item.tag}</a>
+                            <span class="text-[10px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">${item.date}</span>
+                        </div>
+                        <p class="text-xs text-gray-400 truncate">${item.longUrl}</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center bg-[#FDFBF7] px-3 py-2 rounded-lg border border-gray-100 min-w-[60px]">
+                        <span class="text-xs font-bold text-gray-400 mb-0.5">點擊</span>
+                        <span class="text-lg font-black text-[#FFAAA5] leading-none" id="click-count-${item.tag}">${item.clicks || 0}</span>
+                    </div>
+                `;
+                listContainer.appendChild(li);
+            });
+        }
+
+        // 點擊更新按鈕
+        document.getElementById('refreshStatsBtn').addEventListener('click', function() {
+            const btn = this;
+            btn.classList.add('opacity-50', 'pointer-events-none');
+            btn.querySelector('svg').classList.add('animate-spin');
+            
+            fetchClickStats().finally(() => {
+                btn.classList.remove('opacity-50', 'pointer-events-none');
+                btn.querySelector('svg').classList.remove('animate-spin');
+            });
+        });
+
+        // 向 GAS 請求最新點擊次數
+        async function fetchClickStats() {
+            const history = getHistory();
+            if (history.length === 0) return;
+
+            const tags = history.map(item => item.tag).join(',');
+            
+            try {
+                // 呼叫 GAS API，帶入 action=stats 與 tags 參數
+                const response = await fetch(`${GAS_API_URL}?action=stats&tags=${tags}`);
+                const result = await response.json();
+
+                if (result.status === "success" && result.data) {
+                    let updatedHistory = history.map(item => {
+                        // 如果 GAS 有回傳該 tag 的點擊數，則更新
+                        if (result.data[item.tag] !== undefined) {
+                            item.clicks = result.data[item.tag];
+                        }
+                        return item;
+                    });
+                    
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedHistory));
+                    renderHistory(); // 重新渲染畫面
+                }
+            } catch (error) {
+                console.log("更新點擊次數失敗，可能後端尚未支援 stats 查詢:", error);
+            }
+        }
     </script>
 </body>
 </html>
