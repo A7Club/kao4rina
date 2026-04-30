@@ -7,251 +7,168 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #faf9f6; /* 日系和紙般的溫潤底色 */
-            overflow-x: hidden;
-        }
-
-        /* 馬卡龍色系光暈背景 */
-        .macaron-blob {
-            position: absolute;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.6;
-            animation: float 10s ease-in-out infinite;
-        }
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #faf9f6; overflow-x: hidden; }
+        .macaron-blob { position: absolute; filter: blur(80px); z-index: -1; opacity: 0.6; animation: float 10s ease-in-out infinite; }
         .blob-pink { background-color: #ffb3ba; width: 300px; height: 300px; top: -50px; left: -50px; }
         .blob-blue { background-color: #bae1ff; width: 250px; height: 250px; bottom: 10%; right: -20px; animation-delay: 2s; }
         .blob-yellow { background-color: #ffffba; width: 200px; height: 200px; top: 40%; left: 20%; animation-delay: 4s; }
-        .blob-green { background-color: #baffc9; width: 280px; height: 280px; top: 20%; right: 10%; animation-delay: 1s; }
-
-        @keyframes float {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-20px) scale(1.05); }
-            100% { transform: translateY(0px) scale(1); }
-        }
-
-        /* 漸層按鈕與互動效果 */
-        .btn-macaron {
-            background: linear-gradient(135deg, #baffc9 0%, #bae1ff 100%);
-            transition: all 0.3s ease;
-        }
-        .btn-macaron:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -10px rgba(186, 225, 255, 0.8);
-            filter: brightness(1.05);
-        }
-
-        /* 隱藏滾動條但可滾動 */
-        ::-webkit-scrollbar { display: none; }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .btn-macaron { background: linear-gradient(135deg, #baffc9 0%, #bae1ff 100%); transition: all 0.3s ease; }
+        .fade-in { animation: fadeIn 0.6s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center relative px-4 text-gray-700">
 
-    <!-- 背景裝飾 -->
     <div class="macaron-blob blob-pink"></div>
     <div class="macaron-blob blob-blue"></div>
     <div class="macaron-blob blob-yellow"></div>
-    <div class="macaron-blob blob-green"></div>
 
-    <!-- 主要容器 -->
-    <main class="bg-white/80 backdrop-blur-xl w-full max-w-lg rounded-[2.5rem] p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50 relative z-10">
-        
-        <!-- 標題區 -->
+    <!-- 1. 產生器 UI (預設顯示) -->
+    <main id="generatorUI" class="bg-white/80 backdrop-blur-xl w-full max-w-lg rounded-[2.5rem] p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50 relative z-10 hidden">
         <div class="text-center mb-10">
             <h1 class="text-3xl font-bold tracking-widest text-gray-800 mb-3">柒樂部</h1>
             <p class="text-sm text-gray-500 tracking-wider">將繁雜的軌跡，化作簡約的印記。</p>
         </div>
 
-        <!-- 互動表單 -->
         <div class="space-y-6">
-            <!-- 長網址輸入 -->
             <div class="space-y-2">
-                <label for="longUrl" class="block text-sm font-medium text-gray-600 ml-1">原始長網址 <span class="text-red-400">*</span></label>
-                <input type="url" id="longUrl" placeholder="https://example.com/very-long-url..." 
-                    class="w-full px-5 py-4 rounded-2xl bg-gray-50/50 border border-gray-100 focus:border-[#bae1ff] focus:ring-4 focus:ring-[#bae1ff]/20 outline-none transition-all duration-300 text-gray-700 placeholder-gray-400">
+                <label class="block text-sm font-medium text-gray-600 ml-1">原始長網址</label>
+                <input type="url" id="longUrl" placeholder="https://..." class="w-full px-5 py-4 rounded-2xl bg-gray-50/50 border border-gray-100 outline-none focus:ring-4 focus:ring-[#bae1ff]/20 transition-all">
             </div>
 
-            <!-- 自訂後綴 (選填) -->
             <div class="space-y-2">
-                <label for="customTag" class="block text-sm font-medium text-gray-600 ml-1">自訂網址後綴 (選填)</label>
-                <div class="flex items-center">
-                    <span class="text-gray-400 bg-gray-50/50 border border-gray-100 border-r-0 rounded-l-2xl px-4 py-4 text-sm whitespace-nowrap">
-                        a7club.github.io/url/
-                    </span>
-                    <input type="text" id="customTag" placeholder="my-tag" 
-                        class="w-full px-4 py-4 rounded-r-2xl bg-gray-50/50 border border-gray-100 focus:border-[#baffc9] focus:ring-4 focus:ring-[#baffc9]/20 outline-none transition-all duration-300 text-gray-700 placeholder-gray-400">
-                </div>
+                <label class="block text-sm font-medium text-gray-600 ml-1">自訂後綴 (選填)</label>
+                <input type="text" id="customTag" placeholder="my-link" class="w-full px-5 py-4 rounded-2xl bg-gray-50/50 border border-gray-100 outline-none focus:ring-4 focus:ring-[#baffc9]/20 transition-all">
             </div>
 
-            <!-- 錯誤提示訊息 -->
-            <div id="errorMsg" class="hidden text-red-400 text-sm ml-1"></div>
+            <p id="errorMsg" class="hidden text-red-400 text-sm ml-1"></p>
 
-            <!-- 提交按鈕 -->
-            <button id="submitBtn" class="btn-macaron w-full py-4 rounded-2xl text-gray-700 font-medium tracking-widest flex justify-center items-center gap-2 mt-4">
+            <button id="submitBtn" class="btn-macaron w-full py-4 rounded-2xl text-gray-700 font-medium tracking-widest flex justify-center items-center gap-2">
                 <span id="btnText">產生簡約網址</span>
-                <svg id="loadingIcon" class="animate-spin hidden h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
             </button>
         </div>
 
-        <!-- 結果展示區 -->
         <div id="resultArea" class="hidden mt-8 pt-8 border-t border-gray-100 fade-in">
-            <p class="text-sm font-medium text-gray-600 mb-3 ml-1">專屬你的簡約網址已生成 ✨</p>
+            <p class="text-sm font-medium text-gray-600 mb-3 ml-1">生成的簡約網址 ✨</p>
             <div class="flex items-center gap-2 bg-[#faf9f6] p-2 rounded-2xl border border-gray-100">
-                <input type="text" id="shortUrl" readonly class="w-full bg-transparent border-none outline-none text-gray-700 px-3 text-sm font-medium">
-                <button id="copyBtn" class="bg-white hover:bg-gray-50 text-gray-600 px-5 py-2.5 rounded-xl text-sm font-medium shadow-sm transition-all border border-gray-100 whitespace-nowrap">
-                    複製
-                </button>
+                <input type="text" id="shortUrl" readonly class="w-full bg-transparent border-none outline-none text-gray-700 px-3 text-sm">
+                <button id="copyBtn" class="bg-white px-5 py-2.5 rounded-xl text-sm font-medium shadow-sm border border-gray-100">複製</button>
             </div>
-            <p id="copySuccessMsg" class="text-[#ffb3ba] text-xs mt-2 ml-2 hidden">已複製到剪貼簿！</p>
         </div>
-
     </main>
 
+    <!-- 2. 導轉中 UI (有 ID 參數時顯示) -->
+    <div id="redirectUI" class="text-center z-10 hidden fade-in">
+        <div class="mb-6 relative inline-block">
+             <div class="animate-ping absolute inset-0 rounded-full bg-[#bae1ff] opacity-20"></div>
+             <div class="bg-white p-6 rounded-full shadow-sm relative">
+                <svg class="w-12 h-12 text-[#bae1ff] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+             </div>
+        </div>
+        <h2 class="text-xl font-medium tracking-widest text-gray-800">正在前往目的地</h2>
+        <p class="text-sm text-gray-400 mt-2">請稍候，柒樂部正在為您導航...</p>
+    </div>
+
     <script>
-        // 設定 API 與 網域
+        // 使用者提供的 GAS 網址
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzux6h7rNY0MyzcGm3gCLs_m9Zw7JgYisjynJRufPDwsTMlnERizBzEw8WmyplLUeQKjQ/exec";
-        const BASE_DOMAIN = "https://a7club.github.io/url/";
+        const BASE_DOMAIN = window.location.origin + window.location.pathname;
 
-        // 綁定 DOM 元素
+        window.onload = async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+
+            if (id) {
+                // --- 導轉模式 ---
+                document.getElementById('redirectUI').classList.remove('hidden');
+                try {
+                    // 使用 GET 請求查詢對應的長網址
+                    const response = await fetch(`${GAS_API_URL}?id=${id}`);
+                    const result = await response.json();
+                    if (result.status === "success" && result.url) {
+                        window.location.replace(result.url);
+                    } else {
+                        document.body.innerHTML = `
+                            <div class="text-center z-10">
+                                <h1 class="text-4xl font-bold text-gray-800 mb-4">404</h1>
+                                <p class="text-gray-500 mb-6">哎呀！此連結已失效或不存在。</p>
+                                <a href="${BASE_DOMAIN}" class="btn-macaron px-8 py-3 rounded-xl text-gray-700 font-medium inline-block">返回首頁</a>
+                            </div>`;
+                    }
+                } catch (e) {
+                    console.error("Redirect error:", e);
+                    document.body.innerHTML = `<div class="text-center z-10"><p class="text-gray-500">跳轉服務暫時不可用，請稍後再試。</p></div>`;
+                }
+            } else {
+                // --- 產生器模式 ---
+                document.getElementById('generatorUI').classList.remove('hidden');
+            }
+        };
+
+        // 產生按鈕邏輯
         const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        const loadingIcon = document.getElementById('loadingIcon');
-        const longUrlInput = document.getElementById('longUrl');
-        const customTagInput = document.getElementById('customTag');
-        const resultArea = document.getElementById('resultArea');
-        const shortUrlInput = document.getElementById('shortUrl');
-        const copyBtn = document.getElementById('copyBtn');
-        const copySuccessMsg = document.getElementById('copySuccessMsg');
-        const errorMsg = document.getElementById('errorMsg');
-
-        // 處理 API 請求
         submitBtn.addEventListener('click', async () => {
-            const longUrl = longUrlInput.value.trim();
-            const customTag = customTagInput.value.trim();
-
-            // 基礎驗證
+            const longUrl = document.getElementById('longUrl').value.trim();
+            const tag = document.getElementById('customTag').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            
             if (!longUrl) {
-                showError("請輸入原始長網址");
-                return;
-            }
-            if (!longUrl.startsWith('http://') && !longUrl.startsWith('https://')) {
-                showError("網址必須以 http:// 或 https:// 開頭");
+                errorMsg.textContent = "請輸入原始網址";
+                errorMsg.classList.remove('hidden');
                 return;
             }
 
-            // UI 狀態：載入中
-            hideError();
-            resultArea.classList.add('hidden');
+            errorMsg.classList.add('hidden');
             submitBtn.disabled = true;
-            btnText.textContent = "正在生成...";
-            loadingIcon.classList.remove('hidden');
+            document.getElementById('btnText').textContent = "處理中...";
 
             try {
-                // 準備傳送給 GAS 的資料 (使用 URLSearchParams 避免 CORS preflight 問題，GAS e.parameter 可輕鬆解析)
                 const params = new URLSearchParams();
                 params.append('url', longUrl);
-                if (customTag) {
-                    params.append('tag', customTag);
-                }
+                params.append('tag', tag);
 
-                const response = await fetch(GAS_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: params
+                const response = await fetch(GAS_API_URL, { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: params 
                 });
-
-                // 嘗試解析 JSON (假設 GAS 回傳 Content-Type 為 JSON)
                 const result = await response.json();
 
-                // 這裡根據你的 GAS 腳本回傳格式進行調整
-                // 假設成功時回傳 { "status": "success", "tag": "生成的SLASHTAG" }
-                // 或者直接回傳 SLASHTAG
-                let slashtag = result.tag || result.slashtag || result.id || customTag; 
-                
-                // 防呆：如果 API 沒回傳 tag，但用戶有填寫 customTag
-                if(!slashtag && customTag) {
-                    slashtag = customTag;
-                } else if (!slashtag) {
-                    // 萬一完全沒有 tag 回傳，用隨機字串模擬 (根據實際 API 狀況調整)
-                    slashtag = Math.random().toString(36).substring(2, 8); 
+                if (result.status === "success") {
+                    const finalUrl = `${BASE_DOMAIN}?id=${result.tag}`;
+                    document.getElementById('shortUrl').value = finalUrl;
+                    document.getElementById('resultArea').classList.remove('hidden');
+                } else {
+                    errorMsg.textContent = result.message || "發生錯誤";
+                    errorMsg.classList.remove('hidden');
                 }
-
-                // 顯示結果
-                const finalUrl = BASE_DOMAIN + slashtag;
-                shortUrlInput.value = finalUrl;
-                resultArea.classList.remove('hidden');
-
-            } catch (error) {
-                console.error("API 請求錯誤:", error);
-                showError("無法連線到伺服器，請確認 GAS API 設定或 CORS 權限。");
+            } catch (e) {
+                errorMsg.textContent = "無法連線至 API，請確認 GAS 權限設定。";
+                errorMsg.classList.remove('hidden');
             } finally {
-                // 恢復按鈕狀態
                 submitBtn.disabled = false;
-                btnText.textContent = "產生簡約網址";
-                loadingIcon.classList.add('hidden');
+                document.getElementById('btnText').textContent = "產生簡約網址";
             }
         });
 
-        // 複製按鈕功能
-        copyBtn.addEventListener('click', () => {
-            // 使用舊版 execCommand 以防 iframe 限制，或使用 clipboard API
-            shortUrlInput.select();
-            shortUrlInput.setSelectionRange(0, 99999); // 手機相容性
-            
+        // 複製功能
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const input = document.getElementById('shortUrl');
+            input.select();
+            input.setSelectionRange(0, 99999);
             try {
-                // 優先嘗試現代 Clipboard API
-                navigator.clipboard.writeText(shortUrlInput.value).then(() => {
-                    showCopySuccess();
-                }).catch(() => {
-                    // 退回使用 execCommand
-                    document.execCommand('copy');
-                    showCopySuccess();
-                });
-            } catch (err) {
                 document.execCommand('copy');
-                showCopySuccess();
+                this.textContent = "已複製";
+                this.classList.add('text-green-500');
+                setTimeout(() => { 
+                    this.textContent = "複製"; 
+                    this.classList.remove('text-green-500');
+                }, 2000);
+            } catch (err) {
+                console.error('Copy failed');
             }
         });
-
-        // 顯示錯誤訊息
-        function showError(msg) {
-            errorMsg.textContent = msg;
-            errorMsg.classList.remove('hidden');
-        }
-
-        // 隱藏錯誤訊息
-        function hideError() {
-            errorMsg.classList.add('hidden');
-            errorMsg.textContent = "";
-        }
-
-        // 顯示複製成功訊息並重置
-        function showCopySuccess() {
-            copySuccessMsg.classList.remove('hidden');
-            copyBtn.textContent = "已複製";
-            copyBtn.classList.add('bg-green-50', 'text-green-600', 'border-green-200');
-            
-            setTimeout(() => {
-                copySuccessMsg.classList.add('hidden');
-                copyBtn.textContent = "複製";
-                copyBtn.classList.remove('bg-green-50', 'text-green-600', 'border-green-200');
-            }, 2000);
-        }
     </script>
 </body>
 </html>
