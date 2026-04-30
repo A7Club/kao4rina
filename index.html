@@ -3,154 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>柒樂部 | 繽紛樂園縮網址</title>
+    <title>柒樂部 | 管理員專屬縮網址</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 引入黑體(內文)與明體(標題/文青感) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         body { 
             font-family: 'Noto Sans TC', sans-serif; 
-            /* 日系遊樂園點點背景 */
-            background-color: #FDFBF7;
-            background-image: radial-gradient(#E8E3D9 2px, transparent 2px);
-            background-size: 30px 30px;
+            /* 日系雜誌/手帳的柔和網格背景 */
+            background-color: #FFFDF9;
+            background-image: 
+                linear-gradient(#F0EAE1 1px, transparent 1px),
+                linear-gradient(90deg, #F0EAE1 1px, transparent 1px);
+            background-size: 24px 24px;
             overflow-x: hidden; 
+            color: #5C5454; /* 溫柔深灰 */
         }
 
-        /* 繽紛幾何漂浮裝飾 */
-        .shape { position: absolute; z-index: -1; opacity: 0.8; animation: float 8s ease-in-out infinite; }
-        .shape-circle { width: 120px; height: 120px; border-radius: 50%; background: #FFAAA5; top: 10%; left: 5%; box-shadow: 0 10px 30px rgba(255, 170, 165, 0.4); }
-        .shape-triangle { width: 0; height: 0; border-left: 60px solid transparent; border-right: 60px solid transparent; border-bottom: 100px solid #A8E6CF; bottom: 15%; right: 8%; animation-delay: 2s; filter: drop-shadow(0 10px 20px rgba(168, 230, 207, 0.4)); }
-        .shape-pill { width: 80px; height: 160px; border-radius: 40px; background: #AEE1EA; top: 40%; right: -20px; transform: rotate(45deg); animation-delay: 4s; box-shadow: 0 10px 30px rgba(174, 225, 234, 0.4); }
-        .shape-square { width: 90px; height: 90px; border-radius: 20px; background: #FCF6BD; bottom: -20px; left: 15%; transform: rotate(-15deg); animation-delay: 1s; box-shadow: 0 10px 30px rgba(252, 246, 189, 0.4); }
+        .font-serif { font-family: 'Noto Serif TC', serif; }
+
+        /* 馬卡龍色漂浮幾何 (粉紅、粉紫、Babyblue、粉黃) - 降低不透明度增加輕盈感 */
+        .shape { position: absolute; z-index: -1; opacity: 0.6; animation: float 10s ease-in-out infinite; }
+        .shape-circle { width: 180px; height: 180px; border-radius: 50%; background: #FFC2D1; top: 5%; left: -2%; filter: blur(8px); } 
+        .shape-arch { width: 120px; height: 160px; border-radius: 60px 60px 0 0; background: #E2CBF7; bottom: 10%; right: 2%; animation-delay: 2s; transform: rotate(15deg); filter: blur(5px); } 
+        .shape-pill { width: 80px; height: 160px; border-radius: 50px; background: #BDE0FE; top: 40%; right: -10px; transform: rotate(-25deg); animation-delay: 4s; filter: blur(6px); } 
+        .shape-square { width: 110px; height: 110px; border-radius: 15px; background: #FFF1AC; bottom: -10px; left: 8%; transform: rotate(-10deg); animation-delay: 1.5s; filter: blur(5px); } 
 
         @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
 
-        /* 樂園票卷風格的主卡片 */
-        .ticket-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
+        /* 雜誌內頁主卡片 */
+        .magazine-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px -10px rgba(226, 203, 247, 0.2); 
             position: relative;
-            border: 2px solid #ffffff;
+            border: 1px solid #F0EAE1;
         }
-        /* 票卷頂部彩色條紋 */
-        .ticket-strip {
-            height: 12px;
-            background: repeating-linear-gradient(
-                45deg,
-                #FFAAA5, #FFAAA5 15px,
-                #FCF6BD 15px, #FCF6BD 30px,
-                #A8E6CF 30px, #A8E6CF 45px,
-                #AEE1EA 45px, #AEE1EA 60px
-            );
-            border-radius: 24px 24px 0 0;
+        
+        /* 手帳風紙膠帶裝飾 */
+        .washi-tape {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 140px;
+            height: 32px;
+            background: rgba(255, 194, 209, 0.85); /* 粉紅紙膠帶 */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+        .washi-tape::after {
+            content: ''; position: absolute; top: 0; right: -8px; width: 16px; height: 100%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, #FFFFFF 2px, #FFFFFF 4px);
+            opacity: 0.5;
+        }
+        .washi-tape::before {
+            content: ''; position: absolute; top: 0; left: -8px; width: 16px; height: 100%;
+            background: repeating-linear-gradient(-45deg, transparent, transparent 2px, #FFFFFF 2px, #FFFFFF 4px);
+            opacity: 0.5;
         }
 
-        /* 漸層按鈕 */
-        .btn-amusement { 
-            background: linear-gradient(135deg, #A8E6CF 0%, #AEE1EA 100%); 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            box-shadow: 0 8px 20px -6px rgba(174, 225, 234, 0.6);
+        /* 雜誌排版輸入框 */
+        .input-magazine {
+            background: #FFFDF9;
+            border: 2px dashed #E2CBF7; /* 粉紫虛線 */
+            transition: all 0.3s ease;
         }
-        .btn-amusement:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px -6px rgba(174, 225, 234, 0.8); }
-        .btn-amusement:active { transform: translateY(0px) scale(0.98); }
+        .input-magazine:focus {
+            border-color: #BDE0FE; /* Baby blue */
+            border-style: solid;
+            background: #FFFFFF;
+            box-shadow: 4px 4px 0 #BDE0FE; /* 復古錯位陰影 */
+        }
 
-        /* 歷史票卷列表項目 */
+        /* 雜誌按鈕 */
+        .btn-magazine { 
+            background: #5C5454;
+            color: #FFFDF9;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-magazine::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #FFC2D1; z-index: -1; transition: transform 0.3s ease;
+            transform-origin: bottom right; transform: scale(1);
+            border-radius: inherit;
+        }
+        .btn-magazine:hover { color: #5C5454; border: 2px solid #5C5454; }
+        .btn-magazine:hover::before { transform: scale(1.05) translate(-4px, -4px); }
+        .btn-magazine:active { transform: translateY(2px); }
+
+        /* 歷史小卡 (拍立得感) */
         .history-item {
-            border-left: 6px dashed #FFAAA5;
+            background: #FFFFFF;
+            border: 1px solid #F0EAE1;
+            border-bottom: 3px solid #FFF1AC; /* 粉黃底邊 */
             transition: all 0.2s ease;
         }
-        .history-item:hover { transform: translateX(4px); border-left-color: #AEE1EA; }
+        .history-item:hover { transform: translateY(-2px) rotate(1deg); border-bottom-color: #BDE0FE; }
 
         .fade-in { animation: fadeIn 0.6s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 隱藏滾動條 */
+        /* 高光螢光筆效果 */
+        .highlight-blue {
+            background: linear-gradient(180deg, transparent 60%, rgba(189, 224, 254, 0.6) 60%);
+        }
+
         ::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-12 px-4 text-gray-700 relative">
+<body class="min-h-screen flex flex-col items-center py-12 px-4 relative">
 
-    <!-- 繽紛漂浮裝飾 -->
+    <!-- 馬卡龍漂浮裝飾 -->
     <div class="shape shape-circle"></div>
-    <div class="shape shape-triangle"></div>
+    <div class="shape shape-arch"></div>
     <div class="shape shape-pill"></div>
     <div class="shape shape-square"></div>
 
     <!-- 1. 產生器 UI -->
-    <main id="generatorUI" class="w-full max-w-lg z-10 hidden flex-col gap-8">
+    <main id="generatorUI" class="w-full max-w-lg z-10 hidden flex-col gap-8 my-auto">
         
         <!-- 主要生成卡片 -->
-        <div class="ticket-card">
-            <div class="ticket-strip"></div>
+        <div class="magazine-card mt-4">
+            <div class="washi-tape"></div> <!-- 紙膠帶裝飾 -->
+            
             <div class="p-8 sm:p-10">
-                <div class="text-center mb-8">
-                    <h1 class="text-3xl font-black tracking-widest text-gray-800 mb-2 flex items-center justify-center gap-2">
-                        🎡 柒樂部
-                    </h1>
-                    <p class="text-sm text-gray-500 tracking-wider font-medium">專屬你的繽紛樂園通行證</p>
+                <!-- 雜誌 Header 排版 -->
+                <div class="flex justify-between items-end border-b-2 border-dashed border-[#F0EAE1] pb-5 mb-8">
+                    <div>
+                        <p class="font-serif text-[#FFC2D1] font-bold text-xs tracking-[0.2em] uppercase mb-1">Vol. 01 / Special</p>
+                        <h1 class="text-4xl font-serif font-black text-[#5C5454] tracking-widest">柒樂部</h1>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-3xl">🎀</span>
+                        <p class="text-[10px] text-[#A69F98] tracking-widest font-serif mt-1">KAWAII URL</p>
+                    </div>
                 </div>
 
                 <div class="space-y-6">
                     <div class="space-y-2">
-                        <label class="block text-sm font-bold text-gray-600 ml-1">📍 原始長網址</label>
-                        <input type="url" id="longUrl" placeholder="https://..." class="w-full px-5 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-[#AEE1EA] focus:ring-4 focus:ring-[#AEE1EA]/20 outline-none transition-all font-medium">
+                        <label class="block text-sm font-bold text-[#5C5454] font-serif tracking-wider">
+                            <span class="text-[#BDE0FE] mr-1">●</span>原始長網址
+                        </label>
+                        <input type="url" id="longUrl" placeholder="https://..." class="input-magazine w-full px-5 py-4 rounded-xl outline-none font-medium text-sm text-[#5C5454]">
                     </div>
 
                     <div class="space-y-2">
-                        <label class="block text-sm font-bold text-gray-600 ml-1">🏷️ 自訂後綴 (選填)</label>
-                        <div class="relative">
-                            <input type="text" id="customTag" placeholder="my-ticket" class="w-full px-5 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-[#A8E6CF] focus:ring-4 focus:ring-[#A8E6CF]/20 outline-none transition-all font-medium">
-                        </div>
+                        <label class="block text-sm font-bold text-[#5C5454] font-serif tracking-wider">
+                            <span class="text-[#FFF1AC] mr-1">●</span>專屬小尾巴 (選填)
+                        </label>
+                        <input type="text" id="customTag" placeholder="my-cute-link" class="input-magazine w-full px-5 py-4 rounded-xl outline-none font-medium text-sm text-[#5C5454]">
                     </div>
 
-                    <p id="errorMsg" class="hidden text-[#FFAAA5] text-sm font-bold ml-1"></p>
+                    <p id="errorMsg" class="hidden text-[#FFC2D1] text-sm font-bold mt-1"></p>
 
-                    <button id="submitBtn" class="btn-amusement w-full py-4 rounded-2xl text-gray-800 font-bold tracking-widest flex justify-center items-center gap-2 mt-2">
-                        <span id="btnText">產生樂園通行證</span>
+                    <button id="submitBtn" class="btn-magazine w-full py-4 rounded-xl text-lg font-serif font-black tracking-widest flex justify-center items-center gap-2 mt-6 border-2 border-transparent">
+                        <span id="btnText">製作專屬通行證 🪄</span>
                     </button>
                 </div>
 
                 <!-- 單次生成結果展示 -->
-                <div id="resultArea" class="hidden mt-8 pt-8 border-t border-dashed border-gray-200 fade-in">
-                    <p class="text-sm font-bold text-gray-600 mb-3 ml-1">✨ 通行證已開立！</p>
-                    <div class="flex items-center gap-2 bg-[#FDFBF7] p-2 rounded-2xl border border-gray-100">
-                        <input type="text" id="shortUrl" readonly class="w-full bg-transparent border-none outline-none text-gray-700 px-3 text-sm font-medium">
-                        <button id="copyBtn" class="bg-white hover:bg-gray-50 px-5 py-2.5 rounded-xl text-sm font-bold shadow-sm border border-gray-100 transition-colors text-gray-600">複製</button>
+                <div id="resultArea" class="hidden mt-8 pt-6 border-t-2 border-dashed border-[#F0EAE1] fade-in">
+                    <p class="text-sm font-bold text-[#5C5454] mb-3 font-serif"><span class="highlight-blue">🧸 網址製作完成！</span></p>
+                    <div class="flex items-center gap-2 bg-[#FFFDF9] p-2 rounded-xl border border-[#F0EAE1]">
+                        <input type="text" id="shortUrl" readonly class="w-full bg-transparent border-none outline-none text-[#5C5454] px-3 text-sm font-bold font-serif">
+                        <button id="copyBtn" class="bg-[#E2CBF7] hover:bg-[#d4b5f2] px-6 py-2 rounded-lg text-sm font-bold transition-colors text-white shadow-sm">複製</button>
+                    </div>
+                </div>
+                
+                <!-- 雜誌底部條碼裝飾 -->
+                <div class="mt-8 pt-4 flex justify-center opacity-40">
+                    <div class="w-32 h-6 border-x-4 border-[#5C5454] flex justify-between px-1">
+                        <div class="w-1 h-full bg-[#5C5454]"></div>
+                        <div class="w-0.5 h-full bg-[#5C5454]"></div>
+                        <div class="w-2 h-full bg-[#5C5454]"></div>
+                        <div class="w-1 h-full bg-[#5C5454]"></div>
+                        <div class="w-0.5 h-full bg-[#5C5454]"></div>
+                        <div class="w-1 h-full bg-[#5C5454]"></div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- 歷史紀錄列表區塊 -->
-        <div id="historyArea" class="ticket-card p-6 sm:p-8 hidden fade-in">
-            <h2 class="text-lg font-black text-gray-800 mb-5 flex items-center justify-between">
-                <span>🎫 我的通行證列表</span>
-                <button id="refreshStatsBtn" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-600 px-3 py-1.5 rounded-lg transition-colors font-medium flex items-center gap-1">
+        <div id="historyArea" class="magazine-card p-6 sm:p-8 hidden fade-in">
+            <h2 class="text-lg font-black text-[#5C5454] font-serif mb-5 flex items-center justify-between border-b-2 border-[#FFF1AC] pb-2 inline-flex w-full">
+                <span>🎫 管理員通行證列表</span>
+                <button id="refreshStatsBtn" class="text-xs bg-white border border-[#F0EAE1] hover:bg-[#FFFDF9] text-[#5C5454] px-3 py-1.5 rounded-lg transition-all font-bold flex items-center gap-1 shadow-sm">
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    更新點擊
+                    更新
                 </button>
             </h2>
-            <div id="historyList" class="space-y-3 max-h-[300px] overflow-y-auto pr-2">
+            <div id="historyList" class="space-y-4 max-h-[300px] overflow-y-auto pr-2">
                 <!-- 列表項目將透過 JS 動態生成 -->
             </div>
-            <div id="emptyHistory" class="text-center py-6 text-gray-400 text-sm font-medium">
-                尚未開立任何通行證哦！
+            <div id="emptyHistory" class="text-center py-8 text-[#A69F98] text-sm font-bold font-serif">
+                尚未收藏任何網址哦 🫧
             </div>
         </div>
     </main>
 
     <!-- 2. 導轉中 UI -->
-    <div id="redirectUI" class="text-center z-10 hidden fade-in absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
-        <div class="mb-6 relative inline-block">
-             <div class="animate-ping absolute inset-0 rounded-full bg-[#AEE1EA] opacity-40"></div>
-             <div class="bg-white p-6 rounded-full shadow-lg relative border-4 border-[#FDFBF7]">
-                <span class="text-4xl animate-bounce inline-block">🎢</span>
-             </div>
+    <div id="redirectUI" class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-[#FFFDF9]/90 backdrop-blur-sm">
+        <div class="text-center fade-in">
+            <div class="mb-6 relative inline-block">
+                 <div class="animate-spin-slow absolute inset-0 rounded-full border-4 border-dashed border-[#BDE0FE] opacity-50" style="animation: spin 4s linear infinite;"></div>
+                 <div class="bg-white p-8 rounded-full shadow-lg relative border border-[#F0EAE1]">
+                    <span class="text-5xl inline-block" style="animation: bounce 2s infinite;">☁️</span>
+                 </div>
+            </div>
+            <h2 class="text-2xl font-black tracking-widest text-[#5C5454] font-serif">帶您前往目的地</h2>
+            <p class="text-xs text-[#A69F98] mt-3 font-bold tracking-[0.2em] uppercase">Redirecting...</p>
         </div>
-        <h2 class="text-2xl font-black tracking-widest text-gray-800">準備進入樂園</h2>
-        <p class="text-sm text-gray-500 mt-2 font-medium">柒樂部正在為您驗票導航中...</p>
     </div>
 
     <script>
@@ -162,12 +228,23 @@
         const STORAGE_KEY = "a7club_urls";
 
         window.onload = async () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
+            let id = null;
+            const searchStr = window.location.search.substring(1);
+            
+            if (searchStr) {
+                if (!searchStr.includes('=')) {
+                    id = searchStr;
+                } else {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    id = urlParams.get('id');
+                }
+            }
 
             if (id) {
-                // --- 導轉模式 ---
-                document.getElementById('redirectUI').classList.remove('hidden');
+                const redirectUI = document.getElementById('redirectUI');
+                redirectUI.classList.remove('hidden');
+                redirectUI.classList.add('flex');
+                
                 try {
                     const response = await fetch(`${GAS_API_URL}?id=${id}`);
                     const result = await response.json();
@@ -180,25 +257,24 @@
                     show404();
                 }
             } else {
-                // --- 產生器模式 ---
-                document.getElementById('generatorUI').classList.remove('hidden');
-                document.getElementById('generatorUI').classList.add('flex');
+                const generatorUI = document.getElementById('generatorUI');
+                generatorUI.classList.remove('hidden');
+                generatorUI.classList.add('flex');
                 renderHistory();
-                fetchClickStats(); // 載入時自動更新一次點擊數
+                fetchClickStats();
             }
         };
 
         function show404() {
             document.body.innerHTML = `
-                <div class="text-center z-10 flex flex-col items-center justify-center min-h-screen">
-                    <span class="text-6xl mb-4">🎈</span>
-                    <h1 class="text-4xl font-black text-gray-800 mb-2">404</h1>
-                    <p class="text-gray-500 mb-8 font-medium">哎呀！這張樂園通行證已失效或飛走了。</p>
-                    <a href="${BASE_DOMAIN}" class="btn-amusement px-8 py-3 rounded-xl text-gray-800 font-bold inline-block">返回樂園入口</a>
+                <div class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FFFDF9] bg-[linear-gradient(#F0EAE1_1px,transparent_1px),linear-gradient(90deg,#F0EAE1_1px,transparent_1px)] [background-size:24px_24px]">
+                    <span class="text-7xl mb-6 opacity-80" style="filter: drop-shadow(0 10px 10px rgba(226, 203, 247, 0.4));">🌧️</span>
+                    <h1 class="text-5xl font-black text-[#E2CBF7] mb-3 font-serif">404</h1>
+                    <p class="text-[#5C5454] mb-8 font-bold bg-white px-6 py-2 rounded-lg shadow-sm border border-[#F0EAE1] font-serif">哎呀！這頁雜誌被撕掉了 🫧</p>
+                    <a href="${BASE_DOMAIN}" class="bg-[#5C5454] text-white px-8 py-3 rounded-xl font-serif font-bold tracking-widest hover:bg-[#FFC2D1] transition-colors shadow-md">返回目錄</a>
                 </div>`;
         }
 
-        // 產生按鈕邏輯
         const submitBtn = document.getElementById('submitBtn');
         submitBtn.addEventListener('click', async () => {
             const longUrl = document.getElementById('longUrl').value.trim();
@@ -206,14 +282,14 @@
             const errorMsg = document.getElementById('errorMsg');
             
             if (!longUrl) {
-                errorMsg.textContent = "請輸入原始網址";
+                errorMsg.textContent = "※ 請輸入原始網址哦！";
                 errorMsg.classList.remove('hidden');
                 return;
             }
 
             errorMsg.classList.add('hidden');
             submitBtn.disabled = true;
-            document.getElementById('btnText').textContent = "驗證中...";
+            document.getElementById('btnText').textContent = "印製中... 🖨️";
 
             try {
                 const params = new URLSearchParams();
@@ -228,56 +304,51 @@
                 const result = await response.json();
 
                 if (result.status === "success") {
-                    const finalUrl = `${BASE_DOMAIN}?id=${result.tag}`;
+                    const finalUrl = `${BASE_DOMAIN}?${result.tag}`;
                     document.getElementById('shortUrl').value = finalUrl;
                     document.getElementById('resultArea').classList.remove('hidden');
                     
-                    // 儲存到本地歷史紀錄
                     saveToHistory(result.tag, finalUrl, longUrl);
                 } else {
-                    errorMsg.textContent = result.message || "發生錯誤";
+                    errorMsg.textContent = "※ " + (result.message || "發生了一點小錯誤 🥲");
                     errorMsg.classList.remove('hidden');
                 }
             } catch (e) {
-                errorMsg.textContent = "無法連線至 API，請確認網路狀態。";
+                errorMsg.textContent = "※ 無法連線，請確認網路狀態哦！";
                 errorMsg.classList.remove('hidden');
             } finally {
                 submitBtn.disabled = false;
-                document.getElementById('btnText').textContent = "產生樂園通行證";
+                document.getElementById('btnText').textContent = "製作專屬通行證 🪄";
             }
         });
 
-        // 複製功能
         document.getElementById('copyBtn').addEventListener('click', function() {
             const input = document.getElementById('shortUrl');
             input.select();
             input.setSelectionRange(0, 99999);
             try {
                 document.execCommand('copy');
-                this.textContent = "已複製!";
-                this.classList.add('bg-[#A8E6CF]', 'text-gray-800', 'border-[#A8E6CF]');
+                this.textContent = "OK! ✔️";
+                this.classList.replace('bg-[#E2CBF7]', 'bg-[#BDE0FE]');
+                this.classList.replace('hover:bg-[#d4b5f2]', 'hover:bg-[#a5d2fa]');
                 setTimeout(() => { 
                     this.textContent = "複製"; 
-                    this.classList.remove('bg-[#A8E6CF]', 'text-gray-800', 'border-[#A8E6CF]');
+                    this.classList.replace('bg-[#BDE0FE]', 'bg-[#E2CBF7]');
+                    this.classList.replace('hover:bg-[#a5d2fa]', 'hover:bg-[#d4b5f2]');
                 }, 2000);
             } catch (err) {
                 console.error('Copy failed');
             }
         });
 
-        // --- 歷史紀錄與點擊次數邏輯 ---
-
-        function getHistory() {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-        }
+        // --- 歷史紀錄邏輯 ---
+        function getHistory() { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
 
         function saveToHistory(tag, shortUrl, longUrl) {
             let history = getHistory();
-            // 檢查是否已存在，避免重複加入
             const exists = history.find(item => item.tag === tag);
             if (!exists) {
                 history.unshift({ tag, shortUrl, longUrl, clicks: 0, date: new Date().toLocaleDateString() });
-                // 只保留最近 10 筆
                 if(history.length > 10) history.pop(); 
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
                 renderHistory();
@@ -292,7 +363,7 @@
 
             if (history.length === 0) {
                 emptyState.classList.remove('hidden');
-                historyArea.classList.remove('hidden'); // 但沒有項目
+                historyArea.classList.remove('hidden');
                 return;
             }
 
@@ -302,62 +373,52 @@
 
             history.forEach(item => {
                 const li = document.createElement('div');
-                li.className = "history-item bg-white p-4 rounded-xl shadow-sm flex items-center justify-between gap-4 border border-gray-50";
+                li.className = "history-item p-4 rounded-xl flex items-center justify-between gap-4";
                 li.innerHTML = `
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-1">
-                            <a href="${item.shortUrl}" target="_blank" class="text-sm font-bold text-[#AEE1EA] hover:text-[#7acadd] truncate hover:underline">/${item.tag}</a>
-                            <span class="text-[10px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">${item.date}</span>
+                            <span class="text-[#FFC2D1] text-xs">🔗</span>
+                            <a href="${item.shortUrl}" target="_blank" class="text-sm font-black text-[#5C5454] hover:text-[#BDE0FE] truncate hover:underline font-serif">/${item.tag}</a>
+                            <span class="text-[10px] bg-[#FFFDF9] text-[#A69F98] px-2 py-0.5 rounded border border-[#F0EAE1] ml-1">${item.date}</span>
                         </div>
-                        <p class="text-xs text-gray-400 truncate">${item.longUrl}</p>
+                        <p class="text-xs text-[#A69F98] truncate ml-5">${item.longUrl}</p>
                     </div>
-                    <div class="flex flex-col items-center justify-center bg-[#FDFBF7] px-3 py-2 rounded-lg border border-gray-100 min-w-[60px]">
-                        <span class="text-xs font-bold text-gray-400 mb-0.5">點擊</span>
-                        <span class="text-lg font-black text-[#FFAAA5] leading-none" id="click-count-${item.tag}">${item.clicks || 0}</span>
+                    <div class="flex flex-col items-center justify-center bg-[#FFFDF9] px-3 py-2 rounded-lg min-w-[55px]">
+                        <span class="text-[9px] font-bold text-[#A69F98] tracking-widest uppercase mb-1">Hits</span>
+                        <span class="text-xl font-serif font-black text-[#BDE0FE] leading-none" id="click-count-${item.tag}">${item.clicks || 0}</span>
                     </div>
                 `;
                 listContainer.appendChild(li);
             });
         }
 
-        // 點擊更新按鈕
         document.getElementById('refreshStatsBtn').addEventListener('click', function() {
             const btn = this;
             btn.classList.add('opacity-50', 'pointer-events-none');
             btn.querySelector('svg').classList.add('animate-spin');
-            
             fetchClickStats().finally(() => {
                 btn.classList.remove('opacity-50', 'pointer-events-none');
                 btn.querySelector('svg').classList.remove('animate-spin');
             });
         });
 
-        // 向 GAS 請求最新點擊次數
         async function fetchClickStats() {
             const history = getHistory();
             if (history.length === 0) return;
-
             const tags = history.map(item => item.tag).join(',');
-            
             try {
-                // 呼叫 GAS API，帶入 action=stats 與 tags 參數
                 const response = await fetch(`${GAS_API_URL}?action=stats&tags=${tags}`);
                 const result = await response.json();
-
                 if (result.status === "success" && result.data) {
                     let updatedHistory = history.map(item => {
-                        // 如果 GAS 有回傳該 tag 的點擊數，則更新
-                        if (result.data[item.tag] !== undefined) {
-                            item.clicks = result.data[item.tag];
-                        }
+                        if (result.data[item.tag] !== undefined) item.clicks = result.data[item.tag];
                         return item;
                     });
-                    
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedHistory));
-                    renderHistory(); // 重新渲染畫面
+                    renderHistory();
                 }
             } catch (error) {
-                console.log("更新點擊次數失敗，可能後端尚未支援 stats 查詢:", error);
+                console.log("Stats fetch error:", error);
             }
         }
     </script>
