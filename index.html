@@ -232,9 +232,11 @@
             const searchStr = window.location.search.substring(1);
             
             if (searchStr) {
+                // 優先解析不帶 "=" 的純小尾巴網址 (例如: ?myticket)
                 if (!searchStr.includes('=')) {
                     id = searchStr;
                 } else {
+                    // 相容舊有已發布的帶有 id 參數格式 (例如: ?id=myticket)
                     const urlParams = new URLSearchParams(window.location.search);
                     id = urlParams.get('id');
                 }
@@ -275,15 +277,13 @@
                 </div>`;
         }
 
-        // --- 新增：自動抓取網頁標題的功能 ---
+        // --- 自動抓取網頁標題的功能 ---
         async function fetchTitleFallback(url) {
             try {
-                // 透過 allorigins 公共代理繞過 CORS 抓取網頁原始碼
                 const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
                 const data = await res.json();
                 const match = data.contents.match(/<title[^>]*>([^<]+)<\/title>/i);
                 if (match && match[1]) {
-                    // 簡易解碼 HTML Entity (例如 &amp;)
                     const txt = document.createElement("textarea");
                     txt.innerHTML = match[1];
                     return txt.value.trim();
@@ -291,7 +291,6 @@
             } catch (e) {
                 // 若抓取失敗則忽略
             }
-            // 若抓不到標題，則優雅降級顯示網域名稱
             try {
                 return new URL(url).hostname;
             } catch (e) {
@@ -320,7 +319,6 @@
                 params.append('url', longUrl);
                 params.append('tag', tag);
 
-                // 利用 Promise.all 同時執行 GAS 儲存與網頁標題抓取，不拖慢速度
                 const [response, pageTitle] = await Promise.all([
                     fetch(GAS_API_URL, { 
                         method: 'POST', 
@@ -333,11 +331,11 @@
                 const result = await response.json();
 
                 if (result.status === "success") {
+                    // 產生的新網址只保留問號和標籤，不再加上 id=
                     const finalUrl = `${BASE_DOMAIN}?${result.tag}`;
                     document.getElementById('shortUrl').value = finalUrl;
                     document.getElementById('resultArea').classList.remove('hidden');
                     
-                    // 傳入抓取到的 pageTitle
                     saveToHistory(result.tag, finalUrl, longUrl, pageTitle);
                 } else {
                     errorMsg.textContent = "※ " + (result.message || "發生了一點小錯誤 🥲");
@@ -378,7 +376,6 @@
             let history = getHistory();
             const exists = history.find(item => item.tag === tag);
             if (!exists) {
-                // 將標題 title 存入本地端
                 history.unshift({ tag, shortUrl, longUrl, title: pageTitle, clicks: 0, date: new Date().toLocaleDateString() });
                 if(history.length > 10) history.pop(); 
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
@@ -409,13 +406,13 @@
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-[#FFC2D1] text-xs">🔗</span>
+                            <!-- 顯示的也是沒有 id= 的漂亮網址 -->
                             <a href="${item.shortUrl}" target="_blank" class="text-sm font-black text-[#5C5454] hover:text-[#BDE0FE] truncate hover:underline font-serif">?${item.tag}</a>
                             <button class="history-copy-btn text-[#A69F98] hover:text-[#E2CBF7] transition-colors focus:outline-none" title="複製短網址">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                             </button>
                             <span class="text-[10px] bg-[#FFFDF9] text-[#A69F98] px-2 py-0.5 rounded border border-[#F0EAE1] ml-1">${item.date}</span>
                         </div>
-                        <!-- 修改這裡：優先顯示抓取到的標題，懸浮時可查看原始網址 -->
                         <p class="text-xs text-[#A69F98] truncate ml-5" title="${item.longUrl}">${item.title || item.longUrl}</p>
                     </div>
                     <div class="flex flex-col items-center justify-center bg-[#FFFDF9] px-3 py-2 rounded-lg min-w-[55px]">
@@ -425,7 +422,6 @@
                 `;
                 listContainer.appendChild(li);
 
-                // 為每個歷史紀錄項目的複製按鈕綁定點擊事件
                 const copyHistoryBtn = li.querySelector('.history-copy-btn');
                 copyHistoryBtn.addEventListener('click', function() {
                     const input = document.createElement('input');
